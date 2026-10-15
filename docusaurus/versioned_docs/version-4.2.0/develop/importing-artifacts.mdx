@@ -1,0 +1,56 @@
+---
+title: Importing Artifacts
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/develop/importing-artifacts.md
+---
+
+# Importing Artifacts
+
+Follow the instructions given below to import an integration artifact into WSO2 Integration Studio.
+
+1.  [Create an ESB project](create-integration-project.mdx).
+2.	Right-click the ESB project, click **New**, and select the type of artifact you want to import. For example, let's import a REST API artifact.
+
+	<img src="/integration/micro-integrator/assets/img/integrate/create_artifacts/new-artifact.png" />
+
+3.  Select the **Import Artifact** option and click **Next**.
+
+	<img src="/integration/micro-integrator/assets/img/integrate/create_artifacts/select-import-artifact-option.png" width="500" />
+
+4.  Browse for the configuration file of your artifact, specify the location to save the artifact.
+
+	<img src="/integration/micro-integrator/assets/img/integrate/create_artifacts/select-artifact-file.png" width="500" />
+
+5.  Click **Finish**. 
+
+The artifacts are created in the `src/main/synapse-config/<artifact_type>` folder under the ESB project you specified. 
+
+:::note
+
+
+
+:::
+
+	When importing artifacts with custom mediators, make sure the custom mediator name starts with the "CUSTOM_" prefix. 
+
+	:::note
+
+
+
+	:::
+		```xml
+			<proxy name="example_proxy" startOnLoad="true" transports="http" xmlns="http://ws.apache.org/ns/synapse">
+				<target>
+					<inSequence>
+						<log level="custom"/>
+						<CUSTOM_mymediator>
+							...
+						</CUSTOM_mymediator>
+						<log level="full"/>
+					</inSequence>
+					<outSequence/>
+					<faultSequence/>
+				</target>
+			</proxy> 
+		```

@@ -1,0 +1,106 @@
+---
+title: 'Running the WSO2 Integrator: MI Runtime'
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/install-and-setup/install/running-the-mi.md
+---
+
+# Running the WSO2 Integrator: MI Runtime
+
+Follow the steps given below to run the WSO2 Integrator:  MI runtime.
+
+<Prerequisites>
+
+## Before you begin
+
+[Download and install](installing-mi.mdx) the WSO2 Integrator: MI.
+
+</Prerequisites>
+
+## Starting the MI server
+
+Follow the steps given below to start the server.
+
+1. Open a command prompt as explained below.
+
+      <table>
+            <tr>
+                  <th>On <b>Linux/macOS</b></th>
+                  <td>Establish an SSH connection to the server, log on to the text Linux console, or open a terminal window.</td>
+            </tr>
+            <tr>
+                  <th>On <b>Windows</b></th>
+                  <td>Click <b>Start &gt;Run</b>, type <b>cmd</b> at the prompt, and then press <b>Enter</b>.</td>
+            </tr>
+      </table>     
+
+2. Navigate to the `<MI_HOME>/bin` folder from your command line.
+3. Execute one of the commands given below.
+
+    -   To start the server:
+
+        <Tabs>
+        <TabItem value="tab-0" label="On macOS/Linux">
+
+        ```bash
+        sh micro-integrator.sh
+        ```
+
+        </TabItem>
+        <TabItem value="tab-1" label="On Windows">
+
+        ```bash
+        micro-integrator.bat
+        ```
+
+        </TabItem>
+        </Tabs>
+            
+    -       To start the server in background mode:
+
+        <Tabs>
+        <TabItem value="tab-0" label="On macOS/Linux">
+
+        ```bash
+        sh micro-integrator.sh start
+        ```
+
+        </TabItem>
+        <TabItem value="tab-1" label="On Windows">
+
+        ```bash
+        micro-integrator.bat --start
+        ```
+
+        </TabItem>
+        </Tabs>
+
+## Stopping the MI server
+
+- To stop the WSO2 Integrator: MI standalone application, go to the terminal and press <i>Ctrl+C</i>.
+- To stop the WSO2 Integrator: MI in background mode:
+      
+    <Tabs>
+    <TabItem value="tab-0" label="On macOS/Linux">
+
+    ```bash
+    sh micro-integrator.sh stop
+    ```
+
+    </TabItem>
+    <TabItem value="tab-1" label="On Windows">
+
+    ```bash
+    micro-integrator.bat --stop
+    ```
+
+    </TabItem>
+    </Tabs>
+
+## See Also
+
+<LinkCards>
+
+-   [Running the MI as a Windows Service](installing-mi-as-a-windows-service.mdx)
+
+</LinkCards>

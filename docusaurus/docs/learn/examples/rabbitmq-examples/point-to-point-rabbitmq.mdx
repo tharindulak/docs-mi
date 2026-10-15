@@ -1,0 +1,94 @@
+---
+title: How to Implement Point to Point Messaging Using RabbitMQ
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/learn/examples/rabbitmq-examples/point-to-point-rabbitmq.md
+---
+
+# How to Implement Point to Point Messaging Using RabbitMQ
+
+This example demonstrates how WSO2 Integrator: MI can be used to implement an asynchronous point-to-point messaging scenario using queues in a RabbitMQ broker instance.
+
+As shown below, a proxy service configured in the WSO2 Integrator: MI sends messages to the RabbitMQ queue, which are then consumed by another proxy service in the WSO2 Integrator: MI.
+
+<img src="/integration/micro-integrator/assets/img/integrate/rabbitmq/rabbitmq-point-to-point.png" />
+
+## Synapse configurations
+
+See the instructions on how to [build and run](#build-and-run) this example.
+
+<Tabs>
+<TabItem value="tab-0" label="RabbitMQ Consumer">
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="QueueConsumer" transports="rabbitmq" startOnLoad="true">
+  <description/>
+  <target>
+      <inSequence>
+          <log level="custom">
+               <property name="Message Received" expression="//Message"/>
+          </log>
+      </inSequence>
+  </target>
+  <parameter name="rabbitmq.queue.name">queue1</parameter>
+  <parameter name="rabbitmq.connection.factory">AMQPConnectionFactory</parameter>
+  <parameter name="rabbitmq.message.content.type">application/xml</parameter>
+</proxy>
+```
+
+</TabItem>
+<TabItem value="tab-1" label="RabbitMQ Producer">
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+    name="QueueProducer"
+    transports="http https"
+    startOnLoad="true">
+   <description/>
+   <target>
+    <inSequence>
+      <property name="OUT_ONLY" value="true"/>
+      <property name="FORCE_SC_ACCEPTED" value="true" scope="axis2"/>
+      <send>
+          <endpoint>
+            <address uri="rabbitmq:/queue1?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.server.user.name=guest&amp;rabbitmq.server.password=guest"/>
+          </endpoint>
+      </send>
+    </inSequence>
+  </target>
+</proxy>
+```
+
+</TabItem>
+</Tabs>
+    
+## Build and run
+
+Create the artifacts:
+
+1. Launch Visual Studio Code with the WSO2 Integrator: MI for VS Code extension (MI for VS Code) installed.
+
+    :::info
+
+    Follow the [Install WSO2 Integrator: MI for VS Code](../../../../develop/mi-for-vscode/install-wso2-mi-for-vscode) documentation for a complete installation guide.
+
+    :::
+
+2. Create an [integration project](../../../../develop/create-integration-project/).
+
+3. Create the [proxy service](../../../develop/creating-artifacts/creating-a-proxy-service.mdx) with the configurations given above.
+4. Enable the RabbitMQ sender and receiver in the Micro-Integrator from the deployment.toml. Refer the 
+ [configuring RabbitMQ documentation](../../../install-and-setup/setup/brokers/configure-with-rabbitmq.mdx) for more information.
+5. [Deploy the artifacts](../../../develop/deploy-artifacts.mdx) in your WSO2 Integrator: MI.
+6. Make sure you have a RabbitMQ broker instance running.
+7. Configure a queue named `queue1` with required exchanges and routing keys.
+8. Send the following payload to the RabbitMQ publisher proxy (QueueProducer).
+
+    ```xml
+    <Message>
+    <Name>John Doe</Name>
+    <Age>27</Age>
+    </Message>
+    ```

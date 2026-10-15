@@ -1,0 +1,113 @@
+---
+title: SOAP Headers
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/reference/mediators/property-reference/soap-headers.md
+---
+
+# SOAP Headers
+
+:::info
+
+
+
+:::
+	The following properties are SOAP headers that can be used with the [Property mediator](../property-mediator.mdx) and the [Property Group mediator](../property-group-mediator.mdx).
+
+SOAP headers provide information about the message, such as the To and
+From values. You can use the `get-property()` function
+in the [Property mediator](../property-mediator.mdx) to retrieve these
+headers. You can also add Custom SOAP headers using either the
+[Payload mediator](../payloadfactory-mediator.mdx)
+or the [Script mediator](../script-mediator.mdx).
+
+## To
+
+|     Parameter       |           Value               |
+|---------------------|-------------------------------|
+| **Header Name**     | To                            |
+| **Possible Values** | Any URI                       |
+| **Description**     | The To header of the message. |
+| **Example**         | get-property("To")            |
+
+## From
+
+|     Parameter       |           Value               |
+|---------------------|---------------------------------|
+| **Header Name**     | From                            |
+| **Possible Values** | Any URI                         |
+| **Description**     | The From header of the message. |
+| **Example**         | get-property("From")            |
+
+## Action
+
+|     Parameter       |           Value               |
+|---------------------|---------------------------------------|
+| **Header Name**     | Action                                |
+| **Possible Values** | Any URI                               |
+| **Description**     | The SOAPAction header of the message. |
+| **Example**         | get-property("Action")                |
+
+## ReplyTo
+
+|     Parameter       |           Value               |
+|---------------------|--------------------------------------------|
+| **Header Name**     | ReplyTo                                    |
+| **Possible Values** | Any URI                                    |
+| **Description**     | The ReplyTo header of the message.         |
+| **Example**         | \&lt;header name="ReplyTo" action="remove"/\> |
+
+## MessageID
+
+|     Parameter       |           Value               |
+|---------------------|----------------------------------------------------------------------------------------------------------------|
+| **Header Name**     | MessageID                                                                                                      |
+| **Possible Values** | UUID                                                                                                           |
+| **Description**     | The unique message ID of the message. It is not recommended to make alterations to this property of a message. |
+| **Example**         | get-property("MessageID")                                                                                      |
+
+## RelatesTo
+
+|     Parameter       |           Value               |
+|---------------------|--------------------------------------------------------------------------------------------------------------|
+| **Header Name**     | RelatesTo                                                                                                    |
+| **Possible Values** | UUID                                                                                                         |
+| **Description**     | The unique ID of the request to which the current message is related. It is not recommended to make changes. |
+| **Example**         | get-property("RelatesTo")                                                                                    |
+
+## FaultTo
+
+<table>
+<colgroup>
+<col />
+<col />
+</colgroup>
+<tr>
+	<th>Parameter</th>
+	<th>Value</th>
+</tr>
+<tbody>
+<tr className="odd">
+<td><p><strong>Header Name</strong></p></td>
+<td><p>FaultTo</p></td>
+</tr>
+<tr className="even">
+<td><p><strong>Possible Values</strong></p></td>
+<td><p>Any URI</p></td>
+</tr>
+<tr className="odd">
+<td><p><strong>Description</strong></p></td>
+<td><p>The FaultTo header of the message.</p></td>
+</tr>
+<tr className="even">
+<td><p><strong>Example</strong></p></td>
+<td><div className="content-wrapper">
+<div className="code panel pdl">
+<div className="codeContent panelContent pdl">
+<div className="sourceCode" id="cb1" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"><pre className="sourceCode java"><code className="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>&lt;header name=<span className="st">&quot;FaultTo&quot;</span> value=<span className="st">&quot;http:&#47;/localhost:9000&quot;</span>/&gt;</span></code></pre></div>
+</div>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>

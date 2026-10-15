@@ -1,0 +1,4382 @@
+{
+  "docs": [
+    {
+      "type": "doc",
+      "id": "index",
+      "label": "Home"
+    },
+    {
+      "type": "category",
+      "label": "Get Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "get-started/introduction",
+          "label": "Introduction"
+        },
+        {
+          "type": "doc",
+          "id": "get-started/key-concepts",
+          "label": "Key Concepts"
+        },
+        {
+          "type": "doc",
+          "id": "get-started/quick-start-guide",
+          "label": "Quick Start Guide"
+        },
+        {
+          "type": "doc",
+          "id": "get-started/about-this-release",
+          "label": "About this Release"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Learn",
+      "items": [
+        {
+          "type": "doc",
+          "id": "learn/learn-overview",
+          "label": "Overview"
+        },
+        {
+          "type": "doc",
+          "id": "learn/integration-tutorials/sending-a-simple-message-to-a-service",
+          "label": "How to Send a Simple Message to a Service"
+        },
+        {
+          "type": "category",
+          "label": "Message Routing",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/message-routing-overview",
+              "label": "What is Message Routing"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/routing-requests-based-on-message-content",
+              "label": "How to Route Requests Based on Message Content"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/routing-examples/routing-based-on-headers",
+              "label": "How to Route Requests Based on Message Headers"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Message Transformation",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/message-transformation-overview",
+              "label": "What is Message Transformation"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/transforming-message-content",
+              "label": "How to Transform Message Content"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-transformation-examples/json-to-soap-conversion",
+              "label": "How to Transform a JSON Message to SOAP"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-transformation-examples/pox-to-json-conversion",
+              "label": "How to Transform a POX Message to JSON"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Service Orchestration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/service-orchestration-overview",
+              "label": "What is Service Orchestration"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/exposing-several-services-as-a-single-service",
+              "label": "How to Expose Several Services as a Single Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/routing-examples/splitting-aggregating-messages",
+              "label": "How to Split Messages and Aggregate Responses"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Asynchronous Message Processing",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/asynchronous-message-overview",
+              "label": "What is Asynchronous Message Processing"
+            },
+            {
+              "type": "category",
+              "label": "RabbitMQ examples",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/examples/rabbitmq-examples/point-to-point-rabbitmq",
+                  "label": "How to Implement Point to Point Messaging Using RabbitMQ"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/rabbitmq-examples/pub-sub-rabbitmq",
+                  "label": "How to Publish and Subscribe with RabbitMQ"
+                },
+                {
+                  "type": "category",
+                  "label": "Guaranteed Delivery",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "learn/integration-tutorials/storing-and-forwarding-messages",
+                      "label": "How to Store and Forward Messages for Guaranteed Delivery"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "learn/examples/rabbitmq-examples/retry-delay-failed-msgs-rabbitmq",
+                      "label": "How to Retry Failed Messages with a Delay"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "learn/examples/rabbitmq-examples/requeue-msgs-with-errors-rabbitmq",
+                      "label": "How to Requeue a Message Preserving the Order"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "learn/examples/rabbitmq-examples/move-msgs-to-dlq-rabbitmq",
+                      "label": "How to Publish Unacked Messages to Dead Letter Exchange"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/rabbitmq-examples/request-response-rabbitmq",
+                  "label": "How to Implement Dual Channel Scenario with RabbitMQ"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "JMS examples",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/consuming-jms",
+                  "label": "How to Consume JMS Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/producing-jms",
+                  "label": "How to Produce JMS Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/consume-produce-jms",
+                  "label": "How to Consume and Produce JMS Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/publish-subscribe-with-jms",
+                  "label": "How to Publish and Subscribe with JMS"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/dual-channel-http-to-jms",
+                  "label": "How to Implement JMS Synchronous Invocations - Dual Channel HTTP-to-JMS"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/quad-channel-jms-to-jms",
+                  "label": "How to Implement JMS Synchronous Invocations - Quad Channel JMS-to-JMS"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/guaranteed-delivery-with-failover",
+                  "label": "How to Implement a Guaranteed Delivery with Failover"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/shared-topic-subscription",
+                  "label": "How to Implement Shared Topic Subscription Scenario with JMS"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/detecting-repeatedly-redelivered-messages",
+                  "label": "How to Detect Repeatedly Redelivered Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/jms-examples/specifying-a-delivery-delay-on-messages",
+                  "label": "How to Specify Delivery Delay on Messages"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Protocol Switching",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/protocol-switching-overview",
+              "label": "What is Protocol Switching"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-jms-to-http",
+              "label": "How to Switch from JMS to HTTP/S"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-https-to-jms",
+              "label": "How to Switch from HTTP/S to JMS"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-ftp-listener-to-mail-sender",
+              "label": "How to Switch from FTP Listener to Mail Sender"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-http-to-fix",
+              "label": "How to Switch from HTTP to FIX"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-fix-to-http",
+              "label": "How to Switch from FIX to HTTP"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-fix-to-jms",
+              "label": "How to Switch from FIX to JMS"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-between-fix-versions",
+              "label": "How to Switch between FIX Versions"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-tcp-to-https",
+              "label": "How to Switch from TCP to HTTP/S"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-from-udp-to-https",
+              "label": "How to Switch from UDP to HTTP/S"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/protocol-switching/switching-between-http-and-msmq",
+              "label": "How to Switch from HTTP to MSMQ"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "SaaS and B2B Connectivity",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/connectors",
+              "label": "What is SaaS and B2B Connectivity"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/send-email-from-integration-service",
+              "label": "How to Send an Email from an Integration Service"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Data Integration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/data-integration-overview",
+              "label": "What is Data Integration"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/sending-a-simple-message-to-a-datasource",
+              "label": "How to Expose a Datasource as a Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/rdbms-data-service",
+              "label": "How to Expose an RDBMS Datasource"
+            },
+            {
+              "type": "category",
+              "label": "How to Expose other Datasources",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/examples/data-integration/csv-data-service",
+                  "label": "CSV Datasource"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/data-integration/excel-data-service",
+                  "label": "Excel Datasource"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/data-integration/mongo-data-service",
+                  "label": "Mongo Datasource"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/data-integration/carbon-data-service",
+                  "label": "Carbon Datasource"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/json-with-data-service",
+              "label": "How to Expose Data in JSON Format"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/odata-service",
+              "label": "How to Expose Data as an OData Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/nested-queries-in-data-service",
+              "label": "How to Use Nested Data Queries"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/batch-requesting",
+              "label": "How to Perform Batch Requesting"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/request-box",
+              "label": "How to Invoke Multiple Operations as a Request Box"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/distributed-trans-data-service",
+              "label": "How to Use Distributed Transactions in Data Services"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/data-input-validator",
+              "label": "How to Validate Data Input"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/data-integration/swagger-data-services",
+              "label": "How to Use Swagger Documents of RESTful Data Services"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "File Processing",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/file-processing-overview",
+              "label": "What is File Processing"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/file-processing",
+              "label": "How to Process a File"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/file-processing/accessing-windows-share-using-vfs-transport",
+              "label": "How to Access a Windows Share using VFS Transport"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Periodic Execution of Integration Processes",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-use-case/scheduled-task-overview",
+              "label": "What is Periodic Execution of Integration Processes"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/using-scheduled-tasks",
+              "label": "How to Periodically Execute Integration Processes"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/scheduled-tasks/task-scheduling-simple-trigger",
+              "label": "How to Schedule Tasks using a Simple Trigger"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/scheduled-tasks/injecting-messages-to-rest-endpoint",
+              "label": "How to Inject Messages to a RESTful Endpoint"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "REST APIs",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/introduction-rest-api",
+              "label": "How to Use a Simple REST API"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/setting-query-params-outgoing-messages",
+              "label": "How to Set Query Parameters on Outgoing Messages"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/enabling-rest-to-soap",
+              "label": "How to Expose a SOAP Endpoint as a RESTful API"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/configuring-non-http-endpoints",
+              "label": "How to Expose a Non-HTTP Services as a RESTful API"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/handling-non-matching-resources",
+              "label": "How to Handle Non-matching Resources"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/setting-https-status-codes",
+              "label": "How to Handle HTTP Status Codes"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/transforming-content-type",
+              "label": "How to Transform Content Types"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/securing-rest-apis",
+              "label": "How to Secure a REST API"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/publishing-a-swagger-api",
+              "label": "How to Publish a Custom Swagger Document"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/rest-api-examples/special-cases",
+              "label": "How to Handle Special Cases"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Proxy Services",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/proxy-service-examples/introduction-to-proxy-services",
+              "label": "How to Use a Simple Proxy Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/proxy-service-examples/publishing-a-custom-wsdl",
+              "label": "How to Publish a Custom WSDL"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/proxy-service-examples/exposing-proxy-via-inbound",
+              "label": "How to Expose a Proxy Service via Inbound Endpoints"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/proxy-service-examples/securing-proxy-services",
+              "label": "How to Secure a Proxy Service"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Inbound Endpoints",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/using-inbound-endpoints",
+              "label": "How to Use an Inbound Endpoints"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-jms-protocol",
+              "label": "How to Use a JMS Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/file-inbound-endpoint",
+              "label": "How to Use a File Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-http-protocol",
+              "label": "How to Use an HTTP Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-https-protocol",
+              "label": "How to Use an HTTPS Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-hl7-protocol-auto-ack",
+              "label": "How to Use an HL7 Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-mqtt-protocol",
+              "label": "How to Use an MQTT Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-rabbitmq-protocol",
+              "label": "How to Use a RabbitMQ Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-kafka",
+              "label": "How to Use a Kafka Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-secured-websocket",
+              "label": "How to Use a Secured WebSocket Inbound Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/inbound-endpoint-examples/inbound-endpoint-with-registry",
+              "label": "How to Use an Inbound Endpoints with Registry"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Local Entries",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/registry-examples/local-registry-entries",
+              "label": "How to Use Sequences and Endpoints as Local Entries"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Templates",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/template-examples/using-sequence-templates",
+              "label": "How to Use a Sequence Template"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/template-examples/using-endpoint-templates",
+              "label": "How to Use an Endpoint Template"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Message Stores & Processors",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/intro-message-stores-processors",
+              "label": "Introduction to Message Stores and Processors"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/using-jdbc-message-store",
+              "label": "How to Use a JDBC Message Store"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/using-jms-message-stores",
+              "label": "How to Use a JMS Message Store"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/using-rabbitmq-message-stores",
+              "label": "How to Use a RabbitMQ Message Store"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/using-message-sampling-processor",
+              "label": "How to Use a Message Sampling Processor"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/using-message-forwarding-processor",
+              "label": "How to Use a Message Forwarding Processor"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/securing-message-processor",
+              "label": "How to Secure the Message Forwarding Processor"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/message-store-processor-examples/loadbalancing-with-message-processor",
+              "label": "How to Implement Load Balancing with Message Forwarding Processor"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Endpoints",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-http-endpoints",
+              "label": "How to Use an HTTP Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-address-endpoints",
+              "label": "How to Use an Address Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-failover-endpoints",
+              "label": "How to Use a Failover Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-websocket-endpoints",
+              "label": "How to Use a WebSocket Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-wsdl-endpoints",
+              "label": "How to Use a WSDL Endpoint"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/using-loadbalancing-endpoints",
+              "label": "How to Use a Load Balance Endpoint"
+            },
+            {
+              "type": "category",
+              "label": "Recipient List of Endpoints",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/examples/endpoint-examples/using-static-recepient-list-endpoints",
+                  "label": "How to Route Messages to a Static List of Recipients"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/endpoint-examples/using-dynamic-recepient-list-endpoints-1",
+                  "label": "How to Route Messages to a Dynamic List of Recipients"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/endpoint-examples/using-dynamic-recepient-list-endpoints-2",
+                  "label": "How to Route Messages to a Dynamic List of Recipients and Aggregate Responses"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/reusing-endpoints",
+              "label": "How to Reuse Endpoints"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/endpoint-error-handling",
+              "label": "How to Handle Endpoint Errors"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/endpoint-examples/mtom-swa-with-endpoints",
+              "label": "How to Implement MTOM and SwA Optimizations"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Sequences",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/sequence-examples/using-multiple-sequences",
+              "label": "How to Break Complex Flows into Multiple Sequences"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/sequence-examples/using-fault-sequences",
+              "label": "How to Use Fault Sequences"
+            },
+            {
+              "type": "doc",
+              "id": "learn/integration-tutorials/using-templates",
+              "label": "How to Reuse Mediation Sequences"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Transports",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/examples/transport-examples/tcp-transport-examples",
+              "label": "How to Use TCP Transport"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/transport-examples/fix-transport-examples",
+              "label": "How to Use FIX Transport"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/transport-examples/pub-sub-using-mqtt",
+              "label": "How to Use MQTT Transport"
+            },
+            {
+              "type": "doc",
+              "id": "learn/examples/file-processing/mailto-transport-examples",
+              "label": "How to Use MailTo Transport"
+            },
+            {
+              "type": "category",
+              "label": "HL7",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/examples/hl7-examples/hl7-proxy-service",
+                  "label": "How to Mediate HL7 Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/hl7-examples/acknowledge-hl7-messages",
+                  "label": "How to Acknowledge HL7 Messages"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/examples/hl7-examples/file-transfer-using-hl7",
+                  "label": "How to Use HL7 Messages with File Systems"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "learn/integration-tutorials/service-catalog-tutorial",
+          "label": "How to Expose an Integration Service as a Managed API"
+        },
+        {
+          "type": "doc",
+          "id": "learn/examples/json-examples/json-examples",
+          "label": "How to Work with JSON Message Payloads"
+        },
+        {
+          "type": "doc",
+          "id": "learn/examples/integrating-mi-with-si",
+          "label": "How to Integrate MI with SI"
+        },
+        {
+          "type": "category",
+          "label": "Samples",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/samples/samples-overview",
+              "label": "Overview"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/hello-world-service",
+              "label": "Hello World Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/jms-integration",
+              "label": "JMS Integration"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/content-based-routing",
+              "label": "Content Based Routing"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/database-polling",
+              "label": "Database Polling"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/email-service",
+              "label": "Email Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/exception-handling",
+              "label": "Exception Handling"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/fetch-salesforce",
+              "label": "Fetch SalesForce Accounts"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/file-transfer",
+              "label": "File Transfer"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/guaranteed-delivery",
+              "label": "Guaranteed Delivery"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/header-based-routing",
+              "label": "Header Based Routing"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/api-testing",
+              "label": "API Testing"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/docker-sample",
+              "label": "Hello Docker"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/kafka-sample",
+              "label": "Kafka Consumer and Producer"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/message-filtering",
+              "label": "Message Filtering"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/periodical-scheduled-tasks",
+              "label": "Periodical Scheduled Tasks"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/protocol-switching",
+              "label": "Protocol Switching"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/proxying-rest-service",
+              "label": "Proxying a REST Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/proxying-soap-service",
+              "label": "Proxying a SOAP Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/rabbitmq-integration",
+              "label": "RabbitMQ Integration"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/rest-data-service",
+              "label": "REST Data Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/rest-to-soap-conversion",
+              "label": "REST to SOAP Conversion"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/scatter-gather-integration-pattern",
+              "label": "Scatter Gather Integration Pattern"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/students-data-service",
+              "label": "Students Data Service"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/xml-to-json-transformation",
+              "label": "XML To JSON Transformation"
+            },
+            {
+              "type": "doc",
+              "id": "learn/samples/unit-testing",
+              "label": "Unit Test Tutorial"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Enterprise Integration Patterns",
+          "items": [
+            {
+              "type": "doc",
+              "id": "learn/enterprise-integration-patterns/eip-overview",
+              "label": "Overview"
+            },
+            {
+              "type": "category",
+              "label": "Messaging Systems",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/overview",
+                  "label": "Messaging Systems - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/message-channels",
+                  "label": "Message Channels"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/message",
+                  "label": "Message"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/pipes-and-filters",
+                  "label": "Pipes and Filters"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/message-router",
+                  "label": "Message Router"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/message-translator",
+                  "label": "Message Translator"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-systems/message-endpoint",
+                  "label": "Message Endpoint"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Messaging Channels",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/overview",
+                  "label": "Messaging Channels - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/point-to-point-channel",
+                  "label": "Point-to-Point Channel"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/publish-subscribe-channel",
+                  "label": "Publish-Subscribe Channel"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/datatype-channel",
+                  "label": "Datatype Channel"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/invalid-message-channel",
+                  "label": "Invalid Message Channel"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/dead-letter-channel",
+                  "label": "Dead Letter Channel"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/guaranteed-delivery",
+                  "label": "Guaranteed Delivery"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/channel-adapter",
+                  "label": "Channel Adapter"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/messaging-bridge",
+                  "label": "Messaging Bridge"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-channels/message-bus",
+                  "label": "Message Bus"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Message Construction",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/overview",
+                  "label": "Message Construction - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/command-message",
+                  "label": "Command Message"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/document-message",
+                  "label": "Document Message"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/event-message",
+                  "label": "Event Message"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/request-reply",
+                  "label": "Request-Reply"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/return-address",
+                  "label": "Return Address"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/correlation-identifier",
+                  "label": "Correlation Identifier"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/message-sequence",
+                  "label": "Message Sequence"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/message-expiration",
+                  "label": "Message Expiration"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-construction/format-indicator",
+                  "label": "Format Indicator"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Message Routing",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/overview",
+                  "label": "Message Routing - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/content-based-router",
+                  "label": "Content-Based Router"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/message-filter",
+                  "label": "Message Filter"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/dynamic-router",
+                  "label": "Dynamic Router"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/recipient-list",
+                  "label": "Recipient List"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/splitter",
+                  "label": "Splitter"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/aggregator",
+                  "label": "Aggregator"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/composed-message-processor",
+                  "label": "Composed Message Processor"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/scatter-gather",
+                  "label": "Scatter-Gather"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/routing-slip",
+                  "label": "Routing Slip"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/process-manager",
+                  "label": "Process Manager"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-routing/message-broker",
+                  "label": "Message Broker"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Message Transformation",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/overview",
+                  "label": "Message Transformation - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/envelope-wrapper",
+                  "label": "Envelope Wrapper"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/content-enricher",
+                  "label": "Content Enricher"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/content-filter",
+                  "label": "Content Filter"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/claim-check",
+                  "label": "Claim Check"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/normalizer",
+                  "label": "Normalizer"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/message-transformation/canonical-data-model",
+                  "label": "Canonical Data Model"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Messaging Endpoints",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/overview",
+                  "label": "Messaging Endpoints - Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/messaging-gateway",
+                  "label": "Messaging Gateway"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/messaging-mapper",
+                  "label": "Messaging Mapper"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/transactional-client",
+                  "label": "Transactional Client"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/polling-consumer",
+                  "label": "Polling Consumer"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/event-driven-consumer",
+                  "label": "Event-Driven Consumer"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/competing-consumers",
+                  "label": "Competing Consumers"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/message-dispatcher",
+                  "label": "Message Dispatcher"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/selective-consumer",
+                  "label": "Selective Consumer"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/durable-subscriber",
+                  "label": "Durable Subscriber"
+                },
+                {
+                  "type": "doc",
+                  "id": "learn/enterprise-integration-patterns/messaging-endpoints/service-activator",
+                  "label": "Service Activator"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Develop",
+      "items": [
+        {
+          "type": "doc",
+          "id": "develop/intro-integration-development",
+          "label": "Develop Integration Solutions"
+        },
+        {
+          "type": "category",
+          "label": "WSO2 MI for VSCode",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/mi-for-vscode/mi-for-vscode-overview",
+              "label": "Micro Integrator for VSCode Overview"
+            },
+            {
+              "type": "doc",
+              "id": "develop/mi-for-vscode/install-wso2-mi-for-vscode",
+              "label": "Install Micro Integrator for VSCode"
+            },
+            {
+              "type": "doc",
+              "id": "develop/mi-for-vscode/troubleshooting-mi-for-vscode",
+              "label": "Troubleshooting MI for VS Code"
+            },
+            {
+              "type": "doc",
+              "id": "develop/mi-for-vscode/mi-copilot",
+              "label": "MI Copilot"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "WSO2 Integration Studio",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/wso2-integration-studio",
+              "label": "Quick Tour - WSO2 Integration Studio"
+            },
+            {
+              "type": "doc",
+              "id": "develop/installing-wso2-integration-studio",
+              "label": "Install WSO2 Integration Studio"
+            },
+            {
+              "type": "doc",
+              "id": "develop/working-with-wso2-integration-studio",
+              "label": "Work with WSO2 Integration Studio"
+            },
+            {
+              "type": "doc",
+              "id": "develop/troubleshooting-wso2-integration-studio",
+              "label": "Troubleshooting WSO2 Integration Studio"
+            },
+            {
+              "type": "doc",
+              "id": "develop/using-embedded-micro-integrator",
+              "label": "Use the Embedded Micro Integrator"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Integration Projects",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/create-integration-project",
+              "label": "Create a Project"
+            },
+            {
+              "type": "doc",
+              "id": "develop/opening-projects",
+              "label": "Open a Project"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Integration Artifacts",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/creating-artifacts/creating-artifacts-overview",
+              "label": "Integration Artifacts Overview"
+            },
+            {
+              "type": "category",
+              "label": "Create Artifacts",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-an-api",
+                  "label": "Create a REST API"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-a-proxy-service",
+                  "label": "Create a Proxy Service"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-an-inbound-endpoint",
+                  "label": "Create an Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-scheduled-task",
+                  "label": "Create Scheduled Tasks"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-a-message-store",
+                  "label": "Create a Message Store"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-a-message-processor",
+                  "label": "Create a Message Processor"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-endpoints",
+                  "label": "Create an Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-endpoint-templates",
+                  "label": "Create an Endpoint Template"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-sequence-templates",
+                  "label": "Create a Sequence Template"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-reusable-sequences",
+                  "label": "Create a Reusable Sequence"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/creating-registry-resources",
+                  "label": "Create a Registry Resource"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/registry/creating-local-registry-entries",
+                  "label": "Create Local Registry Entries"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/data-services/creating-datasources",
+                  "label": "Create a Datasource"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/data-services/creating-data-services",
+                  "label": "Create a Data Service"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/adding-connectors",
+                  "label": "Adding Connectors"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/opening-artifacts",
+                  "label": "Opening Artifacts"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Create Extensions",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "develop/customizations/creating-custom-inbound-endpoint",
+                  "label": "Create a Custom Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/customizations/creating-custom-mediators",
+                  "label": "Create a Custom Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/customizations/creating-synapse-handlers",
+                  "label": "Create a Synapse Handler"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/customizations/creating-new-connector",
+                  "label": "Create a New Connector"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/customizations/creating-custom-task-scheduling",
+                  "label": "Customizing Task Scheduling"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Securing Artifacts",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/using-docker-secrets",
+                  "label": "Use Docker Secrets in Synapse Configurations"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/using-k8s-secrets",
+                  "label": "Use Kubernetes Secrets in Synapse Configurations"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/advanced-development/applying-security-to-an-api",
+                  "label": "Apply Security to a REST API"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/advanced-development/applying-security-to-a-proxy-service",
+                  "label": "Apply Security to a Proxy Service"
+                },
+                {
+                  "type": "doc",
+                  "id": "develop/creating-artifacts/data-services/securing-data-services",
+                  "label": "Apply Security to a Data Service"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "develop/deploy-artifacts",
+          "label": "Deploy Artifacts"
+        },
+        {
+          "type": "category",
+          "label": "Test Integrations",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/using-remote-micro-integrator",
+              "label": "Use a Remote Micro Integrator"
+            },
+            {
+              "type": "doc",
+              "id": "develop/creating-unit-test-suite",
+              "label": "Create a Unit Test Suite"
+            },
+            {
+              "type": "doc",
+              "id": "develop/generate-docker-image",
+              "label": "Generate Docker Images"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Debug Integrations",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/debugging-mediation",
+              "label": "Mediation Debugging"
+            },
+            {
+              "type": "doc",
+              "id": "develop/using-wire-logs",
+              "label": "Use Wire Logs"
+            },
+            {
+              "type": "doc",
+              "id": "develop/monitoring-capp-level-logs",
+              "label": "Monitor Composite Application-Level Logs"
+            },
+            {
+              "type": "doc",
+              "id": "develop/monitoring-service-level-logs",
+              "label": "Monitor Service-Level Logs"
+            },
+            {
+              "type": "doc",
+              "id": "develop/monitoring-api-level-logs",
+              "label": "Monitor API-Level Logs"
+            },
+            {
+              "type": "doc",
+              "id": "develop/endpoint-trace-logs",
+              "label": "Endpoint Trace"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Advanced Development Tasks",
+          "items": [
+            {
+              "type": "doc",
+              "id": "develop/working-with-service-catalog",
+              "label": "Publish Integrations to the API Manager"
+            },
+            {
+              "type": "doc",
+              "id": "develop/injecting-parameters",
+              "label": "Inject Parameters"
+            },
+            {
+              "type": "doc",
+              "id": "develop/advanced-development/changing-the-endpoint-of-deployed-service",
+              "label": "Change the Endpoint of a Deployed Service"
+            },
+            {
+              "type": "doc",
+              "id": "develop/advanced-development/using-swagger-for-apis",
+              "label": "Swagger Documents"
+            },
+            {
+              "type": "doc",
+              "id": "develop/advanced-development/extend-role-based-filtering-for-ds",
+              "label": "Extend Role-based Data Filtering"
+            },
+            {
+              "type": "doc",
+              "id": "develop/advanced-development/dynamic-user-authentication",
+              "label": "Dynamic User Authentication"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Install and Setup",
+      "items": [
+        {
+          "type": "doc",
+          "id": "install-and-setup/install-and-setup-overview",
+          "label": "Overview"
+        },
+        {
+          "type": "category",
+          "label": "Install",
+          "items": [
+            {
+              "type": "doc",
+              "id": "install-and-setup/install/installation-prerequisites",
+              "label": "Installation Prerequisites"
+            },
+            {
+              "type": "category",
+              "label": "Install the Micro Integrator (MI)",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/installing-mi",
+                  "label": "Install MI"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/running-the-mi",
+                  "label": "Run the MI Runtime"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/installing-mi-as-a-windows-service",
+                  "label": "Run the MI as a Windows Service"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/running-the-mi-in-automation-mode",
+                  "label": "Run the MI in Automation Mode"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Install the Integration Control Plane",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/installing-integration-control-plane",
+                  "label": "Install the Integration Control Plane"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/running-the-integration-control-plane",
+                  "label": "Run the Integration Control Plane"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/install/running-the-integration-control-plane-as-windows-service",
+                  "label": "Run the Integration Control Plane as a Windows Service"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/install/installation-options",
+              "label": "Installation Options"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "install-and-setup/upgrading-wso2-mi",
+          "label": "Migrate"
+        },
+        {
+          "type": "category",
+          "label": "Setup",
+          "items": [
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/updating-mi",
+              "label": "Update WSO2 Micro Integrator"
+            },
+            {
+              "type": "category",
+              "label": "User Stores",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "User Stores in MI",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/user-stores/setting-up-a-userstore-in-mi",
+                      "label": "Configure a User Store in MI"
+                    },
+                    {
+                      "type": "category",
+                      "label": "Configure Databases",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "install-and-setup/setup/databases/setting-up-mysql",
+                          "label": "MySQL Database"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "install-and-setup/setup/databases/setting-up-mssql",
+                          "label": "MSSQL Database"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "install-and-setup/setup/databases/setting-up-oracle",
+                          "label": "Oracle Database"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "install-and-setup/setup/databases/setting-up-postgresql",
+                          "label": "PostgreSQL Database"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "install-and-setup/setup/databases/setting-up-ibm-db2",
+                          "label": "IBM Database"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/user-stores/configuring-secondary-user-stores",
+                      "label": "Configure Secondary User Stores"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/deployment/file-based-registry",
+                      "label": "Configure the File-Based Registry"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "User Stores in ICP",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/user-stores/setting-up-a-userstore-in-icp",
+                      "label": "Configure a User Store in ICP"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Security",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Set up Keystores",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/creating-keystores",
+                      "label": "Create New Keystores"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/importing-ssl-certificate",
+                      "label": "Add SSL certificates to keystores"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/renewing-ca-signed-certificate-in-keystore",
+                      "label": "Renew a CA-signed Certificate"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/configuring-keystores",
+                      "label": "Configure Keystores"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Comply with GDPR",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/gdpr-ei",
+                      "label": "GDPR for the WSO2 Micro Integrator"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/about-forgetme-tool",
+                      "label": "About the Identity Anonymization Tool"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Use Secrets",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/encrypting-plain-text",
+                      "label": "Encrypt Secrets Using WSO2 Secure Vault"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/using-hashicorp-secrets",
+                      "label": "Use Hashicorp Secrets"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/security/single-key-encryption",
+                      "label": "Use Symmetric Encryption"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/security/securing-management-api",
+                  "label": "Secure the Management API"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Message Brokers",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "AMQP (RabbitMQ)",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/deploy-rabbitmq",
+                      "label": "Deploy RabbitMQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-rabbitmq",
+                      "label": "Connect to RabbitMQ"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "JMS",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-activemq",
+                      "label": "Connect to ActiveMQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-apache-artemis",
+                      "label": "Connect to Apache Artemis"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-hornetq",
+                      "label": "Connect to HornetQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-ibm-websphere-app-server",
+                      "label": "Connect to IBM Websphere App Server"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-ibm-webspheremq",
+                      "label": "Connect to IBM WebSphere MQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-jbossmq",
+                      "label": "Connect to JBoss MQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-msmq",
+                      "label": "Connect to MSMQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-swiftmq",
+                      "label": "Connect to Swift MQ"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-tibco-ems",
+                      "label": "Connect to TIBCO EMS"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-weblogic",
+                      "label": "Connect to Weblogic"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-wso2-mb",
+                      "label": "Connect to WSO2 MB"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/brokers/configure-with-multiple-brokers",
+                      "label": "Connect to Multiple Brokers"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/feature-configs/configuring-kafka",
+                  "label": "Kafka"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/brokers/configure-with-azureservicebus",
+                  "label": "Azure Service Bus"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/transport-configurations/configuring-transports",
+              "label": "Transports"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/transport-configurations/multi-https-transport",
+              "label": "Multi-HTTPS Transport"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/message-builders-formatters/message-builders-and-formatters",
+              "label": "Message Builders and Formatters"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/message-builders-formatters/message-relay",
+              "label": "Message Relay"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/dynamic-server-configurations",
+              "label": "Manage Configurations across Environments"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/crypto-provider-configurations/configuring-the-crypto-provider",
+              "label": "Configure Crypto Providers"
+            },
+            {
+              "type": "category",
+              "label": "Load Balancer and Proxy Server",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment/setting-up-lb",
+                  "label": "Load Balancing"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/configuring-proxy-servers",
+                  "label": "Configure a Proxy Server"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/enabling-ssl-tunneling-thru-proxy-server",
+                  "label": "Enable SSL Tunneling through Proxy Server"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/feature-configs/configuring-timestamp-conversion-for-rdbms",
+              "label": "Time Stamp Conversion for RDBMS"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/feature-configs/configuring-rdbms-coordination",
+              "label": "RDBMS Coordination Configuration"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Deploy",
+          "items": [
+            {
+              "type": "category",
+              "label": "Deploy the Micro Integrator",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment/deploying-wso2-mi",
+                  "label": "Configure a Micro Integrator Cluster"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment/deployment-synchronization",
+                  "label": "Deployment Synchronization"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Deploy on Kubernetes",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Micro Integrator on K8s",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/deployment/kubernetes-deployment-patterns",
+                      "label": "Micro Integrator Deployment Patterns on K8s"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/deployment/kubernetes-deployment",
+                      "label": "Deploy the Micro Integrator on K8s"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Integrations on K8s",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/kubernetes-operators/k8s-api-operator/manage-integrations/integration-deployments",
+                      "label": "Deploy Integrations Using the Operator"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/deployment/deploying-micro-integrator-with-helm",
+                      "label": "Deploy Integrations Using Helm Resources"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment/deploying-icp-with-helm",
+                  "label": "Integration Control Plane (ICP) on K8s"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment/setup-userstores-with-helm",
+                  "label": "Setup User Stores on K8s"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Deployment Best Practices",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/production-deployment-guidelines",
+                  "label": "Deployment Checklist"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/security-guidelines-for-production-deployment",
+                  "label": "Security Guidelines for a Production Deployment"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/basic-health-checks",
+                  "label": "Basic Health Checks"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/changing-the-hostname",
+                  "label": "Change the Hostname"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/changing-the-default-ports-with-offset",
+                  "label": "Change the Default Ports"
+                },
+                {
+                  "type": "doc",
+                  "id": "install-and-setup/setup/deployment-best-practices/backup-recovery",
+                  "label": "Backup and Recovery"
+                },
+                {
+                  "type": "category",
+                  "label": "Performance Tuning",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/tuning-jvm-performance",
+                      "label": "Tuning JVM Performance"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/network-os-performance",
+                      "label": "Tuning Network and OS Performance"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/jdbc-tuning",
+                      "label": "Tuning JDBC Configurations"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/http-transport-tuning",
+                      "label": "Tuning the HTTP Transport"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/jms-transport-tuning",
+                      "label": "Tuning the JMS Transport"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/tuning-the-vfs-transport",
+                      "label": "Tuning the VFS Transport"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/rabbitmq-transport-tuning",
+                      "label": "Tuning the RabbitMQ Transport"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "install-and-setup/setup/performance-tuning/tuning-inbound-endpoints",
+                      "label": "Tuning the Inbound Endpoints"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "CI/CD",
+          "items": [
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/deployment/integration-cicd-overview",
+              "label": "CI/CD for Integrations - Overview"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/deployment/mi-cicd-vm",
+              "label": "Build a CI/CD Pipeline for Integrations (VM deployment)"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Reference",
+          "items": [
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/reference/common-runtime-and-configuration-artifacts",
+              "label": "Common Runtime and Configuration Artifacts"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/reference/default-product-ports",
+              "label": "Default Product Ports"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/deployment-best-practices/performance-test-results-mi",
+              "label": "Performance Test Results"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/reference/supported-cipher-suites",
+              "label": "Supported Cipher Suites"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Observe and Manage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "observe-and-manage/observe-overview",
+          "label": "Overview"
+        },
+        {
+          "type": "category",
+          "label": "Observability",
+          "items": [
+            {
+              "type": "category",
+              "label": "Grafana based Observability",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "observe-and-manage/cloud-native-observability-overview",
+                  "label": "Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "observe-and-manage/setting-up-cloud-native-observability-on-a-vm",
+                  "label": "Getting Started Guide - VM Deployment"
+                },
+                {
+                  "type": "doc",
+                  "id": "observe-and-manage/setting-up-cloud-native-observability-in-kubernetes",
+                  "label": "Getting Started Guide - K8s Deployment"
+                },
+                {
+                  "type": "doc",
+                  "id": "observe-and-manage/viewing-cloud-native-observability-statistics",
+                  "label": "View Statistics"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Basic Observability",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Logs",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-logs/configuring-log4j2-properties",
+                      "label": "Configure Logs"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-logs/enabling-logs-for-a-component",
+                      "label": "Enable Logs for a Component"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-logs/monitoring-logs",
+                      "label": "Monitor Logs"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-logs/monitoring-correlation-logs",
+                      "label": "Monitor Correlation Logs"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-logs/monitoring-mi-audit-logs",
+                      "label": "Monitor Audit Logs"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Traces",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-traces/monitoring-with-opentelemetry-mi",
+                      "label": "OpenTelemetry"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Metrics",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-metrics/jmx-monitoring",
+                      "label": "JMX Monitoring with JMX"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-metrics/snmp-monitoring",
+                      "label": "SNMP Monitoring with SNMO"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "TCP Messages",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-tcp/starting-tcp-mon",
+                      "label": "Starting TCPMon"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-tcp/message-monitoring-with-tcpmon",
+                      "label": "Message Monitoring with TCPMon"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/classic-observability-tcp/other-usages-of-tcpmon",
+                      "label": "Other Usages of TCPMon"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Analytics",
+          "items": [
+            {
+              "type": "category",
+              "label": "ELK Based Analytics",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "mi-analytics/mi-elk-installation-guide",
+                  "label": "Setup"
+                },
+                {
+                  "type": "doc",
+                  "id": "mi-analytics/mi-elk-dashboards",
+                  "label": "Access the Dashboard"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Other Analytics",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "mi-analytics/datadog-analytics-installation-guide",
+                  "label": "Datadog Analytics Installation Guide"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Administer",
+          "items": [
+            {
+              "type": "doc",
+              "id": "administer/admin-overview",
+              "label": "Administer Overview"
+            },
+            {
+              "type": "doc",
+              "id": "install-and-setup/setup/user-stores/managing-users",
+              "label": "Manage Users and Roles"
+            },
+            {
+              "type": "doc",
+              "id": "administer/managing-users-and-roles/managing-user-stores/writing-a-custom-user-store-manager",
+              "label": "Write a Custom User Store Manager"
+            },
+            {
+              "type": "category",
+              "label": "Manage Micro Integrator",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Runtime",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/working-with-integration-control-plane",
+                      "label": "Integration Control Plane"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/managing-integrations-with-micli",
+                      "label": "Managing Integrations with MI CLI"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "observe-and-manage/working-with-management-api",
+                      "label": "Management API"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Logs",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "administer/logging-and-monitoring/logging/managing-log-growth",
+                      "label": "Manage Log Growth"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "administer/logging-and-monitoring/logging/masking-sensitive-information-in-logs",
+                      "label": "Masking Sensitive Information in Logs"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "References",
+      "items": [
+        {
+          "type": "category",
+          "label": "Product Configurations",
+          "items": [
+            {
+              "type": "doc",
+              "id": "reference/config-catalog-mi",
+              "label": "MI Configuration Catalog"
+            },
+            {
+              "type": "doc",
+              "id": "reference/config-catalog-integration-control-plane",
+              "label": "Integration Control Plane Configuration Catalog"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Connectors",
+          "items": [
+            {
+              "type": "doc",
+              "id": "reference/connectors/connectors-overview",
+              "label": "Connectors Overview"
+            },
+            {
+              "type": "doc",
+              "id": "reference/connectors/why-connectors",
+              "label": "When to Use Connectors"
+            },
+            {
+              "type": "doc",
+              "id": "reference/connectors/connector-usage",
+              "label": "Connector Usage Guidelines"
+            },
+            {
+              "type": "category",
+              "label": "Amazon DynamoDB Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazondynamodb-connector/amazondynamodb-connector-overview",
+                  "label": "Amazon DynamoDB Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazondynamodb-connector/amazondynamodb-connector-configuration",
+                  "label": "Set up Amazon DynamoDB"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazondynamodb-connector/amazondynamodb-connector-example",
+                  "label": "Amazon DynamoDB Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazondynamodb-connector/amazondynamodb-connector-reference",
+                  "label": "Amazon DynamoDB Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Amazon Lambda Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonlambda-connector/amazonlambda-connector-overview",
+                  "label": "Amazon Lambda Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonlambda-connector/setting-up-amazonlambda",
+                  "label": "Set up Amazon Lambda"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonlambda-connector/amazonlambda-connector-example",
+                  "label": "Amazon Lambda Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonlambda-connector/amazonlambda-connector-config",
+                  "label": "Amazon Lambda Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Amazon S3 Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazons3-connector/amazons3-connector-overview",
+                  "label": "AmazonS3 Overview"
+                },
+                {
+                  "type": "category",
+                  "label": "2.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/amazons3-connector-config",
+                      "label": "Set up Amazon S3"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/amazons3-connector-example",
+                      "label": "AmazonS3 Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/amazons3-connector-reference",
+                      "label": "AmazonS3 Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "1.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/1.x/amazons3-connector-1.x-config",
+                      "label": "Set up Amazon S3"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/1.x/amazons3-connector-1.x-example",
+                      "label": "AmazonS3 Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazons3-connector/1.x/amazons3-connector-1.x-reference",
+                      "label": "AmazonS3 Reference"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Amazon SQS Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonsqs-connector/amazonsqs-connector-overview",
+                  "label": "Amazon SQS Overview"
+                },
+                {
+                  "type": "category",
+                  "label": "2.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/2.x/amazonsqs-connector-2.x-example",
+                      "label": "Amazon SQS Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/2.x/amazonsqs-connector-2.x-reference",
+                      "label": "Amazon SQS Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "1.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/1.x/amazonsqs-connector-1.x-example",
+                      "label": "Amazon SQS Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/1.x/amazonsqs-connector-1.x-reference",
+                      "label": "Amazon SQS Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/amazonsqs-connector/amazonsqs-inbound-endpoint-example",
+                  "label": "Amazon SQS Inbound Endpoint Example"
+                },
+                {
+                  "type": "category",
+                  "label": "Amazon SQS Inbound Endpoint Reference",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/amazon-inbound-endpoint-1.0.x/amazonsqs-inbound-endpoint-reference-configuration",
+                      "label": "1.0.x"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/amazonsqs-connector/amazonsqs-inbound-endpoint-reference-configuration",
+                      "label": "1.1.x"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "BigQuery Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/bigquery-connector/bigquery-connector-overview",
+                  "label": "BigQuery Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/bigquery-connector/bigquery-connector-configuration",
+                  "label": "Set up the BigQuery Environment"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/bigquery-connector/bigquery-connector-example",
+                  "label": "BigQuery Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/bigquery-connector/bigquery-connector-reference",
+                  "label": "BigQuery Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "CDC Inbound Endpoint",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/cdc-inbound-endpoint/cdc-inbound-endpoint-overview",
+                  "label": "CDC Inbound Endpoint Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/cdc-inbound-endpoint/cdc-inbound-endpoint-example",
+                  "label": "CDC Inbound Endpoint Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/cdc-inbound-endpoint/cdc-inbound-endpoint-config",
+                  "label": "CDC Inbound Endpoint Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Ceridian Dayforce Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ceridiandayforce-connector/cerediandayforce-overview",
+                  "label": "Ceridian Dayforce Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ceridiandayforce-connector/ceridiandayforce-connector-config",
+                  "label": "Set up the Ceridian Dayforce Connector"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ceridiandayforce-connector/ceridiandayforce-connector-example",
+                  "label": "Ceridian Dayforce Example"
+                },
+                {
+                  "type": "category",
+                  "label": "Ceridian Dayforce Reference",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/ceridiandayforce-connector/ceridiandayforce-connector-reference",
+                      "label": "Initializing"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/ceridiandayforce-connector/employee",
+                      "label": "Employee"
+                    },
+                    {
+                      "type": "category",
+                      "label": "Configuration",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/configuration/orgunits",
+                          "label": "orgUnits"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/configuration/orgunitdetails",
+                          "label": "orgUnitDetails"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Employee Documents",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-documents/listofdocuments",
+                          "label": "listOfDocuments"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-documents/documentdetails",
+                          "label": "documentDetails"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Employee Employment Information",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeclockdevicegroups",
+                          "label": "employeeClockDeviceGroups"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeecompensationsummary",
+                          "label": "employeeCompensationSummary"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeecourses",
+                          "label": "employeeCourses"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeemploymentagreements",
+                          "label": "employeeEmploymentAgreements"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeemploymentstatuses",
+                          "label": "employeeEmploymentStatuses"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeemploymenttypes",
+                          "label": "employeeEmploymentTypes"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeehighlycompensatedemployees",
+                          "label": "employeeHighlyCompensatedEmployees"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeehrincidents",
+                          "label": "employeeHRIncidents"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeelabordefaults",
+                          "label": "employeeLaborDefaults"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeonboardingpolicies",
+                          "label": "employeeOnboardingPolicies"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeorginfo",
+                          "label": "employeeOrgInfo"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeepayadjustmentcodegroups",
+                          "label": "employeePayAdjustmentCodeGroups"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeepaygraderates",
+                          "label": "employeePayGradeRates"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeperformanceratings",
+                          "label": "employeePerformanceRatings"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeproperties",
+                          "label": "employeeProperties"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeskills",
+                          "label": "employeeSkills"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeetrainingprograms",
+                          "label": "employeeTrainingPrograms"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeunionmemberships",
+                          "label": "employeeUnionMemberships"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeworkassignments",
+                          "label": "employeeWorkAssignments"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-employment-information/employeeworkcontracts",
+                          "label": "employeeWorkContracts"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Employee Personal Information",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeeaddresses",
+                          "label": "employeeAddresses"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeecantaxes",
+                          "label": "employeeCANTaxes"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeecontacts",
+                          "label": "employeeContacts"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeedirectdeposits",
+                          "label": "employeeDirectDeposits"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeeemergencycontacts",
+                          "label": "employeeEmergencyContacts"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeehealthandwellness",
+                          "label": "employeeHealthandWellness"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeemaritalstatuses",
+                          "label": "employeeMaritalStatuses"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-personal-information/employeeustaxes",
+                          "label": "employeeUSTaxes"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Employee Time Management",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-time-management/availability",
+                          "label": "availability"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-time-management/employeepunches",
+                          "label": "employeePunches"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-time-management/employeerawpunches",
+                          "label": "employeeRawPunches"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-time-management/schedules",
+                          "label": "schedules"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employee-time-management/timeawayfromwork",
+                          "label": "timeAwayFromWork"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Employment Eligibility Verification",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/employment-eligibility-verification/i9order",
+                          "label": "i9Order"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Recruiting",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/recruiting/jobpostings",
+                          "label": "jobPostings"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Reporting",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/reporting/reportmetadataforalistofreports",
+                          "label": "reportMetadataForAListOfReports"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/reporting/reportmetadataforaspecificreport",
+                          "label": "reportMetadataForASpecificReport"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/reporting/reports",
+                          "label": "reports"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "User Security Authority And Management",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/documentmanagementsecuritygroups",
+                          "label": "documentManagementSecurityGroups"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/employeelocations",
+                          "label": "employeeLocations"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/employeemanagers",
+                          "label": "employeeManagers"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/employeeroles",
+                          "label": "employeeRoles"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/employeessoaccounts",
+                          "label": "employeeSSOAccounts"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/employeeworkassignmentmanagers",
+                          "label": "employeeWorkAssignmentManagers"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "reference/connectors/ceridiandayforce-connector/user-security-authority-and-management/userpayadjustmentcodegroups",
+                          "label": "userPayAdjustmentCodeGroups"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "CSV Module",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/csv-module/csv-module-config",
+                  "label": "CSV Module Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Email Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/email-connector/email-connector-overview",
+                  "label": "Email Connector Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/email-connector/email-connector-example",
+                  "label": "Email Connector Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/email-connector/email-connector-config",
+                  "label": "Email Connector Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Jira Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/jira-connector/jira-connector-overview",
+                  "label": "Jira Connector Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/jira-connector/jira-connector-example",
+                  "label": "Jira Connector Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/jira-connector/jira-connector-config",
+                  "label": "Jira Connector Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Facebook Ads Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/facebook-ads-connector/facebook-ads-overview",
+                  "label": "Facebook Ads Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/facebook-ads-connector/facebook-ads-configuration",
+                  "label": "Facebook Ads Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Sharepoint Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/sharepoint-connector/sharepoint-overview",
+                  "label": "Sharepoint Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/sharepoint-connector/sharepoint-configuration",
+                  "label": "Sharepoint Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Salesforce Marketing Cloud Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-marketing-cloud-connector/salesforce-marketing-cloud-overview",
+                  "label": "Salesforce Marketing Cloud Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-marketing-cloud-connector/salesforce-marketing-cloud-configuration",
+                  "label": "Salesforce Marketing Cloud Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-marketing-cloud-connector/salesforce-marketing-cloud-token-generation",
+                  "label": "Salesforce Marketing Cloud Token Generation"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-marketing-cloud-connector/salesforce-marketing-cloud-email-prerequisites",
+                  "label": "Salesforce Marketing Cloud Email Prerequisites"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "FHIR Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/fhir-connector/fhir-connector-overview",
+                  "label": "FHIR Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/fhir-connector/fhir-connector-example",
+                  "label": "FHIR Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/fhir-connector/fhir-connector-config",
+                  "label": "FHIR Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "File Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/file-connector/file-connector-overview",
+                  "label": "File Connector Overview"
+                },
+                {
+                  "type": "category",
+                  "label": "4.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/file-connector/file-connector-example",
+                      "label": "File Connector Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/file-connector/file-connector-config",
+                      "label": "File Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "3.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/file-connector/3.x/file-connector-3.x-example",
+                      "label": "File Connector Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/file-connector/3.x/file-connector-3.x-config",
+                      "label": "File Connector Reference"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Gmail Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/gmail-connector/gmail-connector-overview",
+                  "label": "Gmail Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/gmail-connector/gmail-connector-example",
+                  "label": "Gmail Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/gmail-connector/gmail-connector-config",
+                  "label": "Gmail Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/gmail-connector/configuring-gmail-api",
+                  "label": "Gmail Configuration"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Google Ads Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-ads-connector/google-ads-overview",
+                  "label": "Google Ads Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-ads-connector/google-ads-configuration",
+                  "label": "Google Ads Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Google Firebase Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-firebase-connector/google-firebase-overview",
+                  "label": "Google Firebase Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-firebase-connector/google-firebase-setup",
+                  "label": "Set up Google Firebase"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-firebase-connector/google-firebase-connector-example",
+                  "label": "Google Firebase Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-firebase-connector/google-firebase-configuration",
+                  "label": "Google Firebase Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Google Pub/Sub Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-pubsub-connector/googlepubsub-connector-overview",
+                  "label": "Google PubSub Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-pubsub-connector/googlepubsub-connector-configuration",
+                  "label": "Set up the Google PubSub Environment"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-pubsub-connector/googlepubsub-connector-example",
+                  "label": "Google PubSub Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-pubsub-connector/googlepubsub-connector-reference",
+                  "label": "Google PubSub Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Google Spreadsheet Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-spreadsheet-connector/google-spreadsheet-overview",
+                  "label": "Google Spreadsheet Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-spreadsheet-connector/google-spreadsheet-connector-example",
+                  "label": "Google Spreadsheet Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-spreadsheet-connector/get-credentials-for-google-spreadsheet",
+                  "label": "Get Credentials for Google Spreadsheet"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/google-spreadsheet-connector/google-spreadsheet-connector-config",
+                  "label": "Google Spreadsheet Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "ISO8583 Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-connector-overview",
+                  "label": "ISO8583 Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-connector-configuration",
+                  "label": "Set up ISO8583"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-connector-example",
+                  "label": "ISO8583 Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-connector-reference",
+                  "label": "ISO8583 Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-inbound-endpoint-example",
+                  "label": "ISO8583 Inbound Endpoint Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/iso8583-connector/iso8583-inbound-endpoint-config",
+                  "label": "ISO8583 Inbound Endpoint Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Kafka Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/kafka-connector/kafka-connector-overview",
+                  "label": "Kafka Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/kafka-connector/setting-up-kafka",
+                  "label": "Set up Kafka"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/kafka-connector/enabling-security-for-kafka",
+                  "label": "Enable Security for Kafka"
+                },
+                {
+                  "type": "category",
+                  "label": "3.1.x and later",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/kafka-connector/kafka-connector-producer-example",
+                      "label": "Kafka Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/kafka-connector/kafka-connector-avro-producer-example",
+                      "label": "Kafka Avro Message Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/kafka-connector/kafka-connector-config",
+                      "label": "Kafka Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "3.0.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/kafka-connector/3.0.x/kafka-connector-config",
+                      "label": "Kafka Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/kafka-connector/kafka-inbound-endpoint-example",
+                  "label": "Kafka Inbound Endpoint Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/kafka-connector/kafka-inbound-endpoint-config",
+                  "label": "Kafka Inbound Endpoint Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "LDAP Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ldap-connector/ldap-connector-overview",
+                  "label": "LDAP Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ldap-connector/setting-up-ldap",
+                  "label": "Set up an LDAP Server"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ldap-connector/ldap-connector-example",
+                  "label": "LDAP Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/ldap-connector/ldap-server-configuration",
+                  "label": "LDAP Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Microsoft Azure Storage Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/microsoft-azure-storage-connector/microsoft-azure-overview",
+                  "label": "Microsoft Azure Storage Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/microsoft-azure-storage-connector/microsoft-azure-storage-configuration",
+                  "label": "Set up Microsoft Azure Storage"
+                },
+                {
+                  "type": "category",
+                  "label": "2.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/microsoft-azure-storage-connector/2.x/microsoft-azure-storage-connector-example",
+                      "label": "Microsoft Azure Storage Example"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/microsoft-azure-storage-connector/2.x/microsoft-azure-storage-reference",
+                      "label": "Microsoft Azure Storage Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "1.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/microsoft-azure-storage-connector/1.x/microsoft-azure-storage-reference",
+                      "label": "Microsoft Azure Storage Reference"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "MongoDB Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/mongodb-connector/mongodb-connector-overview",
+                  "label": "MongoDB Connector Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/mongodb-connector/mongodb-connector-example",
+                  "label": "MongoDB Connector Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/mongodb-connector/mongodb-connector-config",
+                  "label": "MongoDB Connector Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Redis Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/redis-connector/redis-connector-overview",
+                  "label": "Redis Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/redis-connector/redis-connector-configuration",
+                  "label": "Set up the Environment"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/redis-connector/redis-connector-example",
+                  "label": "Redis Example"
+                },
+                {
+                  "type": "category",
+                  "label": "2.7.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/redis-connector/2.7.x/redis-connector-reference",
+                      "label": "Redis Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "2.4.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/redis-connector/2.4.x/redis-connector-reference",
+                      "label": "Redis Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "2.2.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/redis-connector/2.2.x/redis-connector-reference",
+                      "label": "Redis Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "2.1.x",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/redis-connector/2.1.x/redis-connector-reference",
+                      "label": "Redis Connector Reference"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "1.0.1",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/connectors/redis-connector/1.0.1/redis-connector-reference",
+                      "label": "Redis Connector Reference"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Salesforce Connectors",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-overview",
+                  "label": "Salesforce Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-access-token-generation",
+                  "label": "Salesforce Access Token Generation"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-inbound-endpoint-configuration",
+                  "label": "Set up the PushTopic in Salesforce"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-rest-connector-example",
+                  "label": "Salesforce REST API Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-rest-connector-config",
+                  "label": "Salesforce REST API Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-inbound-endpoint-example",
+                  "label": "Salesforce Inbound Endpoint Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-inbound-endpoint-reference-configuration",
+                  "label": "Salesforce Inbound Endpoint Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforcebulk-connector/salesforcebulk-connector-configuration",
+                  "label": "Salesforce Bulk Configuration"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforcebulk-connector/salesforcebulk-connector-example",
+                  "label": "Salesforce Bulk API Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforcebulk-connector/salesforcebulk-reference",
+                  "label": "Salesforce Bulk API Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/salesforcebulk-v2-connector-example",
+                  "label": "Salesforce Bulk API V2 Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/salesforcebulk-v2-reference",
+                  "label": "Salesforce Bulk API V2 Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-soap-connector-config",
+                  "label": "Salesforce SOAP Connector Configuration"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-connectors/sf-soap-connector-example",
+                  "label": "Salesforce SOAP Connector Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/salesforce-soap-connector/salesforce-soap-reference",
+                  "label": "Salesforce SOAP Connector Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "ServiceNow Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/servicenow-connector/servicenow-overview",
+                  "label": "ServiceNow Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/servicenow-connector/settingup-servicenow-instance",
+                  "label": "Set up Servicenow"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/servicenow-connector/servicenow-connector-example",
+                  "label": "ServiceNow Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/servicenow-connector/servicenow-connector-config",
+                  "label": "ServiceNow Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "SMPP Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-connector-overview",
+                  "label": "SMPP Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-connector-configuration",
+                  "label": "Set up the SMPP Connector"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-connector-example",
+                  "label": "SMPP Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-connector-config",
+                  "label": "SMPP Reference"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-inbound-endpoint-example",
+                  "label": "SMPP Inbound Endpoint Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/smpp-connector/smpp-inbound-endpoint-config",
+                  "label": "SMPP Inbound Endpoint Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Twitter Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/twitter-connector/twitter-connector-overview",
+                  "label": "Twitter Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/twitter-connector/twitter-connector-credentials",
+                  "label": "Generate Credentials"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/twitter-connector/twitter-connector-configuration",
+                  "label": "Set up Integration Runtime"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/twitter-connector/twitter-connector-example",
+                  "label": "Twitter Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/twitter-connector/twitter-connector-reference",
+                  "label": "Twitter Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Snowflake Connector",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/snowflake-connector/snowflake-connector-overview",
+                  "label": "Snowflake Connector Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/snowflake-connector/snowflake-connector-example",
+                  "label": "Snowflake Connector Example"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/snowflake-connector/snowflake-connector-reference",
+                  "label": "Snowflake Connector Reference"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Utility Module",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/utility-module/utility-module-overview",
+                  "label": "Utility Module Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/connectors/utility-module/utility-module-config",
+                  "label": "Utility Module Reference"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Synapse Configurations",
+          "items": [
+            {
+              "type": "category",
+              "label": "Mediator Catalog",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/about-mediators",
+                  "label": "About Mediators"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/aggregate-mediator",
+                  "label": "Aggregate Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/builder-mediator",
+                  "label": "Builder Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/cache-mediator",
+                  "label": "Cache Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/call-mediator",
+                  "label": "Call Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/call-template-mediator",
+                  "label": "Call Template Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/callout-mediator",
+                  "label": "Callout Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/class-mediator",
+                  "label": "Class Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/clone-mediator",
+                  "label": "Clone Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/data-mapper-mediator",
+                  "label": "Data Mapper Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/dss-mediator",
+                  "label": "Data Service Call Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/dblookup-mediator",
+                  "label": "DBLookup  Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/db-report-mediator",
+                  "label": "DB Report Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/drop-mediator",
+                  "label": "Drop Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/ejb-mediator",
+                  "label": "EJB Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/enrich-mediator",
+                  "label": "Enrich Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/entitlement-mediator",
+                  "label": "Entitlement Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/fastxslt-mediator",
+                  "label": "FastXSLT Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/fault-mediator",
+                  "label": "Fault Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/filter-mediator",
+                  "label": "Filter Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/foreach-mediator",
+                  "label": "ForEach Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/header-mediator",
+                  "label": "Header Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/iterate-mediator",
+                  "label": "Iterate Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/json-transform-mediator",
+                  "label": "JSON Transform Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/log-mediator",
+                  "label": "Log Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/loopback-mediator",
+                  "label": "Loopback Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/ntlm-mediator",
+                  "label": "NTLM Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/oauth-mediator",
+                  "label": "OAuth Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/payloadfactory-mediator",
+                  "label": "PayloadFactory Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-mediator",
+                  "label": "Property Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-group-mediator",
+                  "label": "Property Group Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/respond-mediator",
+                  "label": "Respond Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/script-mediator",
+                  "label": "Script Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/send-mediator",
+                  "label": "Send Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/sequence-mediator",
+                  "label": "Sequence Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/smooks-mediator",
+                  "label": "Smooks Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/store-mediator",
+                  "label": "Store Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/switch-mediator",
+                  "label": "Switch Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/throttle-mediator",
+                  "label": "Throttle Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/transaction-mediator",
+                  "label": "Transaction Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/urlrewrite-mediator",
+                  "label": "URLRewrite Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/validate-mediator",
+                  "label": "Validate Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/xquery-mediator",
+                  "label": "XQuery Mediator"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/xslt-mediator",
+                  "label": "XSLT Mediator"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Property Catalog",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-reference/generic-properties",
+                  "label": "Generic Properties"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-reference/http-transport-properties",
+                  "label": "HTTP Transport Properties"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-reference/soap-headers",
+                  "label": "SOAP Headers"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-reference/axis2-properties",
+                  "label": "Axis2 Properties"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/mediators/property-reference/message-context-properties",
+                  "label": "Synapse Message Context Properties"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/expressions",
+              "label": "Expressions"
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/scopes",
+              "label": "Scopes"
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/rest-api-properties",
+              "label": "REST APIs"
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/proxy-service-properties",
+              "label": "Proxy Service Properties"
+            },
+            {
+              "type": "category",
+              "label": "Inbound Endpoints",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/about-inbound-endpoints",
+                  "label": "About Inbound Endpoints"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/listening-inbound-endpoints/http-inbound-endpoint-properties",
+                  "label": "HTTP Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/listening-inbound-endpoints/cxf-ws-rm-inbound-endpoint-properties",
+                  "label": "CXF WS RM Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/listening-inbound-endpoints/hl7-inbound-endpoint-properties",
+                  "label": "HL7 Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/listening-inbound-endpoints/websocket-inbound-endpoint-properties",
+                  "label": "Websocket Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/polling-inbound-endpoints/file-inbound-endpoint-properties",
+                  "label": "File Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/polling-inbound-endpoints/jms-inbound-endpoint-properties",
+                  "label": "JMS Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/polling-inbound-endpoints/kafka-inbound-endpoint-properties",
+                  "label": "Kafka Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/event-based-inbound-endpoints/rabbitmq-inbound-endpoint-properties",
+                  "label": "RabbitMQ Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/event-based-inbound-endpoints/mqtt-inbound-endpoint-properties",
+                  "label": "MQTT Inbound Endpoint"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/inbound-endpoints/custom-inbound-endpoint-properties",
+                  "label": "Custom Inbound Endpoint"
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/scheduled-task-properties",
+              "label": "Scheduled Task Properties"
+            },
+            {
+              "type": "doc",
+              "id": "reference/mediation-sequences",
+              "label": "Mediation Sequences"
+            },
+            {
+              "type": "category",
+              "label": "Message Stores and Processors",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/about-message-stores-processors",
+                  "label": "About Message Stores and Processors"
+                },
+                {
+                  "type": "category",
+                  "label": "Message Stores",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/jms-msg-store-properties",
+                      "label": "JMS Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/jdbc-msg-store-properties",
+                      "label": "JDBC Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/rabbitmq-msg-store-properties",
+                      "label": "RabbitMQ Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/resequence-msg-store-properties",
+                      "label": "Resequence Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/wso2mb-msg-store-properties",
+                      "label": "WSO2 MB Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/in-memory-msg-store-properties",
+                      "label": "In Memory Message Store"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-stores/custom-msg-store-properties",
+                      "label": "Custom Message Store"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Message Processors",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-processors/msg-sampling-processor-properties",
+                      "label": "Message Sampling Processor"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-processors/msg-sched-forwarding-processor-properties",
+                      "label": "Scheduled Message Forwarding Processor"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "reference/synapse-properties/message-processors/msg-sched-failover-forwarding-processor-properties",
+                      "label": "Scheduled Failover Message Forwarding Processor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/template-properties",
+              "label": "Templates"
+            },
+            {
+              "type": "doc",
+              "id": "reference/synapse-properties/endpoint-properties",
+              "label": "Endpoints"
+            },
+            {
+              "type": "category",
+              "label": "Data Services",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services",
+                  "label": "About Data Services"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/elements-of-a-data-service",
+                  "label": "Elements of a Data Service"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/query-parameters",
+                  "label": "Query Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/datasource-configuration-parameters",
+                  "label": "Datasource Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/input-validators",
+                  "label": "Input Validators"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/using-namespaces",
+                  "label": "Namespaces"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/mapping-data-types",
+                  "label": "SQL/Data Types"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/data-services/sample-queries",
+                  "label": "Sample Queries"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Transport Configs",
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/vfs-transport-parameters",
+                  "label": "VFS Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/jms-transport-parameters",
+                  "label": "JMS Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/rabbitmq-transport-parameters",
+                  "label": "RabbitMQ Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/hl7-transport-parameters",
+                  "label": "HL7 Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/fix-transport-parameters",
+                  "label": "FIX Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/mailto-transport-parameters",
+                  "label": "MailTo Parameters"
+                },
+                {
+                  "type": "doc",
+                  "id": "reference/synapse-properties/transport-parameters/mqtt-transport-parameters",
+                  "label": "MQTT Parameters"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Security References",
+          "items": [
+            {
+              "type": "doc",
+              "id": "reference/mi-security-reference/customizing-secure-vault",
+              "label": "Customize Secure Vault"
+            },
+            {
+              "type": "doc",
+              "id": "reference/mi-security-reference/using-keystores",
+              "label": "Use Keystores"
+            },
+            {
+              "type": "doc",
+              "id": "reference/mi-security-reference/security-implementation",
+              "label": "WS-Security Implementations"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Troubleshooting",
+          "items": [
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/error-handling-mi",
+              "label": "Error Handling in Micro Integrator"
+            },
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/capturing-system-data-in-error-situations",
+              "label": "Capturing System Data in Error Situations"
+            },
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/admin-troubleshooting-in-production-environments",
+              "label": "Troubleshooting in Production Environments"
+            },
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/configuring-xslt-mediation-with-xalan",
+              "label": "Configure XSLT Mediation with Xalan"
+            },
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/troubleshooting-jms",
+              "label": "Troubleshooting JMS"
+            },
+            {
+              "type": "doc",
+              "id": "reference/troubleshooting/utilizing-runtime-diagnostic-tool",
+              "label": "Utilizing Runtime Diagnostic Tool"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

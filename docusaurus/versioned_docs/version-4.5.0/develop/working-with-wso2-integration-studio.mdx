@@ -1,0 +1,30 @@
+---
+title: Working with WSO2 Integration Studio
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.5.0/en/docs/develop/working-with-wso2-integration-studio.md
+---
+
+# Working with WSO2 Integration Studio
+
+:::warning
+
+WSO2 Integration Studio is deprecated. It is recommended to use the [WSO2 Integrator: MI extension for VS Code](mi-for-vscode/mi-for-vscode-overview.mdx) instead.
+
+:::
+
+Once you have created a [REST API](creating-artifacts/creating-an-api.mdx) or a [Proxy Service](creating-artifacts/creating-a-proxy-service.mdx) in WSO2 Integration Studio, you can update the mediation flow by adding new mediation artifacts and changing the existing artifacts.
+
+Follow the steps given below.
+
+1.  First, open the proxy service or REST API from the project explorer.
+2.  You can use either the **design view** or the **source view** to update the mediation flow. Shown below is an example of a PassThrough proxy service:
+    -   **Design View**:
+        You can select any of the mediation artifacts from the design view shown below and update its parameters from the **Properties** tab in the bottom pane. You can also drag and drop new mediation artifacts to the design view from the artifact **Palette** to modify the mediation flow.
+
+        ![design view](../../../assets/img/integrate/design-workflow/design-view.png)
+
+    -   **Source View**:
+        If you have a sample proxy service configuration, you can simply copy it to the source view shown below.
+
+        ![source view](../../../assets/img/integrate/design-workflow/source-view.png)

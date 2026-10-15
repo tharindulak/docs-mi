@@ -1,0 +1,70 @@
+---
+title: About Mediators
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/mediators/about-mediators.md
+---
+
+# About Mediators
+
+Mediators are individual processing units that perform a specific function on messages that pass through the Micro Integrator. The mediator takes the message received by the proxy service or REST API, carries out some predefined actions on it (such as transforming, enriching, filtering), and outputs the modified message. 
+
+For example, the [Clone](clone-mediator.mdx) mediator splits a message into several clones, the [Send](send-mediator.mdx) mediator sends the messages, and the [Aggregate](aggregate-mediator.mdx) mediator collects and merges the responses before sending them back to the client. 
+
+Mediators also include functionality to match incompatible protocols, data formats, and interaction patterns across different resources. [XQuery](xquery-mediator.mdx) and [XSLT](xslt-mediator.mdx) mediators allow rich transformations on the messages. Content-based routing using XPath filtering is supported in different flavors, allowing users to get the most convenient configuration experience. Built-in capability to handle transactions allow message mediation to be done transactionally inside the Micro Integrator.
+
+Mediators are always defined within a [mediation sequence](../mediation-sequences.mdx).
+
+## Classification of Mediators
+
+Mediators are classified as follows based on whether or not they access the message's content: 
+
+<table>
+  <col width="140" />
+  <tr>
+    <th>Classification</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><b>Content-Aware</b> mediators</td>
+    <td>
+      These mediators always access the message content when mediating messages (e.g., <a href="/integration/micro-integrator/4.2.0/reference/mediators/enrich-mediator">Enrich</a> mediator).
+    </td>
+  </tr>
+  <tr>
+    <td><b>Content-Unaware</b> mediators</td>
+    <td>
+      These mediators never access the message content when mediating messages (e.g., <a href="/integration/micro-integrator/4.2.0/reference/mediators/send-mediator">Send</a> mediator).
+    </td>
+  </tr>
+  <tr>
+    <td><b>Conditionally Content-Aware</b> mediators</td>
+    <td>
+      These mediators could be either content-aware or content-unaware depending on their exact instance configuration. For example, a simple  mediator instance (i.e. configured as &lt;log/>) is content-unaware. However a log mediator configured as &lt;log level=”full”/> would be content-aware since it is expected to log the message payload.
+    </td>
+  </tr>
+</table>
+
+## List of Mediators
+
+WSO2 Micro Integrator includes a comprehensive library of mediators that provide functionality for implementing widely used **Enterprise Integration Patterns** (EIPs). You can also easily write a custom mediator to provide additional functionality using various technologies such as Java, scripting, and Spring.
+
+**Core Mediators**
+
+[Call](call-mediator.mdx) | [Send](send-mediator.mdx) | [Loopback](loopback-mediator.mdx) | [Sequence](sequence-mediator.mdx) | [Respond](respond-mediator.mdx) | [Drop](drop-mediator.mdx) | [Call Template](call-template-mediator.mdx) | [Enrich](enrich-mediator.mdx) | [Property](property-mediator.mdx) | [Property Group](property-group-mediator.mdx) | [Log](log-mediator.mdx) | 
+
+**Filter Mediators**
+
+[Filter](filter-mediator.mdx) | [Validate](validate-mediator.mdx) | [Switch](switch-mediator.mdx) | 
+
+**Transform Mediators**
+
+[XSLT](xslt-mediator.mdx) | [FastXSLT](fastxslt-mediator.mdx) | [URLRewrite](urlrewrite-mediator.mdx) | [XQuery](xquery-mediator.mdx) | [Header](header-mediator.mdx) | [Fault](fault-mediator.mdx) | [PayloadFactory](payloadfactory-mediator.mdx) | [JSONTransform](json-transform-mediator.mdx) |
+
+**Advanced Mediators**
+
+[Cache](cache-mediator.mdx) | [ForEach](foreach-mediator.mdx) | [Clone](clone-mediator.mdx) | [Store](store-mediator.mdx) | [Iterate](iterate-mediator.mdx) | [Aggregate](aggregate-mediator.mdx) | [Callout](callout-mediator.mdx) | [Transaction](transaction-mediator.mdx) | [Throttle](throttle-mediator.mdx) | [DBReport](db-report-mediator.mdx) | [DBLookup](dblookup-mediator.mdx) | [EJB](ejb-mediator.mdx) | [Binder](builder-mediator.mdx) | [Entitlement](call-mediator.mdx) | [OAuth](call-mediator.mdx) | [Smooks](smooks-mediator.mdx) | [Data Mapper](data-mapper-mediator.mdx) | 
+
+**Extension Mediators**
+
+[Class](class-mediator.mdx) | [Script](script-mediator.mdx) |

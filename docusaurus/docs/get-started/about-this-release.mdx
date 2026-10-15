@@ -1,0 +1,103 @@
+---
+title: About this Release
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/get-started/about-this-release.md
+---
+
+# About this Release
+
+## What's new in this release?
+
+The following features and improvements were introduced with **WSO2 Integrator: MI 4.6.0**.
+
+<details>
+<summary>JDK 25 Support</summary>
+
+With JDK 25 support, WSO2 Integrator: MI stays aligned with the latest Java platform releases, offering a future-ready and fully validated runtime environment.
+
+</details>
+
+<details>
+<summary>Post-Quantum Secure Runtime</summary>
+
+Strengthens runtime security with post-quantum-ready cryptography, safeguards your integrations against emerging quantum threats, ensuring long-term data protection and cryptographic resilience.
+
+</details>
+
+<details>
+<summary>Bouncy Castle FIPS Crypto Provider Support</summary>
+
+Run MI with the Bouncy Castle FIPS crypto provider to meet stricter cryptographic requirements in regulated environments. This improves compliance readiness and enables deployments that rely on FIPS-capable crypto modules.
+
+</details>
+
+<details>
+<summary>OAuth 2.0 (JWT) Authentication for REST APIs</summary>
+
+Secure REST APIs with an OAuth 2.0 (JWT) authentication handler for token-based access control, adding a zero-trust layer to API access.
+
+</details>
+
+<details>
+<summary>Management API Enhancements</summary>
+
+- Enable/disable/trigger scheduled tasks at runtime
+- Enable/disable statistics at runtime
+
+</details>
+
+<details>
+<summary>Enhanced Logging with Mediator ID</summary>
+
+Include mediator IDs in runtime logs for faster troubleshooting and clearer correlation between log entries and mediation flow components. This makes debugging easier, especially in complex integration flows.
+
+</details>
+
+<details>
+<summary>Observability Features/Improvements</summary>
+
+- Support Prometheus API 1.x
+- Support publishing observability data to Moesif
+- OpenTelemetry-based observability in Data Services
+- OpenTelemetry support for traces and logs
+- OpenTelemetry span filtering support for mediators
+- Show connector/module operations as a single span in traces
+
+</details>
+
+<details>
+<summary>VS Code Extension Features/Improvements</summary>
+
+- Remote debugging
+- Unit test coverage for Synapse artifacts
+
+</details>
+
+<details>
+<summary>AI Features</summary>
+
+- MCP tool support for agents in the AI connector
+- Agent memory trim and summarization support
+- Conversational WSO2 Integrator Copilot — Ask, Edit, and Plan modes with in-workspace file edits, checkpoints, plan approval, attachments, and more. See [WSO2 Integrator Copilot](../develop/mi-for-vscode/wso2-integrator-copilot/overview.mdx).
+
+</details>
+
+<details>
+<summary>Connector Enhancements</summary>
+
+- AMQP 1.0 protocol support
+- gRPC connector with import support
+- MI connector generation from Ballerina connectors
+
+</details>
+
+## Fixed issues
+
+- [WSO2 Integrator: MI Issues](https://github.com/wso2/product-micro-integrator/issues?q=is%3Aissue%20is%3Aclosed%20closed%3A2025-10-28..2026-03-27)
+- [MI for VS Code Issues](https://github.com/wso2/mi-vscode/issues?q=is%3Aissue%20is%3Aclosed%20closed%3A2025-10-28..2026-03-27)
+
+## Known issues
+
+- [WSO2 Integrator: MI Issues](https://github.com/wso2/micro-integrator/issues?q=is%3Aissue+is%3Aopen)
+- [MI for VS Code Issues](https://github.com/wso2/mi-vscode/issues?q=is%3Aissue+is%3Aopen)

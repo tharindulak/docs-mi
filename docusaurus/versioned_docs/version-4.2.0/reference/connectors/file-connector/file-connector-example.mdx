@@ -1,0 +1,366 @@
+---
+title: File Connector Example
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/connectors/file-connector/file-connector-example.md
+mdx:
+  format: md
+---
+
+# File Connector Example
+
+File Connector can be used to perform operations in the local file system as well as in a remote server such as FTP and SFTP. 
+
+## What you'll build
+
+This example describes how to use the File Connector to write messages to local files and then read the files. Similarly, the same example can be configured to communicate with a remote file system (i.e FTP server) easily. The example also uses some other WSO2 mediators to manipulate messages. 
+
+
+
+An API is exposed to accept XML messages (employee information).
+When a message is received, it is converted to a CSV message and then stored to a property. 
+A check is done to see if the CSV file (with the same information) exists in the file system. If it does not exist, the connector creates a CSV file with CSV headers included. Then, the connector appends the new CSV entries in the current message to the CSV file. 
+The connector then reads the same CSV file and converts the information back to XML and responds to the client.
+
+
+
+## Setting up the environment
+
+Create a folder in your local file system with read and write access. This will be your working directory. In this example, it is `/Users/hasitha/temp/file-connector-test/dataCollection`. 
+
+:::note
+
+If you set up a FTP server, SFTP server, or a Samba server, do the required configurations and select a working directory. Save the host, port, and security related information for future use. 
+
+:::
+
+## Configure the connector in WSO2 Integration Studio
+
+Follow these steps to set up the Integration Project and the Connector Exporter. 
+
+1. Open WSO2 Integration Studio and select **New Integration Project** to create an Integration Project.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png" title="Creating a new Integration Project" width="800" alt="Creating a new Integration Project" /></a>
+
+2. Right-click on the ESB Config project of the project that you created and click on **Add or Remove Connector** -> **Add Connector**. You will get directed to the WSO2 Connector Store.
+
+3. Search for the specific connector required for your integration scenario and download it to the workspace.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png" title="Search Connector in the Connector Store" width="40%" alt="Search Connector in the Connector Store" /></a>
+
+4. Click **Finish**, and your Integration Project is ready. The downloaded connector is displayed on the side palette with its operations. 
+
+5. You can drag and drop the operations to the design canvas and build your integration logic.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png" title="Drag connector operations" alt="Drag connector operations" /></a>
+  
+6. Right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+ 
+
+## Creating the Integration Logic
+
+1.  Create a new integration project. Be sure to enable a Connector Exporter. 
+    
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon1.png" title="create project" width="500" alt="create project" />
+
+### Create the API
+
+1.  Create an API named `TestAPI` with the `/fileConnector` context. This API will accept employee information.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon2.png" title="create API" width="500" alt="create API" />
+
+2. Change the `Url Style` to `URI_TEMPLATE` and update the value of `Uri-Template` to `/create`.
+
+3. In the default resource of the API, enable `POST` requests. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon3.png" title="select post method" width="500" alt="select post method" />
+
+### Add a Log mediator
+
+1.  Add the Log mediator to the design canvas and configure a custom log that indicates when the API receives a message.  
+
+### Add and configure the Data Mapper mediator to convert XML to CSV
+
+1.  Add the Data Mapper mediator and configure it to transform the incoming XML message to a CSV message. 
+2.  Double-click the Data Mapper mediator and add a new transform configuration called `xmlToCsvConfig`. Provide an existing Registry resource or create a new one to provide as the 
+    project to save in.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon4.png" title="new datamapper config" width="800" alt="new datamapper config" />
+
+3.  Save the following content as an XML file. This will be the data input file. 
+
+    ```xml
+    <test>
+    <information>
+        <people>
+            <person>
+                <name>Hasitha</name>
+                <age>34</age>
+                <company>wso2</company>
+            </person>
+            <person>
+                <name>Johan</name>
+                <age>32</age>
+                <company>IBM</company>
+            </person>
+        </people>
+    </information>
+    </test>
+    ```
+
+4.  Load the input file into the Data Mapper config view.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon5.png" title="load input" width="800" alt="load input" />
+
+5.  Save the following content as a CSV file. This will be the data output file.
+
+    ```
+    Name,Age,Company
+    Hasitha,34,wso2
+    Johan,32,IBM
+    ```
+
+6. Load the output CSV file into the Data Mapper config view.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon6.png" title="load output csv" width="800" alt="load output csv" />
+
+7.  Configure the mapping as shown below. Each element in the input should be mapped to the respective element in the output. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon7.png" title="data mapping" width="800" alt="data mapping" />
+
+8.  Specify the input as XML and output as CSV in the Data Mapper as shown below. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon8.png" title="datamapper input output config" width="800" alt="datamapper input output config" />
+
+### Add an Enrich mediator
+
+1.  Add the Enrich mediator and configure it to save the output generated by the Data Mapper to a property named `CONTENT`. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon9.png" title="enrich - save payload" width="800" alt="enrich - save payload" />
+
+### Use File connector operations
+
+1. First, let's use the File connector to check if the file containing employee information already exists in the file system. 
+
+    1.  Add the <b>checkExist</b> operation of the File connector to the canvas.
+    2.  Create a new file connection pointing to the working directory we already set up. Keep this as the File connection for the operation.  
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon10.png" title="working directory" width="800" alt="working directory" />
+
+    3.  Configure the file path as `/dataCollection/employees/employees.csv`. This file will store the employee information. 
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon11.png" title="checkExist operation" width="800" alt="checkExist operation" />
+
+2. Add the Filter mediator to branch out the logic based on the result from the File connector’s `checkExist` operation. 
+
+    :::note
+
+    If the file does not exist, the File connector’s <b>write</b> operation (which we configure later) will create the file.
+
+    :::
+
+    1.  Click the Filter mediator and define the filter condition as shown below. 
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon12.png" title="filter mediator" width="800" alt="filter mediator" />
+
+3. Inside the `else` block of the Filter mediator, add the File connector's <b>write</b> operation and configure it to write the static content of CSV file headers: `Name,Age,Company`. 
+
+    1. Add the file connection created in the earlier steps as the file connection for this operation.
+    2. Configure the file path as `/dataCollection/employees/employees.csv`.
+    3. Configure the <b>Write Mode</b> to `Create New`.
+    4. Set <b>Append New Line</b> to `true`. This will append a new line at the end of the file.
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon13.png" title="create new" width="800" alt="create new" />
+
+4. After the Filter mediator, use the Enrich mediator again to put back the saved payload into the message payload. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon14.png" title="enrich - put back payload" width="800" alt="enrich - put back payload" />
+
+5.  Add the File connector’s <b>write</b> operation again and configure it to append the CSV message to the existing file.
+    
+    1. Add the file connection created in the earlier steps as the file connection for this operation.
+    2. Configure the file path as `/dataCollection/employees/employees.csv`.
+    3. The <b>Write Mode</b> needs to be `Append`.
+    4. Set the <b>Position</b> to `2`. This will always append the message to line number 2 as we need the newest message at the top.
+    5. Set <b>Append New Line</b> to `true`. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon15.png" title="append to file" width="800" alt="append to file" />
+
+6. Add the File connector’s <b>read</b> operation and configure it to read the same CSV file. 
+
+    1. Add the file connection created in the earlier steps as the file connection for this operation.
+    2. Configure the file path as `/dataCollection/employees/employees.csv`.
+    3. Set the <b>Read Mode</b> to `Starting From Line` and the <b>Start Line Number</b> to `2`.
+    4. Set the <b>Content Type<b> to `text/plain`. 
+
+    :::note
+
+    The file reading will start from line number 2. The content will be read as a text message. 
+
+    :::
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon16.png" title="read csv file" width="800" alt="read csv file" />
+
+### Use the Data Mapper mediator to convert CSV to XML
+
+1. Add the Data Mapper mediator again and configure it to convert the CSV message (after reading) back to XML.
+
+    1.  Double-click the data mapper and add a new configuration called `csvToXmlConfig`.
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon17.png" title="output datamapper config" width="800" alt="output datamapper config" />
+
+    2.  This time, the mapping should be from CSV to XML.
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon18.png" title="output datamapper dialog" width="800" alt="output datamapper dialog" />
+
+2. Finally, use the <b>Respond</b> mediator to send the transformed message to the API caller. 
+
+### Configure a fault sequence
+
+21. Now, let's configure a fault sequence to generate an error message when an error occurs in the message flow.
+
+    1.  Create a fault sequence with a <b>Log</b> mediator and <b>Respond</b> mediator.
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon19.png" title="fault sequence" width="800" alt="fault sequence" />
+
+    2.  Configure the Log mediator generate a custom error.
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon20.png" title="error log" width="800" alt="error log" />
+
+    3.  Add the fault sequence to the API resource as its fault sequence. 
+
+        <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon22.png" title="add fault sequence to api" width="800" alt="add fault sequence to api" />
+
+## Get the project
+
+You can download the ZIP file and extract the contents to get the project code.
+
+<a href="/integration/micro-integrator/_versions/4.2.0/assets/attachments/connectors/FileConnectorExample.zip">
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/download-zip.png" width="200" alt="Download ZIP" />
+</a>
+
+## Exporting Integration Logic as a CApp
+
+**CApp (Carbon Application)** is the deployable artifact on the integration runtime. Let us see how we can export integration logic we developed into a CApp along with the connector. 
+
+### Creating Connector Exporter Project
+
+To bundle a Connector into a CApp, a `Connector Exporter Project` is required. 
+
+1. Navigate to **File** -> **New** -> **Other** -> **WSO2** -> **Extensions** -> **Project Types** -> **Connector Exporter Project**.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg" title="Add Connector Exporter Project" width="60%" alt="Add Connector Exporter Project" /></a>
+
+2. Enter a name for the Connector Exporter Project. 
+
+3. In the next screen select, **Specify the parent from workspace** and select the specific Integration Project you created from the dropdown.
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png" title="Naming Connector Exporter Project" width="60%" alt="Naming Connector Exporter Project" /></a>
+
+4. Now you need to add the Connector to Connector Exporter Project that you just created. Right-click the Connector Exporter Project and select, **New** -> **Add Remove Connectors** -> **Add Connector** -> **Add from Workspace** -> **Connector**.
+
+5. Once you are directed to the workspace, it displays all the connectors that exist in the workspace. You can select the relevant connector and click **Ok**.
+
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg" title="Selecting Connector from Workspace" width="60%" alt="Selecting Connector from Workspace" /></a>
+
+### Creating a Composite Application Project
+
+To export the `Integration Project` as a CApp, a `Composite Application Project` needs to be created. Usually, when an Integration project is created, this project can be created as part of that project by Integration Studio. If not, you can specifically create it by navigating to  **File** -> **New** -> **Other** -> **WSO2** -> **Distribution** -> **Composite Application Project**. 
+
+### Exporting the Composite Application Project
+
+1. Right-click the Composite Application Project and click **Export Composite Application Project**.
+   
+    <img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/capp-project1.jpg" title="Export as a Carbon Application" width="40%" alt="Export as a Carbon Application" />
+
+2. Select an **Export Destination** where you want to save the .car file. 
+
+3. In the next **Create a deployable CAR file** screen, select both the created Integration Project and the Connector Exporter Project to save and click **Finish**. The CApp is created at the specified location provided at the previous step.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png" title="Create a deployable CAR file" width="80%" alt="Create a deployable CAR file" /></a>
+
+
+## Deployment
+
+Follow these steps to deploy the exported CApp in the integration runtime. 
+
+**Deploying on Micro Integrator**
+
+You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server. Micro Integrator will be started and the composite application will be deployed.
+
+You can further refer the application deployed through the CLI tool. See the instructions on [managing integrations from the CLI](../../../observe-and-manage/managing-integrations-with-apictl.mdx).
+
+<details>
+<summary>Click here for instructions on deploying on WSO2 Enterprise Integrator 6</summary>
+
+1. You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server.
+
+2. WSO2 EI server starts and you can login to the Management Console https://localhost:9443/carbon/ URL. Provide login credentials. The default credentials will be admin/admin. 
+
+3. You can see that the API is deployed under the API section. 
+
+</details>
+
+## Testing
+
+1. Create a file called `data.xml` with the following payload. 
+
+    :::note
+
+    When you configuring this `source` parameter in the Windows operating system, set this property as `<source>C:\\Users\Name\Desktop\Salesforcebulk-connector\create.txt</source>`.
+
+    :::
+
+    ```xml
+    <test>
+    <information>
+        <people>
+            <person>
+                <name>Hasitha</name>
+                <age>34</age>
+                <company>wso2</company>
+            </person>
+            <person>
+                <name>Johan</name>
+                <age>32</age>
+                <company>IBM</company>
+            </person>
+            <person>
+                <name>Bob</name>
+                <age>30</age>
+                <company>Oracle</company>
+            </person>
+            <person>
+                <name>Alice</name>
+                <age>28</age>
+                <company>Microsoft</company>
+            </person>
+            <person>
+                <name>Anne</name>
+                <age>30</age>
+                <company>Google</company>
+            </person>
+        </people>
+    </information>
+    </test>
+    ```
+    
+2. Invoke the API as shown below using the curl command. 
+
+    :::info
+
+    Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+
+    :::
+
+    ```bash
+    curl -H "Content-Type: application/json" --request POST --data @body.json http://localhost:8290/fileconnector/create
+    ```
+
+3.  Check the file system to verify that the CSV file has been created. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon21.png" title="file creation result" width="800" alt="file creation result" />
+
+4.  If you invoke the API again with a different set of employees, the new employees will get appended to the same file. The response you receive will include all the employees that were added from both messages.
+
+In this example, the File connector was used to create a file, write to a file, and to read a file. By blending these capabilities together with other powerful message manipulation features of WSO2, it is possible to define a working scenario in minutes. The File connector has many more functionalities. Refer the [File Connector reference guide](file-connector-config.mdx) for more information. 
+
+## What's Next
+
+* To customize this example for your own scenario, see [File Connector Configuration](file-connector-config.mdx) documentation for all operation details of the connector.

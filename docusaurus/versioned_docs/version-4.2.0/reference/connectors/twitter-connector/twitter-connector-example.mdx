@@ -1,0 +1,190 @@
+---
+title: Twitter API Connector Example
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/connectors/twitter-connector/twitter-connector-example.md
+---
+
+# Twitter API Connector Example
+
+This example explains how to use the Twitter client to connect with the Twitter platform and perform operations. The connector uses the [Twitter API](https://developer.twitter.com/en/docs/twitter-api) to interact with Twitter.
+
+## What you'll build
+
+In this guide, you will build a project to perform the following operation. 
+
+* Create a Tweet.
+
+     The user sends the request payload that includes the necessary parameters for a Tweet, to create a New Tweet in Twitter. This request is sent to the integration runtime by invoking the Twitter connector API. 
+
+&lt;center><img src="/integration/micro-integrator/assets/img/integrate/connectors/twitter-connector-store.png" title="Using Twitter Rest Connector" width="200" alt="Using Twitter Rest Connector" />&lt;/center>
+
+The user calls the Twitter REST API. It invokes the **createTweet** sequence and creates a new Tweet on Twitter.
+
+## Configure the connector in WSO2 Integration Studio
+
+Follow these steps to set up the Integration Project and the Connector Exporter Project. 
+
+1. Open WSO2 Integration Studio and select **New Integration Project** to create an Integration Project.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png" title="Creating a new Integration Project" width="800" alt="Creating a new Integration Project" /></a>
+
+2. Right-click on the ESB Config project of the project that you created and click on **Add or Remove Connector** -> **Add Connector**. You will get directed to the WSO2 Connector Store.
+
+3. Search for the specific connector required for your integration scenario and download it to the workspace.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png" title="Search Connector in the Connector Store" width="40%" alt="Search Connector in the Connector Store" /></a>
+
+4. Click **Finish**, and your Integration Project is ready. The downloaded connector is displayed on the side palette with its operations. 
+
+5. You can drag and drop the operations to the design canvas and build your integration logic.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png" title="Drag connector operations" alt="Drag connector operations" /></a>
+  
+6. Right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+
+
+2. Right-click on the created Integration Project and select, -> **New** -> **Rest API** to create the REST API. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/adding-an-api.jpg" title="Adding a Rest API" width="800" alt="Adding a Rest API" />
+
+3. Follow these steps to [configure the Twitter API](twitter-connector-credentials.mdx) and obtain the Client Id, Access Token and Refresh Token. 
+
+4. Provide the API name as **createTweet**. You can go to the source view of the XML configuration file of the API and copy the following configuration. 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/createtweet" name="createTweet" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST">
+        <inSequence>
+            <property expression="json-eval($.clientId)" name="clientId"/>
+            <property expression="json-eval($.accessToken)" name="accessToken"/>
+            <property expression="json-eval($.id)" name="id"/>
+            <property expression="json-eval($.text)" name="text"/>
+            <property expression="json-eval($.for_super_followers_only)" name="for_super_followers_only"/>
+            <property expression="json-eval($.poll)" name="place_fields"/>
+            <twitter.init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+                <clientId>{$ctx:clientId}</clientId>
+            </twitter.init>
+            <twitter.createTweet>
+                <for_super_followers_only>{$ctx:for_super_followers_only}</for_super_followers_only>
+                <poll>{$ctx:poll}</poll>
+                <text>{$ctx:text}</text>
+            </twitter.createTweet>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
+```
+
+5. Follow these steps to export the artifacts. 
+## Exporting Integration Logic as a CApp
+
+**CApp (Carbon Application)** is the deployable artifact on the integration runtime. Let us see how we can export integration logic we developed into a CApp along with the connector. 
+
+### Creating Connector Exporter Project
+
+To bundle a Connector into a CApp, a `Connector Exporter Project` is required. 
+
+1. Navigate to **File** -> **New** -> **Other** -> **WSO2** -> **Extensions** -> **Project Types** -> **Connector Exporter Project**.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg" title="Add Connector Exporter Project" width="60%" alt="Add Connector Exporter Project" /></a>
+
+2. Enter a name for the Connector Exporter Project. 
+
+3. In the next screen select, **Specify the parent from workspace** and select the specific Integration Project you created from the dropdown.
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png" title="Naming Connector Exporter Project" width="60%" alt="Naming Connector Exporter Project" /></a>
+
+4. Now you need to add the Connector to Connector Exporter Project that you just created. Right-click the Connector Exporter Project and select, **New** -> **Add Remove Connectors** -> **Add Connector** -> **Add from Workspace** -> **Connector**.
+
+5. Once you are directed to the workspace, it displays all the connectors that exist in the workspace. You can select the relevant connector and click **Ok**.
+
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg" title="Selecting Connector from Workspace" width="60%" alt="Selecting Connector from Workspace" /></a>
+
+### Creating a Composite Application Project
+
+To export the `Integration Project` as a CApp, a `Composite Application Project` needs to be created. Usually, when an Integration project is created, this project can be created as part of that project by Integration Studio. If not, you can specifically create it by navigating to  **File** -> **New** -> **Other** -> **WSO2** -> **Distribution** -> **Composite Application Project**. 
+
+### Exporting the Composite Application Project
+
+1. Right-click the Composite Application Project and click **Export Composite Application Project**.
+   
+    <img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/capp-project1.jpg" title="Export as a Carbon Application" width="40%" alt="Export as a Carbon Application" />
+
+2. Select an **Export Destination** where you want to save the .car file. 
+
+3. In the next **Create a deployable CAR file** screen, select both the created Integration Project and the Connector Exporter Project to save and click **Finish**. The CApp is created at the specified location provided at the previous step.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png" title="Create a deployable CAR file" width="80%" alt="Create a deployable CAR file" /></a>
+
+
+## Get the project
+
+You can download the ZIP file and extract the contents to get the project code.
+
+<a href="/integration/micro-integrator/_versions/4.2.0/assets/attachments/connectors/twitter-connector.zip">
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/download-zip.png" width="200" alt="Download ZIP" />
+</a>
+
+
+## Deployment
+
+:::warning
+
+    Before deploying you will have to configure runtime. If you have not followed the [Configuring Integration Runtime](twitter-connector-configuration.mdx) guide, please follow it before deploying the CApp.
+
+:::
+
+Follow these steps to deploy the exported CApp in the integration runtime.<br />
+
+**Deploying on Micro Integrator**
+
+You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server. Micro Integrator will be started and the composite application will be deployed.
+
+You can further refer the application deployed through the CLI tool. See the instructions on [managing integrations from the CLI](../../../observe-and-manage/managing-integrations-with-apictl.mdx).
+
+<details>
+<summary>Click here for instructions on deploying on WSO2 Enterprise Integrator 6</summary>
+
+1. You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server.
+
+2. WSO2 EI server starts and you can login to the Management Console https://localhost:9443/carbon/ URL. Provide login credentials. The default credentials will be admin/admin. 
+
+3. You can see that the API is deployed under the API section. 
+
+</details>
+
+## Testing
+Invoke the API as shown below using the curl command. Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+
+```
+curl --location 'http://<HOST_NAME>:<PORT>/createtweet' \
+--header 'Content-Type: application/json' \
+--data '{
+   "ClientId": "ZW82OS1rYkJnOEhmUUpjSDNnS246MTpjaQ",
+   "accessToken": "eENYRW5OczRKbFZCd2JRcm9EejFVUVp4N1JIcmNHY1RCLVBmckpHMjQycE1nOjE2ODczMjcxMzk4NjY6MTowOmF0OjE",
+   "text": "Hello from WSO2",
+   "for_super_followers_only": false,
+   "poll": {"options": ["yes", "maybe", "no"], "duration_minutes": 120}
+}'
+```
+
+If you are using MI 4.2.0 in your local environment without configuring, `<HOST_NAME> = localhost` and `<PORT> = 8290`.
+
+A response simillar to following will be received.
+
+```json
+{
+   "data": {
+      "edit_history_tweet_ids": [
+         "1667035675894640640"
+      ],
+      "id": "1667035675894640640",
+      "text": "Hello from WSO2"
+   }
+}
+```
+
+## What's Next
+
+* To explore further the Twitter connector operations, see [Twitter Connector Reference](twitter-connector-reference.mdx) documentation.

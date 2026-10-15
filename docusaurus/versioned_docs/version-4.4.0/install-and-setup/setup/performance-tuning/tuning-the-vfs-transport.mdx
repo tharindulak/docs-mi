@@ -1,0 +1,114 @@
+---
+title: Tuning the VFS Transport
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.4.0/en/docs/install-and-setup/setup/performance-tuning/tuning-the-vfs-transport.md
+---
+
+# Tuning the VFS Transport
+
+When you work with the [VFS transport](../../../reference/synapse-properties/transport-parameters/vfs-transport-parameters.mdx), you might have a scenario where you need to send large files to a destination. If you use the normal VFS configuration, the memory consumption will be very high since WSO2 Micro Integrator builds the files that are within. The Micro Integrator provides VFS file streaming support to overcome this issue. With VFS file streaming, only the stream is
+passed and therefore memory consumption is less.
+
+:::tip
+
+When you transfer a file to a remote FTP location via VFS, the Micro Integrator tries to detect the FTP location by navigating from the root folder first. If the Micro Integrator does not have **at least list permission** to the root (/), the file transfer fails.
+
+:::
+
+To use the streaming mode with the VFS transport, see the following instructions:
+
+## Update server-level configurations
+
+1. Open the `deployment.toml` file from the `MI_HOME/conf` directory.
+2. Binary message builder and formatter are enabled by default. Be sure that the following configurations unchanged in the `deployment.toml` file.
+
+    ```toml
+    [message_builders]
+    application_binary = "org.apache.axis2.format.BinaryBuilder"   
+ 
+    [message_formatters]
+    application_binary = "org.apache.axis2.format.BinaryFormatter"
+    ```
+
+    See the complete list of [parameters](../../../reference/config-catalog-mi.mdx) for configuring message builders and formatters.
+
+## Update service-level configurations
+
+Apply the following configurations when you create a proxy service.
+
+1.  In the proxy service where you use the VFS transport, add the following parameter to enable streaming:
+
+    ```xml
+    <parameter name="transport.vfs.Streaming">true</parameter>
+    ```
+
+2.  In the same proxy service, add the following property before the Send mediator:
+
+    :::info
+
+    You also need to add the following property if you want to use the VFS transport to transfer files from VFS to VFS.
+
+    ```xml
+    <property name="ClientApiNonBlocking" value="true" scope="axis2" action="remove"/>
+    ```
+
+    :::
+
+## Disable locking for single-consumer setups
+
+It is not recommended to have multiple consumers accessing the same VFS source folder simultaneously, as this can lead to file processing conflicts.
+
+When a single source folder is accessed by only one consumer, you can disable file locking to improve performance by setting the following parameter in the proxy service:
+
+```xml
+<parameter name="transport.vfs.Locking">disable</parameter>
+```
+
+:::note
+
+File locking is enabled by default. Only disable it when you are certain that no other consumer accesses the same source folder. See [transport.vfs.Locking](../../../reference/synapse-properties/transport-parameters/vfs-transport-parameters.mdx#service-level-parameters) for details.
+
+:::
+
+## Configure the connection timeout
+
+The default socket timeout is not applied for VFS transport connections. You must explicitly configure the `timeout` parameter in the `transport.vfs.FileURI` URL to avoid indefinite connection waits. Specify the timeout value in milliseconds as a query parameter:
+
+```
+ftp://username:password@host/path?timeout=5000
+```
+
+See [VFS URL parameters](../../../reference/synapse-properties/transport-parameters/vfs-transport-parameters.mdx#vfs-url-parameters) for details.
+
+## Stream large files
+
+Following is a sample configuration that uses the VFS transport to handle large files:
+
+```xml
+    <proxy xmlns="http://ws.apache.org/ns/synapse" name="StockQuoteProxy" transports="vfs">
+        <parameter name="transport.vfs.FileURI">smb://host/test/in</parameter>        
+        <parameter name="transport.vfs.ContentType">text/xml</parameter>
+        <parameter name="transport.vfs.FileNamePattern">.*\.xml</parameter>
+        <parameter name="transport.PollInterval">15</parameter>
+        <parameter name="transport.vfs.Streaming">true</parameter>
+        <parameter name="transport.vfs.MoveAfterProcess">smb://host/test/original</parameter>            
+        <parameter name="transport.vfs.MoveAfterFailure">smb://host/test/original</parameter>          
+        <parameter name="transport.vfs.ActionAfterProcess">MOVE</parameter>
+        <parameter name="transport.vfs.ActionAfterFailure">MOVE</parameter>
+        <target>
+             <inSequence>
+                <property name="transport.vfs.ReplyFileName"
+                          expression="fn:concat(fn:substring-after(get-property('MessageID'), 'urn:uuid:'), '.xml')" scope="transport"/>
+                <property action="set" name="OUT_ONLY" value="true"/>
+                <property name="ClientApiNonBlocking" value="true" scope="axis2" action="remove"/>
+                <send>
+                    <endpoint>
+                        <address uri="vfs:smb://host/test/out"/> 
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+        <publishWSDL uri="file:repository/samples/resources/proxy/sample_proxy_1.wsdl"/>
+    </proxy>
+```

@@ -1,0 +1,198 @@
+---
+title: Gmail Connector Example
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/connectors/gmail-connector/gmail-connector-example.md
+---
+
+# Gmail Connector Example
+
+The Gmail Connector allows you to access the [Gmail REST API](https://developers.google.com/gmail/api/v1/reference) from an integration sequence. 
+
+## What you'll build
+
+<img src="/integration/micro-integrator/assets/img/integrate/connectors/gmailconnector.png" title="Using Gmail Connector" width="800" alt="Using Gmail Connector" />
+
+This example demonstrates a scenario where a customer feedback Gmail account of a company can be easily managed using the WSO2 Gmail Connector. This application contains a service that can be invoked through an HTTP GET request. Once the service is invoked, it returns the contents of unread emails in the Inbox under the label of Customers, while sending an automated response to the customer, thanking them for their feedback. The number of emails that can be handled in a single invocation is specified in the application.
+
+If you do not want to configure this yourself, you can simply [get the project](#get-the-project) and run it.
+
+## Configure the connector in WSO2 Integration Studio
+
+1. Follow these steps to set up the Integration Project and the Connector Exporter Project. 
+1. Open WSO2 Integration Studio and select **New Integration Project** to create an Integration Project.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png" title="Creating a new Integration Project" width="800" alt="Creating a new Integration Project" /></a>
+
+2. Right-click on the ESB Config project of the project that you created and click on **Add or Remove Connector** -> **Add Connector**. You will get directed to the WSO2 Connector Store.
+
+3. Search for the specific connector required for your integration scenario and download it to the workspace.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png" title="Search Connector in the Connector Store" width="40%" alt="Search Connector in the Connector Store" /></a>
+
+4. Click **Finish**, and your Integration Project is ready. The downloaded connector is displayed on the side palette with its operations. 
+
+5. You can drag and drop the operations to the design canvas and build your integration logic.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png" title="Drag connector operations" alt="Drag connector operations" /></a>
+  
+6. Right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+
+
+2. Right click on the created Integration Project and select, -> **New** -> **Rest API** to create the REST API. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/adding-an-api.jpg" title="Adding a Rest API" width="800" alt="Adding a Rest API" />
+
+3. Follow these steps to [configure the Gmail API](configuring-gmail-api.mdx) and obtain the Client Id, Client Secret, Access Token and Refresh Token. 
+
+4. Provide the API name as **SendMails**. You can go to the source view of the XML configuration file of the API and copy the following configuration. 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/sendmails" name="SendMails" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <gmail.init>
+                <userId></userId>
+                <accessToken></accessToken>
+                <apiUrl>https://www.googleapis.com/gmail</apiUrl>
+                <clientId></clientId>
+                <clientSecret></clientSecret>
+                <refreshToken></refreshToken>
+            </gmail.init>
+            <gmail.listAllMails>
+                <includeSpamTrash>false</includeSpamTrash>
+                <maxResults>20</maxResults>
+                <q>is:unread label:customers</q>
+            </gmail.listAllMails>
+            <iterate expression="json-eval($.messages)">
+                <target>
+                    <sequence>
+                        <sequence key="reply"/>
+                    </sequence>
+                </target>
+            </iterate>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>
+```
+
+5. Right click on the created Integration Project and select **New** -> **Sequence** to create the defined sequence called **reply**. 
+
+6. Provide the Sequence name as **reply**. You can go to the source view of the XML configuration file of the API and copy the following configuration. 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="reply" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="json-eval($.id)" name="msgId" scope="default" type="STRING"/>
+    <gmail.getAccessTokenFromRefreshToken>
+        <clientId></clientId>
+        <clientSecret></clientSecret>
+        <refreshToken></refreshToken>
+    </gmail.getAccessTokenFromRefreshToken>
+    <gmail.readMail>
+        <id>{$ctx:msgId}</id>
+    </gmail.readMail>
+    <property expression="json-eval($.payload.headers[6].value)" name="response" scope="default" type="STRING"/>
+    <log level="custom">
+        <property expression="get-property('response')" name="response1"/>
+    </log>
+    <gmail.getAccessTokenFromRefreshToken>
+        <clientId></clientId>
+        <clientSecret></clientSecret>
+        <refreshToken></refreshToken>
+    </gmail.getAccessTokenFromRefreshToken>
+    <gmail.sendMail>
+        <to>{$ctx:response}</to>
+        <subject>Best of Europe - 6 Countries in 9 Days</subject>
+        <from>isurumuy@gmail.com</from>
+        <messageBody>Thank you for your valuable feedback.</messageBody>
+    </gmail.sendMail>
+</sequence>
+```
+7. In the Rest API and in the Sequence, provide your obtained **Client ID**, **Client Secret**, **Access Token**, and **Refresh Token** accordingly. The **userID** should be your Gmail address. 
+
+8. Follow these steps to export the artifacts. 
+## Exporting Integration Logic as a CApp
+
+**CApp (Carbon Application)** is the deployable artifact on the integration runtime. Let us see how we can export integration logic we developed into a CApp along with the connector. 
+
+### Creating Connector Exporter Project
+
+To bundle a Connector into a CApp, a `Connector Exporter Project` is required. 
+
+1. Navigate to **File** -> **New** -> **Other** -> **WSO2** -> **Extensions** -> **Project Types** -> **Connector Exporter Project**.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg" title="Add Connector Exporter Project" width="60%" alt="Add Connector Exporter Project" /></a>
+
+2. Enter a name for the Connector Exporter Project. 
+
+3. In the next screen select, **Specify the parent from workspace** and select the specific Integration Project you created from the dropdown.
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png" title="Naming Connector Exporter Project" width="60%" alt="Naming Connector Exporter Project" /></a>
+
+4. Now you need to add the Connector to Connector Exporter Project that you just created. Right-click the Connector Exporter Project and select, **New** -> **Add Remove Connectors** -> **Add Connector** -> **Add from Workspace** -> **Connector**.
+
+5. Once you are directed to the workspace, it displays all the connectors that exist in the workspace. You can select the relevant connector and click **Ok**.
+
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg" title="Selecting Connector from Workspace" width="60%" alt="Selecting Connector from Workspace" /></a>
+
+### Creating a Composite Application Project
+
+To export the `Integration Project` as a CApp, a `Composite Application Project` needs to be created. Usually, when an Integration project is created, this project can be created as part of that project by Integration Studio. If not, you can specifically create it by navigating to  **File** -> **New** -> **Other** -> **WSO2** -> **Distribution** -> **Composite Application Project**. 
+
+### Exporting the Composite Application Project
+
+1. Right-click the Composite Application Project and click **Export Composite Application Project**.
+   
+    <img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/capp-project1.jpg" title="Export as a Carbon Application" width="40%" alt="Export as a Carbon Application" />
+
+2. Select an **Export Destination** where you want to save the .car file. 
+
+3. In the next **Create a deployable CAR file** screen, select both the created Integration Project and the Connector Exporter Project to save and click **Finish**. The CApp is created at the specified location provided at the previous step.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png" title="Create a deployable CAR file" width="80%" alt="Create a deployable CAR file" /></a>
+
+
+## Get the project
+
+You can download the ZIP file and extract the contents to get the project code.
+
+<a href="/integration/micro-integrator/assets/attachments/connectors/gmailconnector.zip">
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/download-zip.png" width="200" alt="Download ZIP" />
+</a>
+
+:::tip
+
+You may need to update the value of the access token and make other such changes before deploying and running this project.
+
+:::
+
+## Deployment
+Follow these steps to deploy the exported CApp in the integration runtime.<br />
+
+**Deploying on Micro Integrator**
+
+You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server. Micro Integrator will be started and the composite application will be deployed.
+
+You can further refer the application deployed through the CLI tool. See the instructions on [managing integrations from the CLI](../../../observe-and-manage/managing-integrations-with-apictl.mdx).
+
+<details>
+<summary>Click here for instructions on deploying on WSO2 Enterprise Integrator 6</summary>
+
+1. You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server.
+
+2. WSO2 EI server starts and you can login to the Management Console https://localhost:9443/carbon/ URL. Provide login credentials. The default credentials will be admin/admin. 
+
+3. You can see that the API is deployed under the API section. 
+
+</details>
+
+## Testing
+Invoke the API as shown below using the curl command. Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+
+```
+  curl -H "Content-Type: application/json" --request GET http://localhost:8290/sendmails
+```
+
+The senders should receive an email with a subject of "Best of Europe — 6 Countries in 9 Days", and a body of "Thank you for your valuable feedback."
+
+## What's Next
+
+* To customize this example for your own scenario, see [Gmail Connector Configuration](gmail-connector-config.mdx) documentation.

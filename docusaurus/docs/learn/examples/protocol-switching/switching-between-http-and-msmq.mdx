@@ -1,0 +1,60 @@
+---
+title: How to Switch from HTTP to MSMQ
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/learn/examples/protocol-switching/switching-between-http-and-msmq.md
+---
+
+# How to Switch from HTTP to MSMQ
+
+This example demonstrates how you can use the WSO2 Integrator: MI to switch messages between HTTP and MSMQ during message mediation.
+
+In this example, stockquote requests are placed to the stockquote proxy service, which sends the incoming request message to the MSMQ server. Another proxy service named `msmqTest` listens to the MSMQ queue, invokes the message from the MSMQ server, and sends the message to the backend. 
+
+## Synapse configuration
+
+<Tabs>
+<TabItem value="tab-0" label="MSMQ Test proxy">
+
+```xml
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="msmqTest" transports="msmq" startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="OUT_ONLY" value="true"/>
+            <call>
+                <endpoint>
+                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                </endpoint>
+            </call>
+            <respond/>
+        </inSequence>
+    </target>
+        <parameter name="transport.msmq.ContentType">application/xml</parameter>
+</proxy>
+```
+
+</TabItem>
+<TabItem value="tab-1" label="StockQuote proxy">
+
+```xml
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="StockQuoteProxy" transports="http" startOnLoad="true" trace="disable">
+     <description/>
+      <target>
+        <endpoint>
+          <address uri="msmq:DIRECT=OS:localhost\private$\msmqTest"/>
+        </endpoint>
+        <inSequence>
+           <property name="FORCE_SC_ACCEPTED"  value="true"  scope="axis2"  type="STRING"/>
+           <property name="OUT_ONLY" value="true" scope="default" type="STRING"/>
+           <log level="custom">
+            <property name="MESSAGE" value="Message sent to MSMQ server"/>
+           </log>
+           <respond/>
+        </inSequence>
+      </target>
+      <publishWSDL uri="http://localhost:9000/services/SimpleStockQuoteService?wsdl" preservePolicy="true"/>
+ </proxy>
+```
+
+</TabItem>
+</Tabs>

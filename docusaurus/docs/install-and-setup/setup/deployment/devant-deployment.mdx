@@ -1,0 +1,46 @@
+---
+title: 'Deploy WSO2 Integrator: MI on WSO2 Cloud'
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/install-and-setup/setup/deployment/devant-deployment.md
+---
+
+# Deploy WSO2 Integrator: MI on WSO2 Cloud
+
+This guide walks you through deploying WSO2 Integrator: MI on WSO2 cloud. For this guide, a simple API integration will be deployed on WSO2 Cloud using the WSO2 Integrator: MI VS Code extension.
+
+<Prerequisites>
+
+## Before you begin
+
+- Ensure you are logged in to [WSO2 Cloud](https://console.devant.dev/) with an [organization created](https://wso2.com/integration-platform/docs/get-started/setup/sign-up-sign-in/#step-3-create-an-organization).
+- [Install WSO2 Integrator: MI](../../../develop/mi-for-vscode/install-wso2-mi-for-vscode.mdx) extension on VS Code.
+
+</Prerequisites>
+
+## Deployment steps
+
+1. Create an MI Project and create the integration. For this tutorial, the first step of [Build your first Integration](../../../get-started/build-first-integration/first-integration-api-service.mdx) is followed.
+2. Once you have created the integration, commit and push the changes, then navigate to the **Project Home**.
+3. Click on the **Deploy to WSO2 Cloud** button to deploy the integration on WSO2 Cloud.
+4. If you are not logged in to WSO2 Cloud, you will be prompted to log in. Once you log in, if you have only one organization, it will be selected automatically. If not, the VS Code extension will prompt you to select an organization.
+5. Once you select the organization, you will be prompted to select a Project. 
+
+    !!!note
+        If the repository has been previously deployed, the VS Code extension will automatically select the existing Project. If you want to deploy to a different Project, you can select it by opening the **Command Palette** by selecting **View** > **Command Palette** from the menu and selecting the **WSO2: Manage Project** command.
+
+6. Once you select the Project, the **Create Integration** page will open. The integration type will be automatically chosen for you based on your MI Project, in this case, the **Integration as API** type will be selected.
+7. The name of the integration will be populated automatically. Wait for the GitHub authorization to complete, then click **Next**.
+8. You can confirm the details in the **Git Configuration** and click **Deploy** to deploy on WSO2 Cloud.
+9. Once the integration is deployed, a notification would pop up in the bottom right corner to **View in Console**.
+
+    <a href="/integration/micro-integrator/assets/img/deploy/devant-deploy.gif" className="glightbox"><img src="/integration/micro-integrator/assets/img/deploy/devant-deploy.gif" alt="Deploy on WSO2 Cloud" width="900" /></a>
+
+## Test the API on WSO2 Cloud
+
+1. In the WSO2 cloud console, once the **Build Status** shows as `Build completed`, click **Test** on the development environment card. This will bring you to the **Console** page.
+2. Click **Get Test Key** to get a key for testing.
+3. You will have a single resource available **GET /**. Click to expand the resource.
+4. Click **Try it out**.
+5. Click **Execute**. You will see the response from the backend service as JSON.
+6. After successfully testing, you can promote your API integration to production by clicking the **Promote** button.

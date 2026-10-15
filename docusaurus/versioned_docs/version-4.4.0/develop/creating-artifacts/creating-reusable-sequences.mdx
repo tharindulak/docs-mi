@@ -1,0 +1,100 @@
+---
+title: Create a Reusable Sequence
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.4.0/en/docs/develop/creating-artifacts/creating-reusable-sequences.md
+---
+
+# Create a Reusable Sequence
+
+Follow these steps to create a new reusable sequence that you can add to your mediation workflow or refer to from a sequence mediator, or to create a sequence mediator and its underlying sequence all at once.
+
+## Instructions
+
+### Create a sequence artifact
+
+1. Launch Visual Studio Code with the Micro Integrator for VS Code extension (MI for VS Code) installed.
+
+    :::info
+
+    Follow the [Install Micro Integrator for VS Code](../mi-for-vscode/install-wso2-mi-for-vscode.mdx) documentation for a complete installation guide.
+
+    :::
+
+2. Create an [integration project](../create-integration-project.mdx).
+
+
+3. To add a new Sequence, navigate to **Micro Integrator Project Explorer**.
+
+4. Click on the **+** icon to open the **Add Artifact** pane.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png" alt="add artifact" width="40%" /></a>
+
+5. Click **+ View More** under **Create an Integration**.
+
+6. Click **Sequence** under **Other Artifacts** to open the **Sequence Form**.
+
+7. Provide a unique name for the sequence.
+
+8. Specify the required values for the sequence.
+
+9. Click **Create**.
+
+<br />
+
+- The sequence is created in the `<PROJECT_NAME>/src/main/wso2mi/artifacts/sequences` folder. 
+
+- The created sequence is also available in the **Palette**, under **All Mediators** > **Generic** > **Call Sequence**, and is ready for use in other meditation workflows.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/defined-sequence.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/defined-sequence.png" alt="Sample Sequence" width="80%" /></a>
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/call-defined-sequence.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/call-defined-sequence.png" alt="Call Sequence" width="80%" /></a>
+
+
+### Create from a sequence mediator
+
+1. Go to the graphical view of your proxy service.
+
+2. Click on the add (**+**) icon to open the **Palette** to access **Mediators**.
+
+3. Select **Call Sequence**.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/edit-proxy.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/edit-proxy.png" alt="Edit Proxy" width="80%" /></a>
+
+4. In the **Call Sequence** pane, select the previously created sequence from the **Referring Sequence** dropdown. Then the sequence will be linked to the integration.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/referring-sequence.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/referring-sequence.png" alt="referring sequence" width="30%" /></a>
+
+### Design the integration
+
+1. Once you create a sequence artifact, open its **Resource View** from Go to **MI Project Explorer** > **Other Artifacts** > **Sequences**.
+
+2. Click the **+** icon to open the **Palette**.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/sequence-design-view.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/sequence-design-view.png" alt="Sequence design view" width="80%" /></a>
+
+2. Add the required integration artifacts from the **Palette** and design the integration flow.    
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/sequence-graphical-editor.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/sequence-graphical-editor.png" alt="Sequence graphical editor" width="80%" /></a>
+
+
+
+You can also use the [**Source view**](#using-the-source-view) to update the sequence configuration.
+
+### Use the Source View
+
+Click the **Show Source** (`</>`) icon located in the top right corner of the VS Code to view the XML-based synapse configuration (source code) of the reusable sequence.
+
+<a href="/integration/micro-integrator/assets/img/develop/mi-for-vscode/qsg/show-source-view.png"><img src="/integration/micro-integrator/assets/img/develop/mi-for-vscode/qsg/show-source-view.png" alt="Show Source View" width="30%" /></a>
+
+You can update the sequence using this view.
+
+<a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/using-source-view.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-reusable-sequence/using-source-view.png" alt="Using Source View" width="80%" /></a>
+
+## Examples
+
+Follow our examples on endpoint templates:
+
+- [Breaking Complex Flows into Multiple Sequences](../../learn/examples/sequence-examples/using-multiple-sequences.mdx)
+- [Using Fault Sequences](../../learn/examples/sequence-examples/using-fault-sequences.mdx)
+- [Reusing Sequences](../../learn/integration-tutorials/using-templates.mdx)

@@ -1,0 +1,294 @@
+---
+title: AmazonSQS Connector Example
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/connectors/amazonsqs-connector/amazonsqs-connector-example.md
+---
+
+# AmazonSQS Connector Example
+
+The WSO2 Amazon SQS connector allows you to access the exposed Amazon SQS API from an integration sequence.
+
+## What you'll build
+
+This example explains how to use Amazon SQS Connector to create a queue in the Amazon SQS, send a message to the queue, forward it to Simple Stock Quote Service Backend and send the response to the user. 
+
+It has a single HTTP API resource, which is `sendToQueue`. 
+
+<img src="/integration/micro-integrator/assets/img/integrate/connectors/amazonsqs-connector.jpg" title="AmazonSQS-Connector" width="800" alt="AmazonSQS-Connector" />
+
+If you do not want to configure this yourself, you can simply [get the project](#get-the-project) and run it.
+
+## Setting up the environment 
+
+1. Please follow the steps mentioned in the [Setting up the Amazon S3 Environment ](amazonsqs-connector-config.mdx) document in order to create a Amazon account and obtain access key id and secret access key. Keep them saved to be used in the next steps.  
+
+2. In this example we will be using XPath 2.0 which needs to be enabled in the product as shown below before starting the integration service. 
+
+    If you are using the Micro Integrator of **EI 7** or **APIM 4.0.0**, you need to enable this property by adding the following to the PRODUCT-HOME/conf/deployment.toml file. You can further refer to the [Product Configurations](https://apim.docs.wso2.com/en/4.2.0/reference/config-catalog/#http-transport).
+    
+      ```
+        [mediation]
+        synapse.enable_xpath_dom_failover="true"
+      ```
+
+    If you are using **EI 6**, you can enable this property by uncommenting **synapse.xpath.dom.failover.enabled=true** property in PRODUCT-HOME/conf/synapse.properties file. 
+
+3. In this example we use the SimpleStockQuote service backend. Therefore, the SimpleStockQuote service needs to be started. 
+
+## Configure the connector in WSO2 Integration Studio
+
+Follow these steps to set up the Integration Project and the Connector Exporter Project. 
+
+1. Open WSO2 Integration Studio and select **New Integration Project** to create an Integration Project.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png" title="Creating a new Integration Project" width="800" alt="Creating a new Integration Project" /></a>
+
+2. Right-click on the ESB Config project of the project that you created and click on **Add or Remove Connector** -> **Add Connector**. You will get directed to the WSO2 Connector Store.
+
+3. Search for the specific connector required for your integration scenario and download it to the workspace.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png" title="Search Connector in the Connector Store" width="40%" alt="Search Connector in the Connector Store" /></a>
+
+4. Click **Finish**, and your Integration Project is ready. The downloaded connector is displayed on the side palette with its operations. 
+
+5. You can drag and drop the operations to the design canvas and build your integration logic.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png" title="Drag connector operations" alt="Drag connector operations" /></a>
+  
+6. Right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+ 
+
+1. First let's create the following sequences, which are buildMessage, createQueue, sendMessage and ReceiveAndForwardMessage. Right click on the created Integration Project and select, -> **New** -> **Sequence** to create the Sequence. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/add-sequence.jpg" title="Adding a Sequence" width="800" alt="Adding a Sequence" />
+
+2. Provide the Sequence name as buildMessage. You can go to the source view of the XML configuration file of the API and copy the following configuration. In this sequence we are taking the user's input `companyName` and we build the message using a Payload Factory Mediator. 
+    ```
+      <?xml version="1.0" encoding="UTF-8"?>
+      <sequence name="buildMessage" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+          <property expression="json-eval($.companyName)" name="companyName" scope="default" type="STRING"/>
+          <payloadFactory media-type="xml">
+              <format>
+                  <m0:getQuote xmlns:m0="http://services.samples">
+                      <m0:request>
+                          <m0:symbol>$1</m0:symbol>
+                      </m0:request>
+                  </m0:getQuote>
+              </format>
+              <args>
+                  <arg evaluator="xml" expression="get-property('companyName')"/>
+              </args>
+          </payloadFactory>
+          <header name="Action" scope="default" value="urn:getQuote"/>
+          <enrich>
+              <source clone="true" type="body"/>
+              <target property="target_property" type="property"/>
+          </enrich>
+      </sequence>
+    ```
+3. Create the createQueue sequence as shown below. In this sequence, we create a queue in the Amazon SQS instance. 
+  ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sequence name="createQueue" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+        <amazonsqs.init>
+            <accessKeyId><!-- access key id --></accessKeyId>
+            <secretAccessKey><!-- secret access key --></secretAccessKey>
+            <version>2009-02-01</version>
+            <region>us-east-2</region>
+        </amazonsqs.init>
+        <amazonsqs.createQueue>
+            <queueName>{$ctx:queueName}</queueName>
+        </amazonsqs.createQueue>
+        <property expression="json-eval($.CreateQueueResponse.CreateQueueResult.QueueUrl)" name="queueURL" scope="default" type="STRING"/>
+        <log level="custom">
+            <property expression="$ctx:queueURL" name="queueURL"/>
+        </log>
+        <property expression="fn:substring($ctx:queueURL,39,12)" name="queueId" scope="default" type="STRING" xmlns:fn="http://www.w3.org/2005/xpath-functions"/>
+        <log level="custom">
+            <property expression="$ctx:queueId" name="queueId"/>
+        </log>
+    </sequence>
+  ```
+
+  4. Create sendMessage sequence as shown below. In this sequence, we send the message that we built in step 1 to the Amazon SQS Queue. 
+    ```
+      <?xml version="1.0" encoding="UTF-8"?>
+      <sequence name="sendMessage" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+          <amazonsqs.init>
+              <accessKeyId><!-- access key id --></accessKeyId>
+              <secretAccessKey><!-- secret access key --></secretAccessKey>
+              <version>2009-02-01</version>
+              <region>us-east-2</region>
+          </amazonsqs.init>
+          <amazonsqs.sendMessage>
+              <queueId>{$ctx:queueId}</queueId>
+              <queueName>{$ctx:queueName}</queueName>
+              <messageBody>{$ctx:target_property}</messageBody>
+          </amazonsqs.sendMessage>
+      </sequence>
+    ```
+
+  5. Create the ReceiveAndForwardMessage sequence as shown below. In this sequence, we will receive the message from the Amazon SQS queue and forward it into the StockQuote Endpoint. 
+    ```
+      <?xml version="1.0" encoding="UTF-8"?>
+      <sequence name="ReceiveAndForwardMessage" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+          <amazonsqs.init>
+              <accessKeyId><!-- access key id --></accessKeyId>
+              <secretAccessKey><!-- secret access key --></secretAccessKey>
+              <version>2009-02-01</version>
+              <region>us-east-2</region>
+          </amazonsqs.init>
+          <amazonsqs.receiveMessage>
+              <maxNumberOfMessages>5</maxNumberOfMessages>
+              <queueId>{$ctx:queueId}</queueId>
+              <queueName>{$ctx:queueName}</queueName>
+          </amazonsqs.receiveMessage>
+          <property expression="json-eval($.ReceiveMessageResponse.ReceiveMessageResult.Message.Body)" name="messageBody" scope="default" type="STRING"/>
+          <payloadFactory media-type="xml">
+              <format>
+                  <soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
+                      <soapenv:Body>$1</soapenv:Body>
+                  </soapenv:Envelope>
+              </format>
+              <args>
+                  <arg evaluator="xml" expression="$ctx:messageBody"/>
+              </args>
+          </payloadFactory>
+          <header name="Action" scope="default" value="urn:getQuote"/>
+          <call>
+              <endpoint key="SimpleStockQuote"/>
+          </call>
+      </sequence>
+    ```
+
+  6. Now right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+  
+  7. Provide the API name as SQSAPI and the API context as `/sqs`. You can go to the source view of the XML configuration file of the API and copy the following configuration. 
+    ```
+      <?xml version="1.0" encoding="UTF-8"?>
+      <api context="/sqs" name="SQSAPI" xmlns="http://ws.apache.org/ns/synapse">
+          <resource methods="POST" uri-template="/sendToQueue">
+              <inSequence>
+                  <property expression="json-eval($.queueName)" name="queueName" scope="default" type="STRING"/>
+                  <sequence key="buildMessage"/>
+                  <sequence key="createQueue"/>
+                  <sequence key="sendMessage"/>
+                  <sequence key="ReceiveAndForwardMessage"/>
+                  <respond/>
+              </inSequence>
+              <outSequence/>
+              <faultSequence/>
+          </resource>
+      </api>
+    ```
+
+## Exporting Integration Logic as a CApp
+
+**CApp (Carbon Application)** is the deployable artifact on the integration runtime. Let us see how we can export integration logic we developed into a CApp along with the connector. 
+
+### Creating Connector Exporter Project
+
+To bundle a Connector into a CApp, a `Connector Exporter Project` is required. 
+
+1. Navigate to **File** -> **New** -> **Other** -> **WSO2** -> **Extensions** -> **Project Types** -> **Connector Exporter Project**.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg" title="Add Connector Exporter Project" width="60%" alt="Add Connector Exporter Project" /></a>
+
+2. Enter a name for the Connector Exporter Project. 
+
+3. In the next screen select, **Specify the parent from workspace** and select the specific Integration Project you created from the dropdown.
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png" title="Naming Connector Exporter Project" width="60%" alt="Naming Connector Exporter Project" /></a>
+
+4. Now you need to add the Connector to Connector Exporter Project that you just created. Right-click the Connector Exporter Project and select, **New** -> **Add Remove Connectors** -> **Add Connector** -> **Add from Workspace** -> **Connector**.
+
+5. Once you are directed to the workspace, it displays all the connectors that exist in the workspace. You can select the relevant connector and click **Ok**.
+
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg" title="Selecting Connector from Workspace" width="60%" alt="Selecting Connector from Workspace" /></a>
+
+### Creating a Composite Application Project
+
+To export the `Integration Project` as a CApp, a `Composite Application Project` needs to be created. Usually, when an Integration project is created, this project can be created as part of that project by Integration Studio. If not, you can specifically create it by navigating to  **File** -> **New** -> **Other** -> **WSO2** -> **Distribution** -> **Composite Application Project**. 
+
+### Exporting the Composite Application Project
+
+1. Right-click the Composite Application Project and click **Export Composite Application Project**.
+   
+    <img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/capp-project1.jpg" title="Export as a Carbon Application" width="40%" alt="Export as a Carbon Application" />
+
+2. Select an **Export Destination** where you want to save the .car file. 
+
+3. In the next **Create a deployable CAR file** screen, select both the created Integration Project and the Connector Exporter Project to save and click **Finish**. The CApp is created at the specified location provided at the previous step.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png" title="Create a deployable CAR file" width="80%" alt="Create a deployable CAR file" /></a>
+
+
+## Get the project
+
+You can download the ZIP file and extract the contents to get the project code.
+
+<a href="/integration/micro-integrator/4.2.0/assets/attachments/connectors/amazonsqs.zip">
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/download-zip.png" width="200" alt="Download ZIP" />
+</a>
+
+:::tip
+
+You may need to update the value of the access key and make other such changes before deploying and running this project.
+
+:::
+
+## Deployment
+
+Follow these steps to deploy the exported CApp in the integration runtime. 
+
+**Deploying on Micro Integrator**
+
+You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server. Micro Integrator will be started and the composite application will be deployed.
+
+You can further refer the application deployed through the CLI tool. See the instructions on [managing integrations from the CLI](../../../observe-and-manage/managing-integrations-with-apictl.mdx).
+
+<details>
+<summary>Click here for instructions on deploying on WSO2 Enterprise Integrator 6</summary>
+
+1. You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server.
+
+2. WSO2 EI server starts and you can login to the Management Console via the `https://localhost:9443/carbon/` URL. Provide login credentials. The default credentials will be admin/admin. 
+
+3. You can see that the API is deployed under the API section. 
+
+</details>
+
+## Testing
+
+1. Create a file called data.json with the following payload. 
+    ```
+    {
+      "companyName":"WSO2",
+      "queueName":"Queue1"
+    }
+    ```
+2. Invoke the API as shown below using the curl command. Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+    ```
+    curl -H "Content-Type: application/json" --request POST --data @body.json http://localhost:8290/sqs/sendToQueue
+    ```
+
+**Expected Response**: 
+
+You should get the following response with the 'sys_id' and keep it saved. 
+
+```
+<ns:getQuoteResponse xmlns:ns="http://services.samples">
+    <ns:return xmlns:ax21="http://services.samples/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ax21:GetQuoteResponse">
+        <ax21:change>4.233604086603518</ax21:change>
+        <ax21:earnings>-8.707965767387106</ax21:earnings>
+        <ax21:high>-150.5908765590026</ax21:high>
+        <ax21:last>153.98353327622493</ax21:last>
+        <ax21:lastTradeTimestamp>Wed Apr 08 10:38:56 IST 2020</ax21:lastTradeTimestamp>
+        <ax21:low>158.9975778178183</ax21:low>
+        <ax21:marketCap>-565228.6001002677</ax21:marketCap>
+        <ax21:name>WSO2 Company</ax21:name>
+        <ax21:open>-151.38099715271312</ax21:open>
+        <ax21:peRatio>23.761940918708092</ax21:peRatio>
+        <ax21:percentageChange>-2.8310759126772127</ax21:percentageChange>
+        <ax21:prevClose>-149.5404650806414</ax21:prevClose>
+        <ax21:symbol>WSO2</ax21:symbol>
+        <ax21:volume>9834</ax21:volume>
+    </ns:return>
+</ns:getQuoteResponse>
+```

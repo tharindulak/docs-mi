@@ -1,0 +1,38 @@
+---
+title: About Message Stores and Processors
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.4.0/en/docs/reference/synapse-properties/about-message-stores-processors.md
+---
+
+# About Message Stores and Processors
+
+A **Message Store** is used by a mediation sequence to temporarily store messages before they are delivered to their destination. This approach is useful for serving traffic to back-end services that can only accept messages at a given rate, whereas incoming traffic arrives at different rates. 
+
+The [Store Mediator](../mediators/store-mediator.mdx) in a mediation sequence is used to store incoming messages in the message store. The **Message Processor** retrieves the messages from the message store and delivers them to the back-end service at a given rate.
+
+Multiple message processors can use the same message store. For example, in a clustered environment, each of the nodes would have an instance of the same message processor, each of which would connect to the same message store and evenly consume messages. The message store acts as a manager of these consumers and their connections and ensures that messages are processed by only one message processor, preventing message duplication. You can further control which nodes a message processor runs on by specifying pinned servers.
+
+:::info
+
+You can increase performance of message processors either by **increasing the member count** or by having multiple message processors. If you increase the member count, it will create multiple child processors of the message processor.
+
+:::
+
+## List of Message Stores
+
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/jms-msg-store-properties">JMS Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/jdbc-msg-store-properties">JDBC Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/rabbitmq-msg-store-properties">RabbitMQ Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/resequence-msg-store-properties">Resequence Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/wso2mb-msg-store-properties">WSO2 MB Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/in-memory-msg-store-properties">In-Memory Message Store</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-stores/custom-msg-store-properties">Custom Message Store</a>
+
+
+
+## List of Message Processors
+
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-processors/msg-sampling-processor-properties">Message Sampling Processor</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-processors/msg-sched-forwarding-processor-properties">Scheduled Message Forwarding Processor</a>
+- <a href="/integration/micro-integrator/4.4.0/reference/synapse-properties/message-processors/msg-sched-failover-forwarding-processor-properties">Scheduled Failover Message Forwarding Processor</a>

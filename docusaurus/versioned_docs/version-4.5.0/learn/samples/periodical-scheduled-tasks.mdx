@@ -1,0 +1,26 @@
+---
+title: Periodical Scheduled triggers (Tasks) Sample
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.5.0/en/docs/learn/samples/periodical-scheduled-tasks.md
+---
+
+# Periodical Scheduled triggers (Tasks) Sample
+
+This sample demonstrates the task scheduling capabilities of the WSO2 Integrator: MI.
+
+The scenario is about fetching information related to personal records from a service periodically.
+
+This sample consists of a Scheduled trigger called `PersonRecordRetrieveTask`, an Endpoint called `PersonRecordEP`, and a Sequence called `PersonRecordSeq`.
+
+The Scheduled trigger is configured to run five times in 30 seconds time intervals. It injects messages to the sequence and the sequence invokes the endpoint to get the person record.
+
+## Deploying the sample
+
+1.  Open the sample by clicking on the **Periodical Scheduled triggers** card.
+2.  Give a folder location to save the sample.
+3.  [Build and run](../../develop/deploy-artifacts.mdx#build-and-run) the sample in your WSO2 Integrator: MI.
+
+## Running the sample
+
+A Scheduled trigger will be executed after the carbon application is deployed in the server and that task will log data in the MI server console.

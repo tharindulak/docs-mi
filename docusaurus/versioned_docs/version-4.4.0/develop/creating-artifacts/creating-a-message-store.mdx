@@ -1,0 +1,94 @@
+---
+title: Create a Message Store
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.4.0/en/docs/develop/creating-artifacts/creating-a-message-store.md
+---
+
+# Create a Message Store
+
+Follow the instructions below to create a new [Message Store](../../reference/synapse-properties/about-message-stores-processors.mdx) artifact in the Micro Integrator for Visual Studio Code extension (MI for VS Code).
+
+## Instructions
+
+### Create the message store artifact
+
+1. Launch Visual Studio Code with the Micro Integrator for VS Code extension (MI for VS Code) installed.
+
+    :::info
+
+    Follow the [Install Micro Integrator for VS Code](../mi-for-vscode/install-wso2-mi-for-vscode.mdx) documentation for a complete installation guide.
+
+    :::
+
+2. Create an [integration project](../create-integration-project.mdx).
+
+
+3. To add a new Message Store, navigate to **Micro Integrator Project Explorer**.
+
+4. Click on the **+** icon to open the **Add Artifact** pane.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png" alt="add artifact" width="40%" /></a>
+
+5. Click **+ View More** under **Create an Integration**.
+
+6. Click **Message Store** under **Other Artifacts** to open the **Message Store Form**.
+
+7. Select the type of message store you are creating.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/message-store-form.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/message-store-form.png" alt="create-message-store" width="80%" /></a>
+
+8. Enter a unique name for the message store.
+
+9. Specify values for the other required properties.
+
+	See the links given below for descriptions of message store properties for each store type:
+
+	-	[JMS properties](../../reference/synapse-properties/message-stores/jms-msg-store-properties.mdx)
+	-	[JDBC properties](../../reference/synapse-properties/message-stores/jdbc-msg-store-properties.mdx)
+	-	[RabbitMQ properties](../../reference/synapse-properties/message-stores/rabbitmq-msg-store-properties.mdx)
+	-	[Resequence properties](../../reference/synapse-properties/message-stores/resequence-msg-store-properties.mdx)
+	-	[WSO2 MB properties](../../reference/synapse-properties/message-stores/wso2mb-msg-store-properties.mdx)
+	-	[In-Memory properties](../../reference/synapse-properties/message-stores/in-memory-msg-store-properties.mdx)
+	-	[Custom properties](../../reference/synapse-properties/message-stores/custom-msg-store-properties.mdx)
+
+10. Once you specify the values for the relevant properties, click **Create**.
+
+The message store is created in the `<PROJECT_NAME>/src/main/wso2mi/artifacts/message-stores` folder under the integration project you created.
+
+### Design the integration
+
+To add a message store to the integration sequence, use the [Store Mediator](../../reference/mediators/store-mediator.mdx):
+
+1. Open to the **Design View** of your [mediation sequence](../../reference/mediation-sequences.mdx).
+
+2. Add **Store Message** from the **Palette** under **Mediators** > **Generic** to the relevant position in the mediation sequence.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-message.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-message.png" alt="Store message" width="80%" /></a>
+
+3. Select the name of the message store artifact you previously created from the dropdown.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-message-details.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-message-details.png" alt="Store message details" width="30%" /></a>
+
+The message store is now linked to your integration sequence.
+
+<a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-mediator.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-message-store/store-mediator.png" alt="store mediator" width="80%" /></a>
+
+### Update the properties
+
+Open the above-created message store artifact from the **MI Project Explorer**. You can use the **Form** view or the **Source** view to update message store properties.
+
+## Tutorials
+
+Follow our tutorials on message stores:
+
+- [Using message stores and processors](../../learn/integration-tutorials/storing-and-forwarding-messages.mdx)
+
+## Examples
+
+Follow our examples on message stores:  
+
+- [Introduction to Message Stores and Processors](../../learn/examples/message-store-processor-examples/intro-message-stores-processors.mdx)
+- [JDBC Message Store](../../learn/examples/message-store-processor-examples/using-jdbc-message-store.mdx)
+- [JMS Message Store](../../learn/examples/message-store-processor-examples/using-jms-message-stores.mdx)
+- [RabbitMQ Message Store](../../learn/examples/message-store-processor-examples/using-rabbitmq-message-stores.mdx)

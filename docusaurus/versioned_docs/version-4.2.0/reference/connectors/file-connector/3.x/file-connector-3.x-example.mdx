@@ -1,0 +1,258 @@
+---
+title: File Connector Example
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/connectors/file-connector/3.x/file-connector-3.x-example.md
+---
+
+# File Connector Example
+
+File Connector can be used to perform operations in the local file system as well as in a remote server such as FTP and SFTP. 
+
+## What you'll build
+
+This example explains how to use File Connector to create a file in the local file system and read the particular file. The user sends a payload specifying which content is to be written to the file. Based on that content, a file is created in the specified location. Then the content of the file can be read as an HTTP response by invoking the other API resource upon the existence of the file. 
+
+It will have two HTTP API resources, which are `create` and `read`. 
+
+* `/create `: The user sends the request payload which includes the location where the file needs to be saved and the content needs to be added to the file. This request is sent to the integration runtime by invoking the FileConnector API. It saves the file in the specified location with the relevant content. 
+
+    <p><img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/fileconnector-03.png" title="Adding a Rest API" width="800" alt="Adding a Rest API" /></p>
+
+* `/read `: The user sends the request payload, which includes the location of the file that needs to be read. This request is sent to the integration runtime where the FileConnector API resides. Once the API is invoked, it first checks if the file exists in the specified location. If it exists, the content is read and response is sent to the user. If the file does not exist, it sends an error response to the user. 
+
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/fileconnector-02.png" title="Adding a Rest API" width="800" alt="Adding a Rest API" />
+
+If you do not want to configure this yourself, you can simply [get the project](#get-the-project) and run it.
+
+## Configure the connector in WSO2 Integration Studio
+
+Follow these steps to set up the Integration Project and the Connector Exporter Project. 
+
+1. Open WSO2 Integration Studio and select **New Integration Project** to create an Integration Project.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/new-project/new-integration-project.png" title="Creating a new Integration Project" width="800" alt="Creating a new Integration Project" /></a>
+
+2. Right-click on the ESB Config project of the project that you created and click on **Add or Remove Connector** -> **Add Connector**. You will get directed to the WSO2 Connector Store.
+
+3. Search for the specific connector required for your integration scenario and download it to the workspace.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/search-connector.png" title="Search Connector in the Connector Store" width="40%" alt="Search Connector in the Connector Store" /></a>
+
+4. Click **Finish**, and your Integration Project is ready. The downloaded connector is displayed on the side palette with its operations. 
+
+5. You can drag and drop the operations to the design canvas and build your integration logic.
+   <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/drag-connector-operation.png" title="Drag connector operations" alt="Drag connector operations" /></a>
+  
+6. Right click on the created Integration Project and select **New** -> **Rest API** to create the REST API. 
+ 
+
+## Creating the Integration Logic
+
+1. Right click on the created Integration Project and select, -> **New** -> **Rest API** to create the REST API. 
+    <img src="/integration/micro-integrator/4.2.0/assets/img/integrate/connectors/filecon-3.x/adding-an-api.png" title="Adding a Rest API" width="800" alt="Adding a Rest API" />
+
+2. Provide the API name as File Connector and the API context as `/fileconnector`.
+
+3. First we will create the `/create` resource. Right click on the API Resource and go to **Properties** view. We use a URL template called `/create` as we have two API resources inside single API. The method will be `Post`. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon-3.png" title="Adding the API resource." width="800" alt="Adding the API resource." />
+
+4. In this operation we are going to receive input from the user which is `filePath` and `inputContent`. 
+    - filePath - location that the file is going to be created.
+    - inputContent - what needs to be written to the file. 
+
+5. The above two parameters are saved to properties. Drag and drop the Property Mediator onto the canvas in the design view and do as shown below. For further reference, you can read about the [Property mediator](../../../mediators/property-mediator.mdx).
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon-1.png" title="Adding a property" width="800" alt="Adding a property" />
+
+6. Add the another Property Mediator to get the InputContent value copied. Do the same as in the above step. 
+    - property name: InputContent
+    - Value Type: EXPRESSION
+    - Value Expression: json-eval($.inputContent)
+
+7. Drag and drop the create operation of the File Connector to the Design View as shown below. Set the parameter values as below. We use the property values that we added in step 4 and 5 in this step as `$ctx:filePath` and `$ctx:inputContent`.
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/file-con2.png" title="Adding createFile operation" width="800" alt="Adding createFile operation" />
+
+8. Add a Respond Mediator as the user needs to see the response. Now we are done with creating the first API resource, and it is displayed as shown below. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon9.png" title="First API Resource" width="800" alt="First API Resource" />
+
+9. Create the next API resource, which is `/read`. From this we are going to read the file content from a user specified location. 
+
+10. As described in step 3, drag and drop another API resource to the design view. Use the URL template as `/read`. The method will be POST. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/apiresource.jpg" title="Adding an API resource" width="800" alt="Adding an API resource" />
+
+11. In this operation, the user sends the file location as the request payload. It will be written to the property as we did in step 10. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon4.png" title="Adding property mediator" width="800" alt="Adding property mediator" />
+
+12. Then we are going to check if the file actually exists in the specified location. We can use `isFileExists` operation of the File Connector. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon5.png" title="Adding property mediator" width="800" alt="Adding property mediator" />
+
+13. Then we copy the `isFileExists` response to a property mediator. Add another property mediator and add values as shown below. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon6.png" title="Adding property mediator" width="800" alt="Adding property mediator" />
+
+14. Based on its response, we decide if we read the file or print an error to the user. In this case, we use a Switch Mediator.
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon7.png" title="Adding switch mediator" width="800" alt="Adding switch mediator" />
+
+15. Drag and drop the read operation to the **case** in the Switch mediator. In the default case log an error and drops the message. 
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/filecon-3.x/filecon8.png" title="switch mediator" width="800" alt="switch mediator" />
+
+ 16. You can find the complete API XML configuration below. You can go to the source view and copy paste the following config. 
+
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <api context="/fileconnector" name="FileConnector" xmlns="http://ws.apache.org/ns/synapse">
+        <resource methods="POST" uri-template="/create">
+            <inSequence>
+                <property expression="json-eval($.filePath)" name="source" scope="default" type="STRING"/>
+                <property expression="json-eval($.inputContent)" name="inputContent" scope="default" type="STRING"/>
+                <fileconnector.create>
+                    <filePath>{$ctx:filePath}</filePath>
+                    <inputContent>{$ctx:inputContent}</inputContent>
+            </fileconnector.create>
+                <respond/>
+            </inSequence>
+            <outSequence/>
+            <faultSequence/>
+        </resource>
+        <resource methods="POST" uri-template="/read">
+            <inSequence>
+                <property expression="json-eval($.source)" name="source" scope="default" type="STRING"/>
+                <fileconnector.isFileExist>
+                    <source>{$ctx:source}</source>
+                </fileconnector.isFileExist>
+                <property expression="json-eval($.fileExist)" name="response" scope="default" type="STRING"/>
+                <log level="custom">
+                    <property expression="get-property('response')" name="responselog"/>
+                </log>
+                <switch source="get-property('response')">
+                    <case regex="true">
+                        <fileconnector.read>
+                            <source>{$ctx:source}</source>
+                        </fileconnector.read>
+                        <respond/>
+                    </case>
+                    <default>
+                        <log>
+                            <property name="notext" value="&quot;File does not exist&quot;"/>
+                        </log>
+                        <drop/>
+                    </default>
+                </switch>
+            </inSequence>
+            <outSequence/>
+            <faultSequence/>
+        </resource>
+    </api>
+
+    ```
+
+## Exporting Integration Logic as a CApp
+
+**CApp (Carbon Application)** is the deployable artifact on the integration runtime. Let us see how we can export integration logic we developed into a CApp along with the connector. 
+
+### Creating Connector Exporter Project
+
+To bundle a Connector into a CApp, a `Connector Exporter Project` is required. 
+
+1. Navigate to **File** -> **New** -> **Other** -> **WSO2** -> **Extensions** -> **Project Types** -> **Connector Exporter Project**.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-1.jpg" title="Add Connector Exporter Project" width="60%" alt="Add Connector Exporter Project" /></a>
+
+2. Enter a name for the Connector Exporter Project. 
+
+3. In the next screen select, **Specify the parent from workspace** and select the specific Integration Project you created from the dropdown.
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/connector-exporter-project-naming.png" title="Naming Connector Exporter Project" width="60%" alt="Naming Connector Exporter Project" /></a>
+
+4. Now you need to add the Connector to Connector Exporter Project that you just created. Right-click the Connector Exporter Project and select, **New** -> **Add Remove Connectors** -> **Add Connector** -> **Add from Workspace** -> **Connector**.
+
+5. Once you are directed to the workspace, it displays all the connectors that exist in the workspace. You can select the relevant connector and click **Ok**.
+
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/adding-connector-to-exporter-project-3.jpg" title="Selecting Connector from Workspace" width="60%" alt="Selecting Connector from Workspace" /></a>
+
+### Creating a Composite Application Project
+
+To export the `Integration Project` as a CApp, a `Composite Application Project` needs to be created. Usually, when an Integration project is created, this project can be created as part of that project by Integration Studio. If not, you can specifically create it by navigating to  **File** -> **New** -> **Other** -> **WSO2** -> **Distribution** -> **Composite Application Project**. 
+
+### Exporting the Composite Application Project
+
+1. Right-click the Composite Application Project and click **Export Composite Application Project**.
+   
+    <img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/capp-project1.jpg" title="Export as a Carbon Application" width="40%" alt="Export as a Carbon Application" />
+
+2. Select an **Export Destination** where you want to save the .car file. 
+
+3. In the next **Create a deployable CAR file** screen, select both the created Integration Project and the Connector Exporter Project to save and click **Finish**. The CApp is created at the specified location provided at the previous step.
+   
+    <a href="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png"><img src="https://apim.docs.wso2.com/en/4.1.0/assets/img/integrate/connectors/saving-projects.png" title="Create a deployable CAR file" width="80%" alt="Create a deployable CAR file" /></a>
+
+
+
+## Get the project
+
+You can download the ZIP file and extract the contents to get the project code.
+
+<a href="/integration/micro-integrator/4.2.0/assets/attachments/connectors/filecon-3.x/fileconnector.zip">
+    <img src="/integration/micro-integrator/assets/img/integrate/connectors/download-zip.png" width="200" alt="Download ZIP" />
+</a>
+
+## Deployment
+
+Follow these steps to deploy the exported CApp in the integration runtime. 
+
+**Deploying on Micro Integrator**
+
+You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server. Micro Integrator will be started and the composite application will be deployed.
+
+You can further refer the application deployed through the CLI tool. See the instructions on [managing integrations from the CLI](../../../../observe-and-manage/managing-integrations-with-apictl.mdx).
+
+<details>
+<summary>Click here for instructions on deploying on WSO2 Enterprise Integrator 6</summary>
+
+1. You can copy the composite application to the `<PRODUCT-HOME>/repository/deployment/server/carbonapps` folder and start the server.
+
+2. WSO2 EI server starts and you can login to the Management Console https://localhost:9443/carbon/ URL. Provide login credentials. The default credentials will be admin/admin. 
+
+3. You can see that the API is deployed under the API section. 
+
+</details>
+
+## Testing
+
+### File Create Operation
+
+1. Create a file called data.json with the following payload. 
+    ```
+    {
+        "filePath":"<file_path>/create.txt",
+        "inputContent": "This is a test file"
+    }
+    ```
+    > **Note**: When you configuring this `source` parameter in Windows operating system you need to set this property shown as `<source>C:\\Users\Kasun\Desktop\Salesforcebulk-connector\create.txt</source>`.
+    
+2. Invoke the API as shown below using the curl command. Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+    ```
+    curl -H "Content-Type: application/json" --request POST --data @body.json http://10.100.5.136:8290/fileconnector/create
+    ```
+**Expected Response**: 
+You should get a 'Success' response, and the file should be created in the specified location in the above payload. 
+
+### File Read Operation
+
+1. Create a file called data.json with the following payload. 
+    ```
+    {
+        "source":"<file_path>/create.txt"
+    }
+    ```
+2. Invoke the API as shown below using the curl command. Curl Application can be downloaded from [here](https://curl.haxx.se/download.html).
+    ```
+    curl -H "Content-Type: application/json" --request POST --data @body.json http://10.100.5.136:8290/fileconnector/read
+    ```
+
+**Expected Response**: 
+You should get the following text returned. 
+
+`
+This is a test file.
+`
+
+## What's Next
+
+* To customize this example for your own scenario, see [File Connector Configuration](file-connector-3.x-config.mdx) documentation for all operation details of the connector.

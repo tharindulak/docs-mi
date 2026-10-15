@@ -1,0 +1,98 @@
+---
+title: Custom Inbound Endpoint Properties
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/synapse-properties/inbound-endpoints/custom-inbound-endpoint-properties.md
+---
+
+# Custom Inbound Endpoint Properties
+
+Given below are the properties that should be configured when you define a custom inbound endpoint.
+ 
+<Tabs>
+<TabItem value="tab-0" label="Custom Listening Inbound">
+
+```java
+<inboundEndpoint xmlns="http://ws.apache.org/ns/synapse" name="custom_listener" sequence="request" onError="fault"
+                         class="org.wso2.carbon.inbound.custom.listening.SampleListeningEP" suspend="false">
+       <parameters>
+          <parameter name="sequential">true</parameter>
+          <parameter name="inbound.behavior">listening</parameter>
+          <parameter name="coordination">true</parameter>
+       </parameters>
+</inboundEndpoint>
+```
+
+</TabItem>
+<TabItem value="tab-1" label="Custom Polling Inbound">
+
+```java
+<inboundEndpoint xmlns="http://ws.apache.org/ns/synapse" name="class" sequence="request" onError="fault"
+                                class="org.wso2.carbon.inbound.custom.poll.SamplePollingClient" suspend="false">
+       <parameters>
+          <parameter name="sequential">true</parameter>
+          <parameter name="interval">2000</parameter>
+          <parameter name="coordination">true</parameter>
+       </parameters>
+</inboundEndpoint>
+```
+
+</TabItem>
+<TabItem value="tab-2" label="Custom Event-Based Inbound">
+
+```java
+<inboundEndpoint xmlns="http://ws.apache.org/ns/synapse" name="custom_waiting" sequence="request" onError="fault"
+                         class="org.wso2.carbon.inbound.custom.wait.SampleWaitingClient" suspend="false">
+       <parameters>
+          <parameter name="sequential">true</parameter>
+          <parameter name="inbound.behavior">eventBased</parameter>
+          <parameter name="coordination">true</parameter>
+       </parameters>
+</inboundEndpoint>
+```
+
+</TabItem>
+</Tabs>
+
+<table>
+   <thead>
+      <tr>
+         <th>
+            <p>Property Name</p>
+         </th>
+         <th>
+            <p>Description</p>
+         </th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>
+          class
+         </td>
+         <td>
+          Name of the custom class implementation. Specify a valid class name.
+         </td>
+      </tr>
+      <tr>
+         <td>
+          sequence
+         </td>
+         <td>Name of the sequence message that should be injected. Specify a valid sequence name.</td>
+      </tr>
+      <tr>
+         <td>
+            onError
+         </td>
+         <td>Name of the fault sequence that should be invoked in case of failure. Specify a valid sequence name.</td>
+      </tr>
+      <tr>
+         <td>
+          inbound.behavior
+         </td>
+         <td>
+          The behaviour of the inbound endpoint. Specify <code>listening</code>, <code>polling</code>, or <code>event-based</code>.
+         </td>
+      </tr>
+   </tbody>
+</table>

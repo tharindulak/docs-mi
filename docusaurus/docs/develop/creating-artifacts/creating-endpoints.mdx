@@ -1,0 +1,109 @@
+---
+title: Create an Endpoint
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/develop/creating-artifacts/creating-endpoints.md
+---
+
+import CreatingProject from '../../_partials/creating-project.mdx';
+
+# Create an Endpoint
+
+Follow the instructions below to create a new [Endpoint](../../reference/synapse-properties/endpoint-properties.mdx) artifact in the WSO2 Integrator: MI for Visual Studio Code extension (MI for VS Code).
+
+:::note
+
+For HTTP use cases, you can now use the HTTP Connector instead of defining an endpoint. See the [HTTP Connector](../../reference/connectors/http-connector/http-connector-overview.mdx) documentation for more information.
+
+:::
+
+### Create the endpoint artifact
+
+<CreatingProject />
+
+3. To add a new Endpoint, navigate to **WSO2 Integrator: MI Project Explorer**.
+
+4. Click on the **+** icon to open the **Add Artifact** pane.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/add-artifact-icon.png" alt="add artifact" width="40%" /></a>
+
+5. Click **+ View More** under **Create an Integration**.
+
+6. Click **Endpoint** under **Other Artifacts** to open the **Endpoint Form**.
+
+7. Select the endpoint type you want from the **Endpoint Form**.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/endpoint-form.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/endpoint-form.png" alt="Endpoint form" width="80%" /></a>
+
+8. Enter a unique name for the endpoint.
+
+9. Specify values for the [required parameters](../../reference/synapse-properties/endpoint-properties.mdx) for the selected endpoint type.
+
+10. Click **Create** to save the endpoint configuration.
+
+The endpoint will be created in the `<PROJECT_NAME>/src/main/wso2mi/artifacts/endpoints` folder under the integration project you created.
+
+### Design the integration
+
+:::note
+
+Endpoints cannot be added directly to the integration sequence. Instead, they must be invoked using the [Send Mediator](../../reference/mediators/send-mediator.mdx) or the [Call Mediator](../../reference/mediators/call-mediator.mdx).
+
+Therefore, to add an endpoint artifact to the integration sequence, use the Send Mediator or the Call Mediator.
+
+:::
+
+Follow the below steps to add the created endpoint to the integration flow:
+
+1.	Open the **Design View** of your [mediation sequence](../../reference/mediation-sequences.mdx).
+2.  Add the **Call Endpoint** mediator from the palette under **All Mediators** > **Generic** section to the relevant position in the mediation sequence:
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/select-call-endpoint.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/select-call-endpoint.png" alt="Select call endpoint" width="80%" /></a>
+
+    :::tip
+
+    Similarly, you can use the Send Mediator instead of the Call Mediator.
+
+    :::
+
+3. In the **Call Endpoint** form, select the endpoint you need to invoke under **Select Endpoint**. You can also select **Create New** to create a new endpoint artifact.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/call-endpoint.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/call-endpoint.png" alt="Call endpoint" width="30%" /></a>
+
+The endpoint artifact is now linked to your integration sequence.
+
+### Update the properties
+
+You can use the **Form** view or the **Source** view to update endpoint properties.
+
+#### To update from the Form View:
+
+1. Go to **MI Project Explorer**.
+2. Under **Other Artifacts** > **Endpoints**, select the endpoint that you need to update the properties. The **Endpoint Form** will be opened.
+3. Update the properties.
+4. Click **Save Changes**.
+
+#### To update from the Source View:
+
+1. Go to **MI Project Explorer**.
+2. Under **Other Artifacts** > **Endpoints**, select the endpoint that you need to update the properties.
+3. Click on the **Show Source** (**<b>&lt;/&gt;</b>**) icon located in the top right corner of the VS Code. 
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/show-source.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/show-source.png" alt="Show source" width="50%" /></a>
+
+    This will open the source view of the endpoint artifact.
+
+    <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/endpoint-source-view.png" className="glightbox"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/create-endpoint/endpoint-source-view.png" alt="Endpoint source view" width="50%" /></a>
+
+To learn more about all available endpoint properties, see the [endpoint properties](../../reference/synapse-properties/endpoint-properties.mdx) documentation.
+
+## Examples
+
+Follow our examples on endpoints:
+
+- [Using Address Endpoints](../../learn/examples/endpoint-examples/using-address-endpoints.mdx)
+- [Using Failover Endpoints](../../learn/examples/endpoint-examples/using-failover-endpoints.mdx)
+- [Using HTTP Endpoints](../../learn/examples/endpoint-examples/using-http-endpoints.mdx)
+- [Using a Websocket Endpoint](../../learn/examples/endpoint-examples/using-websocket-endpoints.mdx)
+- [Using WSDL Endpoints](../../learn/examples/endpoint-examples/using-wsdl-endpoints.mdx)
+- [Using Load Balancing Endpoints](../../learn/examples/endpoint-examples/using-loadbalancing-endpoints.mdx)

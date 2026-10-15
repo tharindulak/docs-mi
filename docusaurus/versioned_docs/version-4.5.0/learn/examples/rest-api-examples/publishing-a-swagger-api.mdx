@@ -1,0 +1,77 @@
+---
+title: How to Publish a Custom Swagger Document
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.5.0/en/docs/learn/examples/rest-api-examples/publishing-a-swagger-api.md
+---
+
+# How to Publish a Custom Swagger Document
+
+When you create a REST API, by default a Swagger 3.0 (OpenApi) definition is generated automatically. You can access this Swagger document by suffixing the API URL
+with `?swagger.json` or `?swagger.yaml`. See [Using Swagger Documents](../../../develop/advanced-development/using-swagger-for-apis.mdx) for more information.
+
+This example demonstrates how a custom Swagger definition is published for a REST API. 
+    
+## Synapse configuration
+Following is a sample REST API configuration with a custom Swagger definition. See the instructions on how to [build and run](#build-and-run) this example.
+
+:::note
+
+The custom Swagger file that you use for generating the API is saved to the WSO2 Integrator: MI's registry. The `publishSwagger` element in the REST API configuration specifies the registry path. In this example, we are storing the Swagger definition in the <b>governance</b> registry as shown below.
+
+:::
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/v2" name="SwaggerPetstore" publishSwagger="/_system/governance/swagger_files/simple_petstore.yaml" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" url-mapping="/pet">
+        <inSequence>
+            <!--This is generated API skeleton.-->
+            <!--Business Logic Goes Here-->
+            <payloadFactory media-type="json">
+                <format>{"Response" : "Sample Response"}</format>
+                <args/>
+            </payloadFactory>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/pet/findByStatus">
+        <inSequence>
+            <!--This is generated API skeleton.-->
+            <!--Business Logic Goes Here-->
+            <payloadFactory media-type="json">
+                <format>{"Response" : "Sample Response"}</format>
+                <args/>
+            </payloadFactory>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </resource>
+</api>
+```
+
+## Build and run
+
+Create the artifacts:
+
+1. Launch Visual Studio Code with the WSO2 Integrator: MI for VS Code extension (MI for VS Code) installed.
+
+    :::info
+
+    Follow the [Install WSO2 Integrator: MI for VS Code](../../../../develop/mi-for-vscode/install-wso2-mi-for-vscode) documentation for a complete installation guide.
+
+    :::
+
+2. Create an [integration project](../../../../develop/create-integration-project/).
+
+3. To create the REST API with the above configurations:
+    - Download the Swagger file: [simple_petstore.yaml](https://github.com/wso2-docs/WSO2_EI/blob/master/samples-rest-apis/simple_petstore.yaml).
+    - Follow the instructions on [creating a REST API](../../../develop/creating-artifacts/creating-an-api.mdx).
+
+4. [Deploy the artifacts](../../../develop/deploy-artifacts.mdx) in your WSO2 Integrator: MI.
+
+Copy the following URLs to your browser to see the Swagger documents of your API:
+
+- `http://localhost:8290/SwaggerPetstore?swagger.json`
+- `http://localhost:8290/SwaggerPetstore?swagger.yaml`

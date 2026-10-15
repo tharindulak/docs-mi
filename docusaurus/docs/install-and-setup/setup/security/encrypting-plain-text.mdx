@@ -1,0 +1,322 @@
+---
+title: Encrypting Secrets using WSO2 Secure Vault
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/install-and-setup/setup/security/encrypting-plain-text.md
+---
+
+# Encrypting Secrets using WSO2 Secure Vault
+
+WSO2 Integrator: MI can use secrets with static origins as well as dynamic origins in configurations. This applies to secrets in server-level configurations as well as configurations within integration solutions (synapse configurations).
+
+It is not recommended to use plain-text values for your sensitive data in your configurations. Therefore, you can encrypt the plain-text secrets using the secure vault implementation that is built in to the WSO2 Integrator: MI. 
+
+The WSO2 Integrator: MI is shipped with the **Cipher Tool**, which uses the secure vault implementation and encrypts the secrets you specify. Running the **Cipher Tool** also ensures that the secrets are enabled in the WSO2 Integrator: MI environment. You can then refer the encrypted secrets from anywhere in your server configurations or synapse configurations.
+
+Note that you can customize the default secure vault configurations in the product by implementing a new secret repository, call back handler, etc.
+
+Follow the steps given below to encrypt secrets.
+
+<Steps>
+
+## Defining secrets {/* #step-1-defining-secrets */}
+
+### Static secrets
+
+Static secrets are sensitive data that are specified directly in configurations. The secret can be a plain-text value or the alias of an encrypted value.
+
+You must first list the plain-text secrets in the `deployment.toml` file under the `secrets` header. Note that we have specified an <b>alias</b> for the secret followed by the actual plain-text secret.
+
+```toml
+[secrets]
+server_secret = "[secret_1]"
+synapse_secret = "[secret_2]"
+```
+
+### Dynamic secrets
+
+Dynamic secrets are specified in configurations as environment variables, system properties, Docker secrets, or Kubernetes secrets. The actual secrets is then encrypted using the WSO2 Integrator: MI CLI, **micli** and injected to the environment.
+
+1.  First, list the dynamic secrets in the `deployment.toml` file under the `[secrets]` section. However, unlike for static secrets, specify the secret value as an environment variable or system property.
+
+    :::note
+
+    In this example, `dynamic_secret` is a placeholder for the secret. You will use this placeholder as the secret's alias when you encrypt the plain-text secret using the MI CLI (in the next step).
+
+    :::
+    
+    <Tabs>
+    <TabItem value="tab-0" label="Environment Variable">
+
+    ```toml
+    [secrets]
+    server_secret = "$env{dynamic_secret}"
+    ```
+
+    </TabItem>
+    <TabItem value="tab-1" label="System Property">
+
+    ```toml
+    [secrets]
+    server_secret = "$sys{dynamic_secret}"
+    ``` 
+
+    </TabItem>
+    </Tabs>
+
+2.  Now, encrypt a plain-text secret for the `dynamic_secret` alias by using the WSO2 MI CLI. For more information, see [Encrypting Secrets with CLI](../../../observe-and-manage/managing-integrations-with-micli.mdx#encrypting-secrets-with-mi-cli)
+
+## Running the Cipher Tool {/* #step-2-running-the-cipher-tool */}
+
+Running the Cipher Tool will first encrypt any [static secrets](#static-secrets) defined in the `[secrets]` section, and then enable all the secrets (static as well as dynamic) in the environment.
+
+:::note
+
+While you are able to encrypt passwords using symmetric or asymmetric encryption, it is recommended to use symmetric encryption due to its greater resilience towards emerging post-quantum threats. Asymmetric encryption methods like RSA are not recommended due to their vulnerability to quantum computing capabilities.
+
+:::
+
+### In a VM environment
+
+In a <b>VM environment</b>, you need to manually run the Cipher Tool as follows:
+
+:::tip
+
+If you are using **Windows**, you need to have [Ant](http://ant.apache.org/) installed before using the Cipher Tool.
+
+:::
+
+1.  Open a terminal, navigate to the `<MI_HOME>/bin/` directory.
+2.  Execute the `-Dconfigure` command with the cipher tool script as shown below.
+
+    <Tabs>
+    <TabItem value="tab-0" label="Asymmetric encryption">
+
+    :::warning
+
+     Asymmetric encryption methods like RSA are not recommended due to their vulnerability to post-quantum threats.
+
+    :::
+
+    - For Linux: `./ciphertool.sh -Dconfigure`
+    - For Windows: `ciphertool.bat -Dconfigure`
+
+    </TabItem>
+    <TabItem value="tab-1" label="Symmetric encryption">
+
+    :::note
+
+    To support symmetric encryption, you should have a symmetric secret in an internal keystore of type PKCS12. Follow the instructions [here](configuring-keystores.mdx#add-a-symmetric-secret-to-a-pkcs12-keystore) to add one.
+
+    :::
+
+    - For Linux: `./ciphertool.sh -Dconfigure -Dsymmetric`
+    - For Windows: `ciphertool.bat -Dconfigure -Dsymmetric`
+
+    </TabItem>
+    </Tabs>
+
+
+### In Docker/Kubernetes environments
+
+For container deployments (Docker or Kubernetes), you don't need to manually run the Cipher tool. Follow the steps given below.
+
+1. Open the `pom.xml` file of your project from the VS Code explorer view and update the `ciphertool.enable` tag to **true** as shown below.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/k8s_deployment/enable-ciphertool.png" alt="pom file" width="700" />
+
+2. Switch back to the MI VS Code Extension to view the **Project Overview** page.
+3. Click on the **Build** button on the top right corner of the **Project Overview** page and select the **Create Docker Image** option to build the Docker image.
+
+    <img src="/integration/micro-integrator/assets/img/integrate/k8s_deployment/build-docker.png" alt="build docker image" width="700" />
+
+:::note
+
+When you build the Docker image from the MI VS Code Extension with the above configurations, the secrets will get encrypted and enabled in the environment.
+
+:::
+
+If you specified any [static secrets](#static-secrets), check the `deployment.toml` file in the created docker image and it will be visible that the secrets are encrypted.
+
+```toml
+[secrets]
+keystore_password = "encrypted_pass_3"
+key_password = "encrypted_pass_4"
+truststore_password = "encrypted_pass_5"
+```
+
+## Accessing secrets {/* #step-3-accessing-secrets */}
+
+### In server configurations
+
+You can refer an encrypted secret in your server configurations by using the `$secret{alias}` function in place of the plain-text secret as shown below. Replace `alias` with the secret's alias that is defined under the `[secrets]` section.
+
+:::note
+
+You can use encrypted [static secrets](#static-secrets) as well as [dynamic secrets](#dynamic-secrets).
+
+:::
+
+```toml
+[keystore.primary]
+password = "$secret{server_secret}"
+alias = "$secret{server_secret}"
+key_password = "$secret{server_secret}"  
+
+[truststore]                  
+password = "$secret{server_secret}"
+```
+
+### In synapse configurations
+
+You can refer an encrypted secret in your synapse configurations by using the **vault lookup** function (`${wso2-vault('alias')}`) in place of the plain-text secret as shown below. Replace `alias` with the secret's alias that is defined under the `[secrets]` section.
+
+:::note
+
+You can only use encrypted [static secrets](#static-secrets) here.
+
+:::
+
+```xml
+<variable name="password" expression="${wso2-vault('mysqlpassword')}"/>
+```
+
+## Populating dynamic secrets {/* #step-4-populating-dynamic-secrets */}
+
+If you have defined [dynamic secrets in your configurations](#dynamic-secrets), you must populate the secret into the relevant environment as required. 
+
+### In a VM environment
+
+For an instance, in the case of environment variables, you can populate them with the export command as follows:
+
+```bash
+export env_carbon_sec=<ENCRYPTED_VALUE>
+```
+
+### In Docker/Kubernetes environments
+
+If you are in a Docker/Kubernetes environment, you should have generated a .yaml file with the encrypted secrets using the WSO2 MI CLI, **mi**. See [defining dynamic secrets](#dynamic-secrets).
+
+### Start server as a background job
+
+If you start the WSO2 Integrator: MI as a background job, you will not be able to provide password values on the command line. Therefore, you must start the server in "daemon" mode as explained below.
+
+1. Create a new file in the MI_HOME directory. The file should be named according to your OS as explained below.
+
+    * For Linux: The file name should be `password-tmp`.
+    * For Windows: The file name should be `password-tmp.txt`.
+
+    :::note
+
+    When you start the server, the keystore password will be picked from this new file. Note that this file is automatically deleted from the file system after the server starts. Therefore, the admin has to create a new text file every time the server starts.
+
+    Alternatively, if you want to retain the password file after the server starts, the file should be named as follows:
+
+    * For Linux: The file name should be `password-persist`
+    * For Windows: The file name should be `password-persist.txt`
+
+    :::
+
+2. Add the primary keystore password (which is "wso2carbon" by default) to the new file and save. By default, the password provider assumes that both private key and keystore passwords are the same. If not, the private key password must be entered in the second line of the file.
+
+3. Now, start the server as a background process by running the following command.
+   ```bash
+   ./micro-integrator.sh start
+   ```
+
+</Steps>
+
+## Managing Secrets at Runtime
+
+The steps above require a server restart whenever a new secret is added or updated. If you need to manage secrets dynamically at runtime, you can store secrets as properties in the registry and read it from there using synapse expressions.
+
+This approach uses the existing [Management API for registry resource properties](../../../observe-and-manage/working-with-management-api.mdx#add-properties-to-a-registry-resource) to add or update secrets at runtime, without restarting the server.
+
+:::note
+
+Secrets managed this way are only accessible in synapse configurations via synapse expressions. They cannot be referenced in server configuration files such as `deployment.toml` (e.g., using `$secret{alias}`).
+
+:::
+
+<Steps>
+
+### Enable registry-backed vault lookup {/* #step-1-enable-registry-backed-vault-lookup */}
+
+Add the following to `deployment.toml` and restart the server **once** to enable the feature:
+
+```toml
+[mediation]
+vault_registry_lookup_enabled = true
+```
+
+Once enabled:
+
+- `wso2:vault-lookup('<alias>')` or `${wso2:vault-lookup('<alias>')}` checks for the secret as a property on `conf:/repository/components/secure-vault` before falling back to `cipher-text.properties`.
+
+### Encrypt the secret value {/* #step-2-encrypt-the-secret-value */}
+
+You must store secrets in encrypted form. Use one of the following methods to obtain the ciphertext.
+
+**Option A: Using MI CLI (recommended)**
+
+Initialize the keystore once, pointing to the same JKS keystore configured in MI:
+
+```bash
+mi secret init
+```
+
+Then encrypt the secret interactively. The ciphertext is printed to the console:
+
+```bash
+mi secret create
+```
+
+For more information, see [Encrypting Secrets with MI CLI](../../../observe-and-manage/managing-integrations-with-micli.mdx#encrypting-secrets-with-mi-cli).
+
+**Option B: Using the Cipher Tool**
+
+```bash
+sh <MI_HOME>/bin/ciphertool.sh
+```
+
+Copy the encrypted output (ciphertext) from either option.
+
+### Obtain a Management API access token {/* #step-3-obtain-a-management-api-access-token */}
+
+```bash
+curl -X GET "https://localhost:9164/management/login" \
+  -H "Authorization: Basic <base64(username:password)>" -k
+```
+
+Copy the `AccessToken` value from the response.
+
+### Add the secret via the Management API {/* #step-4-add-the-secret-via-the-management-api */}
+
+Use the registry resource properties endpoint to store the encrypted value at the secure-vault registry path:
+
+```bash
+curl -X POST \
+  "https://localhost:9164/management/registry-resources/properties?path=registry/config/repository/components/secure-vault" \
+  -H "Authorization: Bearer {AccessToken}" \
+  -H "Content-Type: application/json" \
+  -d '[{"name": "<alias>", "value": "<encrypted_value>"}]' -k
+```
+
+- Replace `<alias>` with the alias you will reference in your synapse configuration (e.g., `myEndpointPassword`).
+- Replace `<encrypted_value>` with the ciphertext from Step 2.
+
+The secret is immediately available — no server restart is required.
+
+### Reference the secret in synapse configurations {/* #step-5-reference-the-secret-in-synapse-configurations */}
+
+```xml
+<variable name="password" expression="${wso2-vault('myEndpointPassword')}"/>
+```
+
+If you are using xpath expressions, use the following syntax:
+
+```xml
+<variable name="password" expression="wso2:vault-lookup('myEndpointPassword')"/>
+```
+
+</Steps>

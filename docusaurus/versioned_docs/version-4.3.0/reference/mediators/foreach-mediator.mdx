@@ -1,0 +1,142 @@
+---
+title: ForEach Mediator
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.3.0/en/docs/reference/mediators/foreach-mediator.md
+---
+
+# ForEach Mediator
+
+The ForEach mediator splits the message into a number of different messages derived from the original message by finding matching elements for the [expression](../synapse-properties/expressions.mdx) specified. The behaviour of ForEach mediator is similar to a generic loop. Based on the matching elements, new messages are created for each iteration and processed sequentially. 
+The message in each iteration is flowing through the specified [mediation sequence](../mediation-sequences.mdx). After flowing through the mediation sequence, the sub-messages in each iteration are merged back to the corresponding original parent element in the original message sequentially.
+
+:::note
+
+[Iterate Mediator](iterate-mediator.mdx) is quite similar to the ForEach mediator. You can use complex expressions to conditionally select elements to iterate over in both mediators. Following are the main difference between ForEach and Iterate mediators:
+
+-   Use the ForEach mediator only for message transformations. If you
+    need to make back-end calls from each iteration, then use the
+    iterate mediator.
+-   ForEach mediator supports modifying the original payload. You can use Iterate mediator
+    for situations where you send the split messages to a target and
+    collect them by an [Aggreagte](aggregate-mediator.mdx) mediator in a different flow
+-   You need to always accompany an Iterate mediator with an Aggregate mediator.
+    ForEach mediator loops over the sub-messages and merges them back to the same
+    parent element of the message.
+-   In Iterate mediator you need to send the split messages to an endpoint to
+    continue the message flow. However, ForEach mediator does not allow using
+    [Call](call-mediator.mdx), [Send](send-mediator.mdx) and
+    [Callout](callout-mediator.mdx) mediators in the sequence.
+-   ForEach mediator does not split the message flow, unlike Iterate mediator. It
+    guarantees to execute in the same thread until all iterations are
+    complete.
+
+:::
+
+:::note
+
+The ForEach mediator creates the following properties in the [default scope](../synapse-properties/scopes.mdx#default-scope) during mediation and can be accessed in the iterations.
+
+| Property                   | Description                                                                                           |
+|----------------------------|-------------------------------------------------------------------------------------------------------|
+| FOREACH_ORIGINAL_MESSAGE | This contains the original envelop of the messages split by the ForEach mediator. For example the property `<property name="ORIGINAL_PAYLOAD" expression="get-property('foreachID_FOREACH_ORIGINAL_MESSAGE')"/>` stores the original envelop of the message. You have to prefix the [ForEach ID](#foreachID) to `FOREACH_ORIGINAL_MESSAGE` property name.                    |
+| FOREACH_COUNTER           | This contains the current index of the iteration (zero-based indexing). The message count increases during each iteration. For example the property `<property name="CURRENT_INDEX" expression="get-property('foreachID_FOREACH_COUNTER')"/>` stores the current index of the iteration. You have to prefix the [ForEach ID](#foreachID) to `FOREACH_COUNTER` property name.|
+
+:::
+
+
+
+## Syntax
+
+```
+<foreach expression="expression" [sequence="sequenceKey"] [id="string"] >
+    <sequence>
+      (mediator)+
+    </sequence>?
+</foreach>
+```
+
+## Configuration
+
+The parameters available to configure the ForEach mediator are as follows.
+
+<table><thead><tr className={"header"}><th>{"Parameter Name"}</th><th>{"Description"}</th></tr></thead><tbody><tr className={"odd"}><td id={"foreachID"}><strong>{"ForEach ID"}</strong></td><td>{"If a value is entered for this parameter, it will be used as the prefix for the "}<code>{"FOREACH_ORIGINAL_MESSAGE"}</code>{" and "}<code>{"FOREACH_COUNTER"}</code>{" properties created during mediation. This is an optional parameter. It is recommended to define a ForEach ID in nested ForEach scenarios to avoid the properties mentioned from being overwritten."}</td></tr><tr className={"even"}><td><strong>{"Expression"}</strong></td><td><div className={"content-wrapper"}><p>{"The "}<a href={"/integration/micro-integrator/4.3.0/reference/synapse-properties/expressions"}>{"expression"}</a>{" with which different messages are derived by splitting the parent message. This expression should have matching elements based on which the splitting is carried out."}</p><p>{"You can click "}<strong>{"+ Add Namespace"}</strong>{" in the "}<strong>{"Expression Editor"}</strong>{" to add namespaces when you are providing an expression."}</p></div></td></tr><tr className={"odd"}><td><strong>{"Sequence"}</strong></td><td><p>{"The mediation sequence that should be applied to the messages derived from the parent message. ForEach mediator is used only for transformations, thereby, you should not include "}<a href={"/integration/micro-integrator/4.3.0/reference/mediators/call-mediator"}>{"Call"}</a>{", "}<a href={"/integration/micro-integrator/4.3.0/reference/mediators/send-mediator"}>{"Send"}</a>{", or "}<a href={"/integration/micro-integrator/4.3.0/reference/mediators/callout-mediator"}>{"Callout"}</a>{" mediators, which are used to invoke endpoints, within this sequence."}</p><p>{"For the sequence type you can select one of the following options."}</p><ul><li><strong>{"Anonymous"}</strong>{": This allows you to define an anonymous sequence to be applied to the split messages by adding the required mediators as children of the ForEach mediator in the mediator tree."}</li><li><strong>{"Key"}</strong>{": This allows you to pick an existing mediation sequence."}</li></ul></td></tr></tbody></table>
+
+
+## Examples
+
+### Example 1 - Log sub messages
+
+In this configuration, the `"//m0:getQuote/m0:request"` XPath expression and `"json-eval($.getQuote.request)"` JSONPath expression evaluate the split messages to be derived from the parent message. Then the split messages pass through a sequence which includes a [Log mediator](log-mediator.mdx) with the log level set to `full`.
+
+<Tabs>
+<TabItem value="tab-0" label="Using an XPath expression">
+
+```java
+<foreach id="foreach_1" expression="//m0:getQuote/m0:request" xmlns:m0="http://services.samples">
+        <sequence>
+             <log level="full"/>
+        </sequence>
+</foreach>
+```
+
+</TabItem>
+<TabItem value="tab-1" label="Using a JSONPath expression">
+
+```java
+<foreach id="foreach_1" expression="json-eval($.getQuote.request)">
+        <sequence>
+             <log level="full"/>
+        </sequence>
+</foreach>
+```
+
+</TabItem>
+</Tabs>
+
+### Example 2 - Modify the payload iteratively
+
+When you use ForEach mediator, you can only loop through segments of the message and make changes to a particular segment. You can use [Payload Factory mediator](payloadfactory-mediator.mdx) to change the payload in each iteration. Once you exit from the ForEach loop, it automatically aggregates the split segments. This replaces the ForEach function of the complex [XSLT mediators](xslt-mediator.mdx) using a ForEach mediator and a Payload Factory mediator. However, to implement the [split-aggregate pattern](../../learn/enterprise-integration-patterns/message-routing/splitter.mdx), you still need to use [Iterate mediator](iterate-mediator.mdx).
+
+<Tabs>
+<TabItem value="tab-0" label="Using an XPath expression">
+
+```java
+<foreach id="foreach_1" expression="//m0:getQuote/m0:request" xmlns:m0="http://services.samples">
+    <sequence>
+        <property name="OLD_SYMBOL" xmlns:xsd="http://services.samples/xsd" expression="//xsd:symbol"/>
+        <property name="NEW_SYMBOL" expression="fn:concat(($ctx:OLD_SYMBOL, '_0')"/>
+        <payloadFactory media-type="xml" template-type="default">
+            <format>
+                <symbol>$1</symbol>
+            </format>
+            <args>
+                <arg expression="$ctx:NEW_SYMBOL"/>
+            </args>
+        </payloadFactory>
+    </sequence>
+</foreach>
+```
+
+</TabItem>
+<TabItem value="tab-1" label="Using a JSONPath expression">
+
+```java
+<foreach id="foreach_1" expression="json-eval($.getQuote.request)">
+    <sequence>
+        <property name="OLD_SYMBOL" expression="json-eval($.symbol)"/>
+        <property name="NEW_SYMBOL" expression="fn:concat($ctx:OLD_SYMBOL, '_0')"/>
+        <payloadFactory media-type="json" template-type="default">
+            <format>
+                {"symbol": "$1"}
+            </format>
+            <args>
+                <arg expression="$ctx:NEW_SYMBOL"/>
+            </args>
+        </payloadFactory>
+    </sequence>
+</foreach>
+```
+
+</TabItem>
+</Tabs>

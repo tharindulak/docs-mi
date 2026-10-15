@@ -1,0 +1,61 @@
+---
+title: How to Use an HTTP Endpoint
+deployment_options:
+  - Self-hosted
+custom_edit_url: https://github.com/wso2/docs-mi/edit/4.6.0/en/docs/learn/examples/endpoint-examples/using-http-endpoints.md
+---
+
+# How to Use an HTTP Endpoint
+
+:::note
+
+Starting from WSO2 MI 4.4.0, a new [**HTTP Connector**](../../../reference/connectors/http-connector/http-connector-overview.mdx) is available for invoking HTTP backends. While **HTTP endpoints** can still be used, the HTTP connector provides a more flexible and feature-rich approach for handling HTTP requests. It is **recommended** to use the [HTTP Connector](../../../reference/connectors/http-connector/http-connector-overview.mdx) for new implementations.
+
+:::
+
+See the examples given below on how to effectively use the HTTP endpoint.
+
+## Example 1: Populate an HTTP endpoint during mediation
+
+Shown below is a synapse configuration that defines an endpoint artifact.
+
+```xml
+<endpoint name="HTTPEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="get" uri-template="http://localhost:8080/{uri.var.servicepath}/restapi/{uri.var.servicename}/menu?category={uri.var.category}&amp;type={uri.var.pizzaType}"/>
+</endpoint>
+```
+
+The URI template variables in this example HTTP endpoint can be populated during mediation using the following sequence configuration:
+
+```xml
+ <inSequence>
+    <property name="uri.var.servicepath" scope="default" type="STRING" value="PizzaShopServlet"/>
+    <property name="uri.var.servicename" scope="default" type="STRING" value="PizzaWS"/>
+    <property name="uri.var.category" scope="default" type="STRING" value="pizza"/>
+    <property name="uri.var.pizzaType" scope="default" type="STRING" value="pan"/>
+    <send>
+        <endpoint key="HTTPEndpoint"/>
+    </send>
+ </inSequence>
+```
+
+This configuration will cause the RESTful URL to evaluate the following: 
+
+```bash
+http://localhost:8080/PizzaShopServlet/restapi/PizzaWS/menu?category=pizza&type=pan
+```
+
+## Example 2
+
+You can specify one parameter as the HTTP endpoint by
+using multiple other parameters, and then pass that to define the HTTP
+endpoint as follows:
+
+```xml
+<property name="uri.var.httpendpointurl" expression="fn:concat($ctx:prefixuri, $ctx:host, $ctx:port, $ctx:urlparam1, $ctx:urlparam2)" />
+<send>
+    <endpoint>
+        <http uri-template="{uri.var.httpendpointurl}"/>
+    </endpoint>
+</send>
+```
