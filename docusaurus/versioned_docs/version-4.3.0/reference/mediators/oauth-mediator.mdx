@@ -15,10 +15,9 @@ See [2-legged OAuth for Securing a RESTful Service](https://docs.wso2.com/displa
 
 :::info
 
-
+If you are using OAuth 1 a, you will get the `org.apache.synapse.SynapseException: Unable to find SCOPE value in Synapse Message Context` error when the `         SCOPE        ` property is not set in the synapse message context. To avoid this error, add a property with the name `scope` and a value in the synapse message context as shown in the [Example](#example) section.
 
 :::
-	If you are using OAuth 1 a, you will get the `org.apache.synapse.SynapseException: Unable to find SCOPE value in Synapse Message Context` error when the `         SCOPE        ` property is not set in the synapse message context. To avoid this error, add a property with the name `scope` and a value in the synapse message context as shown in the [Example](#example) section.
 
 ## Syntax
 
@@ -52,10 +51,9 @@ request.
 
 :::info
 
-
+The following example is applicable for OAuth 2.0 as well.
 
 :::
-	The following example is applicable for OAuth 2.0 as well.
 
 ```xml
 <property name="scope" scope="default" type="STRING" value="123"/>

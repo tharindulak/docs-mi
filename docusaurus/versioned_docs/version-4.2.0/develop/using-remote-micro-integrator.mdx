@@ -44,11 +44,10 @@ For more information on how to export a CAR file, see [Exporting Artifacts](expo
     :::note
 
 
+    -   If you selected an <b>Enterprise Integrator</b> server in the previous step, enter the port details required for an Enterprise Integrator.
+    -   If you are already running another server on these ports, give unused ports. See [Default ports](../install-and-setup/setup/deployment-best-practices/changing-the-default-ports-with-offset.mdx) of the Micro Integrator for more information.
 
     :::
-    
-		-   If you selected an <b>Enterprise Integrator</b> server in the previous step, enter the port details required for an Enterprise Integrator.
-        -   If you are already running another server on these ports, give unused ports. See [Default ports](../install-and-setup/setup/deployment-best-practices/changing-the-default-ports-with-offset.mdx) of the Micro Integrator for more information.
 
 ## Deploy and run artifacts in a remote instance
 
@@ -69,11 +68,10 @@ For more information on how to export a CAR file, see [Exporting Artifacts](expo
 
 :::note
 
-
+Hot deployment is enabled in the Micro Integrator by default. This allows you to redeploy artifacts without restarting the server.
+If you disabled hot deployment while adding the server, you need to restart the server as well.
 
 :::
-	Hot deployment is enabled in the Micro Integrator by default. This allows you to redeploy artifacts without restarting the server.
-	If you disabled hot deployment while adding the server, you need to restart the server as well.
 
 ## Disable graceful shutdown (Only for testing)
 
@@ -90,10 +88,9 @@ You can disable this feature by using the following system property when you sta
 
 :::warning
 
-
+Disabling graceful shutdown is only recommended for a development environment for the purpose of making the development and testing process faster. Be sure to have graceful shutdown enabled when you move to production.
 
 :::
-	Disabling graceful shutdown is only recommended for a development environment for the purpose of making the development and testing process faster. Be sure to have graceful shutdown enabled when you move to production.
 
 ```bash
 -DgracefulShutdown=false

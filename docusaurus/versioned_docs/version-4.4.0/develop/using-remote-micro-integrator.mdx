@@ -48,11 +48,10 @@ If you require to make any changes to the CAR file by modifying its artifacts, t
 
 :::note
 
-
+ Hot deployment is enabled in the Micro Integrator by default. This allows you to redeploy artifacts without restarting the server. 
+ Therefore, if you manually add or remove any CAR file to or from the `<MI_HOME>/repository/deployment/server/carbonapps/` folder, those will be deployed or removed from the server without a server restart.
 
 :::
-	 Hot deployment is enabled in the Micro Integrator by default. This allows you to redeploy artifacts without restarting the server. 
-     Therefore, if you manually add or remove any CAR file to or from the `<MI_HOME>/repository/deployment/server/carbonapps/` folder, those will be deployed or removed from the server without a server restart.
 
 ## Disable graceful shutdown (Only for testing)
 
@@ -69,10 +68,9 @@ You can disable this feature by using the following system property when you sta
 
 :::warning
 
-
+Disabling graceful shutdown is only recommended for a development environment for the purpose of making the development and testing process faster. Be sure to have graceful shutdown enabled when you move to production.
 
 :::
-	Disabling graceful shutdown is only recommended for a development environment for the purpose of making the development and testing process faster. Be sure to have graceful shutdown enabled when you move to production.
 
 ```bash
 -DgracefulShutdown=false

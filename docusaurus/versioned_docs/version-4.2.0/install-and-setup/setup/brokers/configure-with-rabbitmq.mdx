@@ -11,10 +11,9 @@ This section describes how to configure WSO2 Micro Integrator to connect with Ra
 
 :::tip
 
-
+See the complete list of server-level configurations for the [RabbitMQ Listener](../../../reference/config-catalog-mi.mdx#rabbitmq-listener) and [RabbitMQ Sender](../../../reference/config-catalog-mi.mdx#rabbitmq-sender) in the `deployment.toml` file (stored in the `MI_HOME/conf` directory).
 
 :::
-	See the complete list of server-level configurations for the [RabbitMQ Listener](../../../reference/config-catalog-mi.mdx#rabbitmq-listener) and [RabbitMQ Sender](../../../reference/config-catalog-mi.mdx#rabbitmq-sender) in the `deployment.toml` file (stored in the `MI_HOME/conf` directory).
 
 ## Setting up RabbitMQ
 
@@ -48,21 +47,20 @@ Add the following parameters to enable SSL for the RabbitMQ listener.
 
 :::tip
 
+  Note that keystore information is not required for an SSL connection if the <code>fail_if_no_peer_cert</code> parameter is set to 'false' in the RabbitMQ broker. You only need to enable SSL in the Micro Integrator (using the `parameter.ssl_enable` parameter shown below).
 
+However, if the <code>fail_if_no_peer_cert</code> parameter is set to 'true' in RabbitMQ, the keystore configurations (given below) are also required for the Micro Integrator.
+
+Shown below is an example of the config file where `fail_if_no_peer_cert` is set to `false`:
+```
+ssl_options.cacertfile = /path/to/ca_certificate.pem
+ssl_options.certfile   = /path/to/server_certificate.pem
+ssl_options.keyfile    = /path/to/server_key.pem
+ssl_options.verify     = verify_peer
+ssl_options.fail_if_no_peer_cert = false
+```
 
 :::
-	  Note that keystore information is not required for an SSL connection if the <code>fail_if_no_peer_cert</code> parameter is set to 'false' in the RabbitMQ broker. You only need to enable SSL in the Micro Integrator (using the `parameter.ssl_enable` parameter shown below).
-
-    However, if the <code>fail_if_no_peer_cert</code> parameter is set to 'true' in RabbitMQ, the keystore configurations (given below) are also required for the Micro Integrator.
-
-    Shown below is an example of the config file where `fail_if_no_peer_cert` is set to `false`:
-    ```
-    ssl_options.cacertfile = /path/to/ca_certificate.pem
-    ssl_options.certfile   = /path/to/server_certificate.pem
-    ssl_options.keyfile    = /path/to/server_key.pem
-    ssl_options.verify     = verify_peer
-    ssl_options.fail_if_no_peer_cert = false
-    ```
 
 ```toml
 [[transport.rabbitmq.listener]]

@@ -28,7 +28,7 @@ Let's use an integration template in WSO2 Integration Studio to generate a sampl
 1.	Open WSO2 Integration Studio.
 2.	In the <b>Getting Started</b> view, select the <b>Hello Kubernetes</b> template.
 
-	<img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/k8s-hello-world-template.jpg" alt="getting started view" />
+    <img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/k8s-hello-world-template.jpg" alt="getting started view" />
 
 3.	Give a project name and click <b>Finish</b>. 
 
@@ -40,47 +40,47 @@ This generates the complete integration project with the 'Hello World' solution,
 
 :::note
 
-
+Be sure to start your Docker instance before building the image. If Docker is not started, the build process will fail. 
 
 :::
-	Be sure to start your Docker instance before building the image. If Docker is not started, the build process will fail. 
 
 There are two ways to build a Docker image of the integration solution and push it to your Docker registry:
 
 -	Using <b>Maven</b>:
 
-	:::note[Before you begin]
+    <Prerequisites title="Before you begin">
 
+    ```
+    You need **Maven 3.5.2** or a later version when you build the Docker image manually (without using WSO2 Integration Studio).
+    ```
 
+    </Prerequisites>
 
-	:::
-			You need **Maven 3.5.2** or a later version when you build the Docker image manually (without using WSO2 Integration Studio).
+    1.	Open a terminal and navigate to the integration project.
+    2.	Execute the following command. 
 
-	1.	Open a terminal and navigate to the integration project.
-	2.	Execute the following command. 
-
-		Be sure to specify the user name and password of the correct Docker registry.
+        Be sure to specify the user name and password of the correct Docker registry.
 
 	    ```bash
 	    mvn clean install -Dmaven.test.skip=true -Ddockerfile.username={username} -Ddockerfile.password={password} 
 		```
 
-	This will build the Docker image and then push it to the specified Docker registry.
+    This will build the Docker image and then push it to the specified Docker registry.
 
 -	Using <b>WSO2 Integration Studio</b>:
       
-	1.  Open the **pom.xml** file in the Kubernetes project as shown below.
-	    
-	    <img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/select-dependency-hello-world.png" />
-	
-	2.	Ensure that the composite exporter is selected under **Dependencies**.
-	3.  In the <b>Target Repository</b> field, enter the name of the Docker registry to which you will push a Docker image.
-	4.	Click <b>Build & Push</b> to build the image and push to the Docker registry.
-	5.	In the dialog box that opens, enter the credentials of your Docker registry to which the image should be pushed.
+    1.  Open the **pom.xml** file in the Kubernetes project as shown below.
+        
+        <img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/select-dependency-hello-world.png" />
+    
+    2.	Ensure that the composite exporter is selected under **Dependencies**.
+    3.  In the <b>Target Repository</b> field, enter the name of the Docker registry to which you will push a Docker image.
+    4.	Click <b>Build & Push</b> to build the image and push to the Docker registry.
+    5.	In the dialog box that opens, enter the credentials of your Docker registry to which the image should be pushed.
 
-	    <img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/docker-registry-credentials.png" width="500" alt="docker registry credentials" />
+        <img src="/integration/micro-integrator/assets/img/integrate/create_project/docker_k8s_project/docker-registry-credentials.png" width="500" alt="docker registry credentials" />
 
-	6.	Click <b>Push Image</b>.
+    6.	Click <b>Push Image</b>.
 
 Run the `docker image ls` command to verify that the Docker image is created.
     

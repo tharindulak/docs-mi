@@ -11,13 +11,12 @@ Follow the steps given below to set up the required Postgre databases for your W
 
 :::tip
 
+WSO2 Integrator: MI requires databases for the following scenarios:
 
+-	<a href='/integration/micro-integrator/4.5.0/install-and-setup/setup/deployment/deploying-wso2-mi#cluster-coordination'>cluster coordination</a>
+-	<a href='/integration/micro-integrator/4.5.0/install-and-setup/setup/user-stores/setting-up-a-userstore'>using an RDBMS user store</a>
 
 :::
-	WSO2 Integrator: MI requires databases for the following scenarios:
-
-	-	<a href='/integration/micro-integrator/4.5.0/install-and-setup/setup/deployment/deploying-wso2-mi#cluster-coordination'>cluster coordination</a>
-    -	<a href='/integration/micro-integrator/4.5.0/install-and-setup/setup/user-stores/setting-up-a-userstore'>using an RDBMS user store</a>
 
 ## Setting up the database and login role
 
@@ -98,18 +97,19 @@ pool_options.testOnBorrow = true
 
 :::note[About User DB]
 
-
+If you replace 'WSO2CarbonDB' with a different id in the user DB configuration, you also need to list the id as a datasource under the <code>[realm_manager]</code> section in the <code>deployment.toml</code> file as shown below.
 
 :::
-	If you replace 'WSO2CarbonDB' with a different id in the user DB configuration, you also need to list the id as a datasource under the <code>[realm_manager]</code> section in the <code>deployment.toml</code> file as shown below.
 
 	```toml
 	[realm_manager]
 	data_source = "new_id"
 	```
 
-	Otherwise the user store database id defaults to 'WSO2CarbonDB' in the realm manager configurations..
-	
+```
+Otherwise the user store database id defaults to 'WSO2CarbonDB' in the realm manager configurations..
+```
+    
 
 See the descriptions of [database connection parameters](../../../reference/config-catalog-mi.mdx#database-connection).
 

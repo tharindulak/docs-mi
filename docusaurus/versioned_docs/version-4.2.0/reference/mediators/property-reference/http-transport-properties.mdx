@@ -9,10 +9,9 @@ custom_edit_url: https://github.com/wso2/docs-mi/edit/4.2.0/en/docs/reference/me
 
 :::info
 
-
+The following are HTTP transport properties that can be used with the [Property mediator](../property-mediator.mdx) and the [Property Group mediator](/integration/micro-integrator/4.2.0/reference/mediators/property-Group-Mediator).
 
 :::
-	The following are HTTP transport properties that can be used with the [Property mediator](../property-mediator.mdx) and the [Property Group mediator](/integration/micro-integrator/4.2.0/reference/mediators/property-Group-Mediator).
 
 HTTP transport properties allow you to configure how the HTTP transport
 processes messages, such as forcing a 202 HTTP response to the client so
@@ -46,7 +45,7 @@ appending a context to the target URL in RESTful invocations.
 ## NON_ERROR_HTTP_STATUS_CODES
 
 <table><tbody><tr><th>{"Parameter"}</th><th>{"Description"}</th></tr></tbody><tbody><tr className={"odd"}><td><p><strong>{"Name"}</strong></p></td><td><p>{"non.error.http.status.codes"}</p></td></tr><tr className={"even"}><td><p><strong>{"Possible Values"}</strong></p></td><td><p>{"HTTP status code number/comma separated numbers"}</p></td></tr><tr className={"odd"}><td><p><strong>{"Default Behavior"}</strong></p></td><td><p>{"none"}</p></td></tr><tr className={"even"}><td><p><strong>{"Scope"}</strong></p></td><td><p>{"axis2"}</p></td></tr><tr className={"odd"}><td><p><strong>{"Description"}</strong></p></td><td><p>{"Set the HTTP status code(s) that should be considered as non-error HTTP status code(s) in blocking mode."}</p></td></tr><tr className={"even"}><td><p><strong>{"Example"}</strong></p></td><td><div className={"content-wrapper"}><div className={"code panel pdl"}><div className={"codeContent panelContent pdl"}><div className={"sourceCode"} id={"cb1"} data-syntaxhighlighter-params={"brush: java; gutter: false; theme: Confluence"} data-theme={"Confluence"}><pre className={"sourceCode java"}><code className={"sourceCode java"}><span id={"cb1-1"}><a href={"#cb1-1"}></a>{"<property name="}<span className={"st"}>{"\"non.error.http.status.codes\""}</span>{" value="}<span className={"st"}>{"\"403\""}</span>{" scope="}<span className={"st"}>{"\"axis2\" type="}<span className={"st"}>{"\"STRING\""}</span>{"/>"}</span></span></code></pre></div></div></div></div></td></tr></tbody></table>
-	
+    
 ## HTTP_SC_DESC
 
 <table><tbody><tr><th>{"Parameter"}</th><th>{"Description"}</th></tr></tbody><tbody><tr className={"odd"}><td><p><strong>{"Name"}</strong></p></td><td><p>{"HTTP_SC_DESC"}</p></td></tr><tr className={"even"}><td><p><strong>{"Possible Values"}</strong></p></td><td><div>{"HTTP response's Reason- Phrase that is sent by the backend. For example, if the backend sends the response's status as HTTP/1.1 200 OK, then the value of HTTP_SC_DESC is OK."}</div></td></tr><tr className={"odd"}><td><p><strong>{"Default Behavior"}</strong></p></td><td><p>{"none"}</p></td></tr><tr className={"even"}><td><p><strong>{"Scope"}</strong></p></td><td><p>{"axis2"}</p></td></tr><tr className={"odd"}><td><p><strong>{"Description"}</strong></p></td><td><p>{"Set the HTTP status message (Reason-Phrase)."}</p></td></tr><tr className={"even"}><td><p><strong>{"Example"}</strong></p></td><td><div className={"content-wrapper"}><div className={"code panel pdl"}><div className={"codeContent panelContent pdl"}><div className={"sourceCode"} id={"cb1"} data-syntaxhighlighter-params={"brush: java; gutter: false; theme: Confluence"} data-theme={"Confluence"}><pre className={"sourceCode java"}><code className={"sourceCode java"}><span id={"cb1-1"}><a href={"#cb1-1"}></a>{"<property name="}<span className={"st"}>{"\"HTTP_SC_DESC\""}</span>{" value="}<span className={"st"}>{"\"Your description here\""}</span>{" scope="}<span className={"st"}>{"\"axis2\""}</span>{"/>"}</span></code></pre></div></div></div></div></td></tr></tbody></table>

@@ -11,11 +11,10 @@ This section describes how to configure WSO2 Micro Integrator to connect with Ra
 
 :::tip
 
-
+- See the complete list of server-level configurations for the [RabbitMQ Listener](../../../reference/config-catalog-mi.mdx#rabbitmq-listener) and [RabbitMQ Sender](../../../reference/config-catalog-mi.mdx#rabbitmq-sender) in the `deployment.toml` file (stored in the `MI_HOME/conf` directory).
+- Refer to [Tuning the RabbitMQ Transport](../performance-tuning/rabbitmq-transport-tuning.mdx) for guidance on optimizing RabbitMQ performance.
 
 :::
-	- See the complete list of server-level configurations for the [RabbitMQ Listener](../../../reference/config-catalog-mi.mdx#rabbitmq-listener) and [RabbitMQ Sender](../../../reference/config-catalog-mi.mdx#rabbitmq-sender) in the `deployment.toml` file (stored in the `MI_HOME/conf` directory).
-    - Refer to [Tuning the RabbitMQ Transport](../performance-tuning/rabbitmq-transport-tuning.mdx) for guidance on optimizing RabbitMQ performance.
 
 ## Setting up RabbitMQ
 
@@ -69,30 +68,29 @@ parameter.ssl_version = "SSL"
 
 :::tip
 
+  Note that keystore information is not required for an SSL connection if the <code>fail_if_no_peer_cert</code> parameter is set to `false` in the RabbitMQ broker. You only need to enable SSL in the Micro Integrator (using the `parameter.ssl_enable` parameter shown above). You can check the <code>fail_if_no_peer_cert</code> parameter in the <code>rabbitmq.conf</code> file in its <a target="_blank" href="https://www.rabbitmq.com/docs/configure#config-location">OS-specific location</a>.
 
+Shown below is an example of the configuration file where `fail_if_no_peer_cert` is set to `false`:
+```
+ssl_options.cacertfile = /path/to/ca_certificate.pem
+ssl_options.certfile   = /path/to/server_certificate.pem
+ssl_options.keyfile    = /path/to/server_key.pem
+ssl_options.verify     = verify_peer
+ssl_options.fail_if_no_peer_cert = false
+```
+
+However, if the <code>fail_if_no_peer_cert</code> parameter is set to `true` in RabbitMQ, the keystore configurations (given below) are also required for the Micro Integrator.
+
+```
+parameter.keystore_location ="repository/resources/security/wso2carbon.jks"
+parameter.keystore_type = "JKS"
+parameter.keystore_password = "wso2carbon"
+parameter.truststore_location ="repository/resources/security/client-truststore.jks"
+parameter.truststore_type = "JKS"
+parameter.truststore_password = "wso2carbon"
+```
 
 :::
-	  Note that keystore information is not required for an SSL connection if the <code>fail_if_no_peer_cert</code> parameter is set to `false` in the RabbitMQ broker. You only need to enable SSL in the Micro Integrator (using the `parameter.ssl_enable` parameter shown above). You can check the <code>fail_if_no_peer_cert</code> parameter in the <code>rabbitmq.conf</code> file in its <a target="_blank" href="https://www.rabbitmq.com/docs/configure#config-location">OS-specific location</a>.
-    
-    Shown below is an example of the configuration file where `fail_if_no_peer_cert` is set to `false`:
-    ```
-    ssl_options.cacertfile = /path/to/ca_certificate.pem
-    ssl_options.certfile   = /path/to/server_certificate.pem
-    ssl_options.keyfile    = /path/to/server_key.pem
-    ssl_options.verify     = verify_peer
-    ssl_options.fail_if_no_peer_cert = false
-    ```
-
-    However, if the <code>fail_if_no_peer_cert</code> parameter is set to `true` in RabbitMQ, the keystore configurations (given below) are also required for the Micro Integrator.
-
-    ```
-    parameter.keystore_location ="repository/resources/security/wso2carbon.jks"
-    parameter.keystore_type = "JKS"
-    parameter.keystore_password = "wso2carbon"
-    parameter.truststore_location ="repository/resources/security/client-truststore.jks"
-    parameter.truststore_type = "JKS"
-    parameter.truststore_password = "wso2carbon"
-    ```
 
 ## Configuring connection recovery
 

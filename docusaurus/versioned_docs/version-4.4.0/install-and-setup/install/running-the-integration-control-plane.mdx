@@ -54,14 +54,13 @@ Follow the steps given below before you start.
 
 ## Configuring Single Sign-on with OpenID Connect
 
-:::note[Before you begin]
+<Prerequisites title="Before you begin">
 
+- 	This is an **optional** configuration that you can do to enable Single Sign-On for the Integration Control Plane. By default, the Integration Control Plane uses its own user store for authentication.
+-	See the documentation of your preferred Identity provider for instructions on setting up OpenID Connect.
+-	This feature was tested with WSO2 IS 5.10.0 and Shibboleth 4.1.2. There may be compatibility issues when using other vendors.
 
-
-:::
-	- 	This is an **optional** configuration that you can do to enable Single Sign-On for the Integration Control Plane. By default, the Integration Control Plane uses its own user store for authentication.
-	-	See the documentation of your preferred Identity provider for instructions on setting up OpenID Connect.
-	-	This feature was tested with WSO2 IS 5.10.0 and Shibboleth 4.1.2. There may be compatibility issues when using other vendors.
+</Prerequisites>
 
 Follow the steps given below to connect the Integration Control Plane to your Identity provider.
 
@@ -78,9 +77,9 @@ Follow the steps given below to connect the Integration Control Plane to your Id
 	sign_in_redirect_URL = "https://localhost:9743/sso"
 	```
 
-	Parameters used above are explained below.
+    Parameters used above are explained below.
 
-	<table><tbody><tr><th>{"Parameter"}</th><th>{"Desciption"}</th></tr><tr><td><code>{"enable"}</code></td><td>{"Use this paramater to enable Single Sign-On."}</td></tr><tr><td><code>{"client_id"}</code></td><td>{"The client ID generated from the Identity Provider."}</td></tr><tr><td><code>{"base_url"}</code></td><td>{"The URL of the Identity Provider."}</td></tr><tr><td><code>{"jwt_issuer"}</code></td><td>{"The Identity Provider's issuer identifier."}</td></tr><tr><td><code>{"resource_server_URLs"}</code></td><td>{"The URL of the Integration Control Plane."}</td></tr><tr><td><code>{"sign_in_redirect_URL"}</code></td><td>{"The Sign In redirect URL of the Integration Control Plane."}</td></tr></tbody></table>
+    <table><tbody><tr><th>{"Parameter"}</th><th>{"Desciption"}</th></tr><tr><td><code>{"enable"}</code></td><td>{"Use this paramater to enable Single Sign-On."}</td></tr><tr><td><code>{"client_id"}</code></td><td>{"The client ID generated from the Identity Provider."}</td></tr><tr><td><code>{"base_url"}</code></td><td>{"The URL of the Identity Provider."}</td></tr><tr><td><code>{"jwt_issuer"}</code></td><td>{"The Identity Provider's issuer identifier."}</td></tr><tr><td><code>{"resource_server_URLs"}</code></td><td>{"The URL of the Integration Control Plane."}</td></tr><tr><td><code>{"sign_in_redirect_URL"}</code></td><td>{"The Sign In redirect URL of the Integration Control Plane."}</td></tr></tbody></table>
 
 See the [complete list of parameters](../../reference/config-catalog-integration-control-plane.mdx#single-sign-on) you can configure for the single sign-on.
 

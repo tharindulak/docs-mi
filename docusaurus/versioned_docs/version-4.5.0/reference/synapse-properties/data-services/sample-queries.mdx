@@ -157,10 +157,9 @@ Dynamic SQL queries allow you to change SQL queries (e.g., defining additional c
 
 :::warning
 
-
+ Dynamic queries can lead to SQL injection attacks. Therefore, we recommend that the clients validate the values set using the `QUERY_STRING` data type during runtime.
 
 :::
-	 Dynamic queries can lead to SQL injection attacks. Therefore, we recommend that the clients validate the values set using the `QUERY_STRING` data type during runtime.
 
 The `QUERY_STRING` data type is available as an SQL type when creating Input mappings for queries:
 
@@ -172,10 +171,9 @@ You can add the SQL query using the mapping name:
 
 :::info
 
-
+ To avoid any errors, the value we pass to the query param must be URL encoded. You may refer to https://www.w3schools.com/tags/ref_urlencode.ASP and do the encoding.
 
 :::
-	 To avoid any errors, the value we pass to the query param must be URL encoded. You may refer to https://www.w3schools.com/tags/ref_urlencode.ASP and do the encoding.
 
 For example, see the following data service configuration:
 

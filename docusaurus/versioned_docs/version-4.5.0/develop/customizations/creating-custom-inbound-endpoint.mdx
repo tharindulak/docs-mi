@@ -32,48 +32,48 @@ To add the jar file via your integration project, copy it to the <b>lib</b> dire
 
 1. If you have already created an [Integration Project](../create-integration-project.mdx), click the `+` button in the **Inbound Endpoints** section of the **WSO2 Integrator: MI: Project Explorer** and select **Custom**. This will open a form.
 2. Give a unique name to the inbound endpoint and update the rest of the properties with the required details as follows:
-	<table>
-   		<thead>
-	  		<tr>
-		 		<th>
-					<p>Property Name</p>
-		 		</th>
-		 		<th>
-					<p>Description</p>
-		 		</th>
-	  		</tr>
-   		</thead>
-   		<tbody>
-	  		<tr>
-		 		<td>
-				  Sequence
-				 </td>
-				 <td>Name of the sequence message that should be injected. Select the appropriate sequence from the drop-down menu. If you have not created sequences for your project yet, please create them first.</td>
-			 </tr>
-			 <tr>
-				 <td>
-				  onError
-				 </td>
-				 <td>Name of the fault sequence that should be invoked in case of failure. Select the appropriate error sequence from the drop-down menu.</td>
-			 </tr>
-			 <tr>
-				 <td>
-				  class
-				 </td>
-				 <td>
-				  Name of the custom class you implemented in <a href="#step-1-developing-a-custom-inbound-endpoint">step 1</a>.
-				 </td>
-			  </tr>
-			  <tr>
-				 <td>
-				  inbound.behavior
-				 </td>
-				 <td>
-				  Specify whether your custom endpoint is <code>listening</code>, <code>polling</code>, or <code>event-based</code>.
-				 </td>
-			  </tr>
-		   </tbody>
-		</table>  
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <p>Property Name</p>
+                </th>
+                <th>
+                    <p>Description</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                  Sequence
+                 </td>
+                 <td>Name of the sequence message that should be injected. Select the appropriate sequence from the drop-down menu. If you have not created sequences for your project yet, please create them first.</td>
+             </tr>
+             <tr>
+                 <td>
+                  onError
+                 </td>
+                 <td>Name of the fault sequence that should be invoked in case of failure. Select the appropriate error sequence from the drop-down menu.</td>
+             </tr>
+             <tr>
+                 <td>
+                  class
+                 </td>
+                 <td>
+                  Name of the custom class you implemented in <a href="#step-1-developing-a-custom-inbound-endpoint">step 1</a>.
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                  inbound.behavior
+                 </td>
+                 <td>
+                  Specify whether your custom endpoint is <code>listening</code>, <code>polling</code>, or <code>event-based</code>.
+                 </td>
+              </tr>
+           </tbody>
+        </table>  
 3. Add any required parameters by clicking the **Add Parameter** button. Depending on the type of inbound endpoint (e.g., Kafka, HTTP), you may need to add additional parameters specific to the protocol or technology you are integrating with. 
 4. Click **Create** to add the custom inbound endpoint to the project.
 

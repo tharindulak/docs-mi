@@ -112,52 +112,52 @@ read_groups = "true"
 The parameters used above are explained below.
 
 <table>
-	<tr>
-		<th>Parameter</th>
-		<th>Value</th>
-	</tr>
-	<tr>
-		<td>
-			<code>connection_url</code>
-		</td>
-		<td>
-			The URL for connecting to the LDAP. If you are connecting over LDAPS (secured LDAP), you need to import the certificate of the user store to the truststore (<code>client-truststore.jks</code> by default). See the instructions on how to <a href="/integration/micro-integrator/4.5.0/install-and-setup/setup/security/importing-ssl-certificate/#importing-ssl-certificates-to-a-truststore">add certificates to the truststore</a>.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<code>connection_name</code>
-		</td>
-		<td>
-			The username used to connect to the user store and perform various operations. This user needs to be an administrator in the user store. That is, the user requires write permission to manage add, modify users and perform search operations on the user store. The value you specify is used as the DN (Distinguish Name) attribute of the user who has sufficient permissions to perform operations on users and roles in LDAP.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<code>connection_password</code>
-		</td>
-		<td>
-			Password for the connection username.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<code>user_search_base</code>
-		</td>
-		<td>
-			The DN of the context or object under which the user entries are stored in the user store. When the user store searches for users, it will start from this location of the directory.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<code>type</code>
-		</td>
-		<td>
-			Use one of the following values. 
-			<code>read_only_ldap</code>: The LDAP connection does not provide write access.
-			<code>read_write_ldap</code>: The LDAP connection provides write access.
-		</td>
-	</tr>
+    <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>
+            <code>connection_url</code>
+        </td>
+        <td>
+            The URL for connecting to the LDAP. If you are connecting over LDAPS (secured LDAP), you need to import the certificate of the user store to the truststore (<code>client-truststore.jks</code> by default). See the instructions on how to <a href="/integration/micro-integrator/4.5.0/install-and-setup/setup/security/importing-ssl-certificate/#importing-ssl-certificates-to-a-truststore">add certificates to the truststore</a>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>connection_name</code>
+        </td>
+        <td>
+            The username used to connect to the user store and perform various operations. This user needs to be an administrator in the user store. That is, the user requires write permission to manage add, modify users and perform search operations on the user store. The value you specify is used as the DN (Distinguish Name) attribute of the user who has sufficient permissions to perform operations on users and roles in LDAP.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>connection_password</code>
+        </td>
+        <td>
+            Password for the connection username.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>user_search_base</code>
+        </td>
+        <td>
+            The DN of the context or object under which the user entries are stored in the user store. When the user store searches for users, it will start from this location of the directory.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>type</code>
+        </td>
+        <td>
+            Use one of the following values. 
+            <code>read_only_ldap</code>: The LDAP connection does not provide write access.
+            <code>read_write_ldap</code>: The LDAP connection provides write access.
+        </td>
+    </tr>
 </table>
 
 See the [complete list of parameters](../../../reference/config-catalog-mi.mdx#external-user-store) you can configure for the LDAP user store.
@@ -179,24 +179,23 @@ If you are already using a JDBC user store (database) with another WSO2 product 
 
 1. To set up a new RDBMS, select the preferred RDBMS type and follow the instructions.
 
-	:::tip
+    :::tip
 
+    If you already have an RDBMS user store set up, you can skip this step.
 
+    :::
 
-	:::
-		If you already have an RDBMS user store set up, you can skip this step.
-
-	- [Setting up a MySQL database](../databases/setting-up-mysql.mdx)
-	- [Setting up an MSSQL database](../databases/setting-up-mssql.mdx)
-	- [Setting up an Oracle database](../databases/setting-up-oracle.mdx)
-	- [Setting up a Postgre database](../databases/setting-up-postgresql.mdx)
-	- [Setting up an IBM database](../databases/setting-up-ibm-db2.mdx)
+    - [Setting up a MySQL database](../databases/setting-up-mysql.mdx)
+    - [Setting up an MSSQL database](../databases/setting-up-mssql.mdx)
+    - [Setting up an Oracle database](../databases/setting-up-oracle.mdx)
+    - [Setting up a Postgre database](../databases/setting-up-postgresql.mdx)
+    - [Setting up an IBM database](../databases/setting-up-ibm-db2.mdx)
 
 2. Be sure to add the JDBC driver to the `<ICP_HOME>/lib` folder.
 3. To connect the ICP to your RDBMS user store:
 
-	1. Open the `deployment.toml` file (stored in the `<ICP_HOME>/conf` directory).
-	2. Add the relevant configurations for your RDBMS type.
+    1. Open the `deployment.toml` file (stored in the `<ICP_HOME>/conf` directory).
+    2. Add the relevant configurations for your RDBMS type.
 
         <Tabs>
         <TabItem value="tab-0" label="MySQL">
@@ -293,66 +292,66 @@ If you are already using a JDBC user store (database) with another WSO2 product 
 	        pool_options.maxWait = 60000   
 	        ```
 
-		The parameters used above are explained below.
+        The parameters used above are explained below.
 
-		<table>
-			<tr>
-				<th>Parameter</th>
-				<th>Value</th>
-			</tr>
-			<tr>
-				<td>
-					<code>id</code>
-				</td>
-				<td>
-					The name given to the datasource. This is required to be <code>WSO2CarbonDB</code>.
-					<b>Note</b>: If you replace <code>WSO2CarbonDB</code> with a different ID, you also need to list the ID as a datasource under the <code>[realm_manager]</code> section in the <code>deployment.toml</code> file as shown below.
-					<div>
-						<code>
-						[realm_manager]
-						data_source = "new_id"
-						</code>
-					</div>
-					Otherwise, the user store database ID defaults to <code>WSO2CarbonDB</code> in the realm manager configurations.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<code>url</code>
-				</td>
-				<td>
-					The URL for connecting to the database. The type of database is determined by the URL string.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<code>username</code>
-				</td>
-				<td>
-					The username used to connect to the user store and perform various operations. This user needs to be an administrator in the user store. That is, the user requires write permission to manage add users, modify users, and perform search operations on the user store.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<code>password</code>
-				</td>
-				<td>
-					Password for the connection username.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<code>driver</code>
-				</td>
-				<td>
-					The driver class specific to the JDBC user store.
-				</td>
-			</tr>
-		</table>
-		
-		See the complete list of [database connection parameters](../../../reference/config-catalog-mi.mdx#database-connection) and their descriptions. Also, see the recommendations for [tuning the JDBC connection pool](../performance-tuning/jdbc-tuning.mdx).
-	
-		The datasource configured under the `[[datasource]]` TOML heading will now be the effective user store for the WSO2 Integrator: MI. 
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>
+                    <code>id</code>
+                </td>
+                <td>
+                    The name given to the datasource. This is required to be <code>WSO2CarbonDB</code>.
+                    <b>Note</b>: If you replace <code>WSO2CarbonDB</code> with a different ID, you also need to list the ID as a datasource under the <code>[realm_manager]</code> section in the <code>deployment.toml</code> file as shown below.
+                    <div>
+                        <code>
+                        [realm_manager]
+                        data_source = "new_id"
+                        </code>
+                    </div>
+                    Otherwise, the user store database ID defaults to <code>WSO2CarbonDB</code> in the realm manager configurations.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>url</code>
+                </td>
+                <td>
+                    The URL for connecting to the database. The type of database is determined by the URL string.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>username</code>
+                </td>
+                <td>
+                    The username used to connect to the user store and perform various operations. This user needs to be an administrator in the user store. That is, the user requires write permission to manage add users, modify users, and perform search operations on the user store.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>password</code>
+                </td>
+                <td>
+                    Password for the connection username.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>driver</code>
+                </td>
+                <td>
+                    The driver class specific to the JDBC user store.
+                </td>
+            </tr>
+        </table>
+        
+        See the complete list of [database connection parameters](../../../reference/config-catalog-mi.mdx#database-connection) and their descriptions. Also, see the recommendations for [tuning the JDBC connection pool](../performance-tuning/jdbc-tuning.mdx).
+    
+        The datasource configured under the `[[datasource]]` TOML heading will now be the effective user store for the WSO2 Integrator: MI. 
 
 ## What's next?
 

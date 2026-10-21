@@ -183,10 +183,9 @@ To enable the FIX transport listener and sender, set the following parameters to
 
 :::info
 
-
+Quickfix/J related .jar files are not shipped with the product by default. You need to add them before enabling the FIX transport.
 
 :::
-	Quickfix/J related .jar files are not shipped with the product by default. You need to add them before enabling the FIX transport.
 
 ```toml
 [transport.fix]
@@ -435,25 +434,24 @@ The MailTo transport listener implementation can be configured by setting the pa
 	parameter.from = "demo_user@wso2.com"
 	```
 
-	:::note
+    :::note
 
+    In addition to enabling the MailTO transport, the following parameters are used in the above configuration to set a default email account as the mail sender. You can override this default mail sender by specifying an email sender account within your mediation sequence.
 
+    -	`parameter.from` : The email address from which mails will be sent.
+    -	`parameter.username` : The user name of the email account (mail sender). Note that in some email service providers, the user name is the same as the email address specified for the 'From' parameter.
+    -	`parameter.password` : The password of the email account (mail sender).
 
-	:::
-		In addition to enabling the MailTO transport, the following parameters are used in the above configuration to set a default email account as the mail sender. You can override this default mail sender by specifying an email sender account within your mediation sequence.
+    :::
 
-		-	`parameter.from` : The email address from which mails will be sent.
-		-	`parameter.username` : The user name of the email account (mail sender). Note that in some email service providers, the user name is the same as the email address specified for the 'From' parameter.
-		-	`parameter.password` : The password of the email account (mail sender).
+    If you want to use multiple mail boxes to send emails, make a copy of the default MailTo sender configuration in the `MI_HOME/conf/deployment.toml` file and change the transport sender name. For example, add `mailtoWSO2` as the name.
 
-	If you want to use multiple mail boxes to send emails, make a copy of the default MailTo sender configuration in the `MI_HOME/conf/deployment.toml` file and change the transport sender name. For example, add `mailtoWSO2` as the name.
+    For a list of parameters supported by the MailTo transport sender, see [SMTP Package Summary](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html). You can add these parameters into the mail transport as custom parameters by appending relevant parameters surrounded by single quotes into the parameter section. For example, to add `mail.smtp.localport` parameter into the mail transport, toml configuration would be `parameter.'mail.smtp.localport'=5000`.
 
-	For a list of parameters supported by the MailTo transport sender, see [SMTP Package Summary](https://javaee.github.io/javamail/docs/api/com/sun/mail/smtp/package-summary.html). You can add these parameters into the mail transport as custom parameters by appending relevant parameters surrounded by single quotes into the parameter section. For example, to add `mail.smtp.localport` parameter into the mail transport, toml configuration would be `parameter.'mail.smtp.localport'=5000`.
+    In addition to the parameters described there, the MailTo transport sender supports the following custom parameters.
 
-	In addition to the parameters described there, the MailTo transport sender supports the following custom parameters.
-
-	-	`transport.mail.SMTPBccAddresses`: If one or more e-mail addresses need to be specified as BCC addresses for outgoing mails, this parameter can be used. You can enter a comma-separated list of e-mail addresses.
-	-	`transport.mail.Format`: Format of the outgoing mail. Possible values are <b>Text</b> and <b>Multipart</b>.
+    -	`transport.mail.SMTPBccAddresses`: If one or more e-mail addresses need to be specified as BCC addresses for outgoing mails, this parameter can be used. You can enter a comma-separated list of e-mail addresses.
+    -	`transport.mail.Format`: Format of the outgoing mail. Possible values are <b>Text</b> and <b>Multipart</b>.
 
 ## Configuring the JMS transport
 

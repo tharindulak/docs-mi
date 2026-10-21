@@ -24,7 +24,7 @@ Once you have the [integration artifacts packaged](/integration/micro-integrator
     <img src="/integration/micro-integrator/assets/img/integrate/testing-integrations/testing_artifact_selection.png" width="700" />
 
 5.  Click **Finish**. The artifacts will be deployed in the WSO2 Micro Integrator and the server will start. 
-	See the startup log in the **Console** tab:  
+    See the startup log in the **Console** tab:  
     <img src="/integration/micro-integrator/assets/img/integrate/testing-integrations/testing_log.png" width="700" />
 
 6.  If you find errors in your mediation sequence, use the [debugging features](debugging-mediation.mdx) to troubleshoot.
@@ -49,10 +49,9 @@ Click the <img src="/integration/micro-integrator/assets/img/integrate/testing-i
 
 :::note
 
-
+You can also paramterize configurations as [environment variables](../install-and-setup/setup/dynamic-server-configurations.mdx) and later [inject environment variables to the embedded Micro Integrator](#injecting-environment-variables-to-embedded-micro-integrator).
 
 :::
-	You can also paramterize configurations as [environment variables](../install-and-setup/setup/dynamic-server-configurations.mdx) and later [inject environment variables to the embedded Micro Integrator](#injecting-environment-variables-to-embedded-micro-integrator).
 
 <img src="/integration/micro-integrator/assets/img/integrate/testing-integrations/server-configs-panel.png" />
 
@@ -65,7 +64,7 @@ If you have secrets in the `deployment.toml` file, you can encrypt them using th
 1.  Open the [<b>Embedded Micro Integrator Configuration</b>](#update-embedded-server-configs-and-libraries) dialog box. 
 2.  Update the static secrets in the `deployment.toml` file as explained in [encrypting server secrets](../install-and-setup/setup/security/encrypting-plain-text.mdx).
 3.  Click <b>Encrypt Secrets</b>.
-	
+    
     <img src="/integration/micro-integrator/assets/img/integrate/testing-integrations/encrypt-secrets.png" />
 
 This will run the Cipher Tool internally and encrypt the secrets. The plain-text values you entered are now replaced with the encrypted values.
@@ -85,13 +84,12 @@ WSO2 Micro Integrator supports environment variables for server configurations a
 
 :::note
 
+To be able to dynamically inject parameters to the embedded Micro Integrator, you must first define the relevant configurations as environment variables. See the following topics for instructions:
 
+- [Environment variables for server Configurations](../install-and-setup/setup/dynamic-server-configurations.mdx)
+- [Environment variables for synapse configurations](externalized-configuration.mdx)
 
 :::
-	To be able to dynamically inject parameters to the embedded Micro Integrator, you must first define the relevant configurations as environment variables. See the following topics for instructions:
-
-	- [Environment variables for server Configurations](../install-and-setup/setup/dynamic-server-configurations.mdx)
-	- [Environment variables for synapse configurations](externalized-configuration.mdx)
 
 Follow the steps given below.
 

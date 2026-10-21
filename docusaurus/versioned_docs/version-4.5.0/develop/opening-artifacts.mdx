@@ -33,19 +33,18 @@ Follow the instructions given below to open an already-created integration artif
 
     <a href="/integration/micro-integrator/assets/img/develop/create-artifacts/refresh-project-explorer.png"><img src="/integration/micro-integrator/assets/img/develop/create-artifacts/refresh-project-explorer.png" alt="refresh project explorer" width="30%" /></a>
 
+::::note
+
+
+When importing artifacts with custom mediators, make sure the custom mediator name starts with the "CUSTOM_" prefix. 
+
 :::note
 
 
 
 :::
 
-	When importing artifacts with custom mediators, make sure the custom mediator name starts with the "CUSTOM_" prefix. 
-
-	:::note
-
-
-
-	:::
+::::
 		```xml
 			<proxy name="example_proxy" startOnLoad="true" transports="http" xmlns="http://ws.apache.org/ns/synapse">
 				<target>
